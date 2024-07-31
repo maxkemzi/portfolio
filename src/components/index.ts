@@ -1,3 +1,2 @@
-import ContactForm from './ContactForm/ContactForm';
-
-export {ContactForm};
+export {ContactForm} from './ContactForm';
+export {Header} from './Header';

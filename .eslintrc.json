@@ -22,6 +22,8 @@
 			{"devDependencies": ["test/**/*.ts", "vitest.config.ts"]}
 		],
 		"react/react-in-jsx-scope": "off",
-		"import/prefer-default-export": "off"
+		"import/prefer-default-export": "off",
+		"react/require-default-props": "off",
+		"consistent-return": "off"
 	}
 }
