@@ -15,7 +15,7 @@ const HeroDownButton = (props: Props): JSX.Element => {
 	return (
 		<Link
 			className={classNames('flex flex-col items-center gap-2', className)}
-			href={Anchor.ABOUT}
+			href={`#${Anchor.ABOUT}`}
 		>
 			<Typography as="span" align="center">
 				Continue journey

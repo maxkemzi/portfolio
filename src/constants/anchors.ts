@@ -1,8 +1,8 @@
 const Anchor = {
-	HOME: '#home',
-	ABOUT: '#about',
-	PROJECTS: '#projects',
-	CONTACT: '#contact',
+	HOME: 'home',
+	ABOUT: 'about',
+	PROJECTS: 'projects',
+	CONTACT: 'contact',
 };
 
 export default Anchor;

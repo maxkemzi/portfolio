@@ -4,6 +4,7 @@ import {ContactForm, Header} from '@/components';
 import {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {Typography} from '@/components/ui';
 import {HeroSection} from './(hero)';
+import {AboutSection} from './(about)';
 
 const Home = () => {
 	const [isClient, setIsClient] = useState(false);
@@ -52,6 +53,7 @@ const Home = () => {
 					waveWidth={heroWaveWidth}
 					moonTopPos={heroMoonTopPos}
 				/>
+				<AboutSection />
 				<ContactForm />
 			</main>
 		</>

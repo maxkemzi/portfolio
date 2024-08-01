@@ -3,8 +3,8 @@
 import {Container, Typography} from '@/components/ui';
 import {CrosshairSimple} from '@phosphor-icons/react/dist/ssr';
 import {motion, useAnimation} from 'framer-motion';
-import {useLayoutEffect, useMemo, useRef, useState} from 'react';
-import {Color} from '@/constants';
+import {useLayoutEffect, useState} from 'react';
+import {Anchor, Color} from '@/constants';
 import classNames from 'classnames';
 import HeroWave from './HeroWave';
 import HeroMoon from './HeroMoon';
@@ -25,35 +25,26 @@ const HeroSection = (props: Props): JSX.Element => {
 
 	const controls = useAnimation();
 	const [hasAnimated, setHasAnimated] = useState(false);
-	const containerRef = useRef<HTMLDivElement>(null);
-
-	const crosshairFinalTopPos = useMemo(
-		() => moonTopPos + (moonSize / 2 - crosshairSize / 2),
-		[moonTopPos],
-	);
 
 	useLayoutEffect(() => {
 		const startAnimation = async () => {
-			if (!containerRef.current || hasAnimated) {
+			if (hasAnimated) {
 				return;
 			}
 
-			const {width: containerWidth, height: containerHeight} =
-				containerRef.current.getBoundingClientRect();
+			const yTopPos = moonTopPos - crosshairSize / 2;
+			const yCenterPos = moonTopPos + (moonSize / 2 - crosshairSize / 2);
+			const yBottomPos = moonTopPos + moonSize - crosshairSize / 2;
+
+			const xCenterPos = moonSize / 2 - crosshairSize / 2;
+			const xLeftPos = moonSize - crosshairSize / 2;
+			const xRightPos = -crosshairSize / 2;
 
 			await controls.start({
-				top: [
-					containerHeight - crosshairSize,
-					containerHeight / 2 - crosshairSize / 2,
-					crosshairFinalTopPos,
-				],
-				right: [
-					containerWidth - crosshairSize,
-					containerWidth / 2 - crosshairSize / 2,
-					moonSize / 2 - crosshairSize / 2,
-				],
+				top: [yTopPos, yCenterPos, yBottomPos, yCenterPos, yCenterPos],
+				right: [xCenterPos, xLeftPos, xCenterPos, xRightPos, xCenterPos],
 				transition: {
-					duration: 2,
+					duration: 4,
 					ease: 'easeInOut',
 				},
 			});
@@ -62,25 +53,66 @@ const HeroSection = (props: Props): JSX.Element => {
 		};
 
 		startAnimation();
-	}, [controls, crosshairFinalTopPos, hasAnimated]);
+	}, [controls, hasAnimated, moonTopPos]);
 
 	useLayoutEffect(() => {
 		if (hasAnimated) {
-			controls.set({top: crosshairFinalTopPos});
+			controls.set({top: moonTopPos + (moonSize / 2 - crosshairSize / 2)});
 		}
-	}, [controls, crosshairFinalTopPos, hasAnimated]);
+	}, [controls, hasAnimated, moonTopPos]);
+
+	const nbSpace = '\u00A0';
+	const firstRow = `Hi${nbSpace}there,${nbSpace}I’m${nbSpace}Max.`.split('');
+	const secondRow =
+		`I’m${nbSpace}a${nbSpace}software${nbSpace}engineer.`.split('');
+
+	const calcCharDelay = (i: number) => i / 15;
 
 	return (
-		<section className="h-screen">
-			<Container ref={containerRef}>
+		<section id={Anchor.HOME} className="h-screen">
+			<Container>
 				<div className="h-full flex flex-col justify-center">
-					<div>
-						<Typography variant="h1" align="center">
-							Hi there, I’m{' '}
-							<Typography variant="highlight">Max</Typography>
-							. <br /> I’m a software engineer.
-						</Typography>
-					</div>
+					<Typography variant="h1" align="center">
+						{firstRow.map((char, i) => {
+							return (
+								<motion.span
+									// TODO: fix eslint error
+									// eslint-disable-next-line react/no-array-index-key
+									key={i}
+									className="inline-block"
+									initial={{y: 20, opacity: 0}}
+									animate={{y: 0, opacity: 1}}
+									transition={{
+										duration: 0.1,
+										delay: calcCharDelay(i),
+									}}
+								>
+									{char}
+								</motion.span>
+							);
+						})}
+						<br />
+						{secondRow.map((char, i) => {
+							return (
+								<motion.span
+									// TODO: fix eslint error
+									// eslint-disable-next-line react/no-array-index-key
+									key={i}
+									className="inline-block"
+									initial={{y: 20, opacity: 0}}
+									animate={{y: 0, opacity: 1}}
+									transition={{
+										duration: 0.1,
+										delay:
+											calcCharDelay(firstRow.length) +
+											calcCharDelay(i),
+									}}
+								>
+									{char}
+								</motion.span>
+							);
+						})}
+					</Typography>
 				</div>
 				<HeroMoon
 					className="absolute right-0 z-[-2]"
@@ -96,7 +128,7 @@ const HeroSection = (props: Props): JSX.Element => {
 					size={crosshairSize}
 					weight="thin"
 				/>
-				<HeroDownButton className="absolute bottom-5 left-[50%] translate-x-[-50%]" />
+				<HeroDownButton className="absolute bottom-6 left-[50%] translate-x-[-50%]" />
 			</Container>
 			<HeroWave
 				className="absolute top-0 left-0 z-[-3]"

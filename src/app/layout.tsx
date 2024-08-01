@@ -16,8 +16,13 @@ const RootLayout = ({
 	children: React.ReactNode;
 }>) => {
 	return (
-		<html lang="en">
-			<body className={classNames(exo2Font.className, 'bg-background-main')}>
+		<html lang="en" className="scroll-smooth">
+			<body
+				className={classNames(
+					exo2Font.className,
+					'bg-background-main overflow-x-hidden',
+				)}
+			>
 				{children}
 			</body>
 		</html>
