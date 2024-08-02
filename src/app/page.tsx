@@ -5,6 +5,10 @@ import {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {Typography} from '@/components/ui';
 import {HeroSection} from './(hero)';
 import {AboutSection} from './(about)';
+import ProjectsSection from './(projects)';
+
+const WAVE_SPACING = 16;
+const MOON_SPACING = 32;
 
 const Home = () => {
 	const [isClient, setIsClient] = useState(false);
@@ -24,11 +28,9 @@ const Home = () => {
 				}
 
 				const {top, left} = navbarRef.current.getBoundingClientRect();
-				const waveSpacing = 16;
-				const moonSpacing = 32;
 
-				setHeroWaveWidth(left - waveSpacing);
-				setHeroMoonTopPos(top + moonSpacing);
+				setHeroWaveWidth(left - WAVE_SPACING);
+				setHeroMoonTopPos(top + MOON_SPACING);
 			};
 
 			updateHeroWaveWidth();
@@ -54,6 +56,7 @@ const Home = () => {
 					moonTopPos={heroMoonTopPos}
 				/>
 				<AboutSection />
+				<ProjectsSection />
 				<ContactForm />
 			</main>
 		</>

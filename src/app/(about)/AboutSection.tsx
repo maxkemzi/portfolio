@@ -5,20 +5,20 @@ import {Anchor} from '@/constants';
 import Image from 'next/image';
 import {motion, Transition} from 'framer-motion';
 
-const viewportConfig = {once: true, amount: 0.5};
-const transitionConfig: Transition = {duration: 1, ease: 'easeOut'};
+const VIEWPORT_CONFIG = {once: true, amount: 0.5};
+const TRANSITION_CONFIG: Transition = {duration: 1, ease: 'easeOut'};
 
 const AboutSection = () => {
 	return (
 		<section id={Anchor.ABOUT} className="py-20">
-			<Container>
+			<Container variant="content">
 				<div className="flex justify-center items-center gap-12">
 					<motion.div
 						className="relative shrink-0 size-[350px] bg-secondary-main rounded-full overflow-hidden"
 						initial={{x: -50, opacity: 0}}
 						whileInView={{x: 0, opacity: 1}}
-						viewport={viewportConfig}
-						transition={transitionConfig}
+						viewport={VIEWPORT_CONFIG}
+						transition={TRANSITION_CONFIG}
 					>
 						<Image
 							className="absolute top-0 left-[53%] translate-x-[-50%] scale-x-[-1] rotate-[5deg]"
@@ -30,13 +30,13 @@ const AboutSection = () => {
 						/>
 					</motion.div>
 					<motion.div
-						className="max-w-[400px]"
+						className="grow"
 						initial={{x: 50, opacity: 0}}
 						whileInView={{x: 0, opacity: 1}}
-						viewport={viewportConfig}
-						transition={{...transitionConfig, delay: 0.6}}
+						viewport={VIEWPORT_CONFIG}
+						transition={{...TRANSITION_CONFIG, delay: 0.6}}
 					>
-						<Typography className="mb-2" variant="h2">
+						<Typography className="mb-4" variant="h2">
 							About me
 						</Typography>
 						<Typography>

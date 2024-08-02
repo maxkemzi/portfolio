@@ -18,16 +18,20 @@ const Header = (props: Props): JSX.Element => {
 					<Logo />
 					<Navbar ref={navbarRef}>
 						<NavbarItem>
-							<NavbarLink href={Anchor.HOME}>Home</NavbarLink>
+							<NavbarLink href={`#${Anchor.HOME}`}>Home</NavbarLink>
 						</NavbarItem>
 						<NavbarItem>
-							<NavbarLink href={Anchor.ABOUT}>About</NavbarLink>
+							<NavbarLink href={`#${Anchor.ABOUT}`}>About</NavbarLink>
 						</NavbarItem>
 						<NavbarItem>
-							<NavbarLink href={Anchor.PROJECTS}>Projects</NavbarLink>
+							<NavbarLink href={`#${Anchor.PROJECTS}`}>
+								Projects
+							</NavbarLink>
 						</NavbarItem>
 						<NavbarItem>
-							<NavbarLink href={Anchor.CONTACT}>Contact</NavbarLink>
+							<NavbarLink href={`#${Anchor.CONTACT}`}>
+								Contact
+							</NavbarLink>
 						</NavbarItem>
 						<NavbarItem>
 							<Link className="group" href="https://github.com/maxkemzi">

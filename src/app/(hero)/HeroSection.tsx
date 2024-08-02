@@ -17,11 +17,13 @@ interface Props {
 
 const MotionCrosshairSimple = motion(CrosshairSimple);
 
+const MOON_SIZE = 370;
+const CROSSHAIR_SIZE = 260;
+
+const NB_SPACE = '\u00A0';
+
 const HeroSection = (props: Props): JSX.Element => {
 	const {waveWidth, moonTopPos} = props;
-
-	const moonSize = 370;
-	const crosshairSize = 260;
 
 	const controls = useAnimation();
 	const [hasAnimated, setHasAnimated] = useState(false);
@@ -32,13 +34,13 @@ const HeroSection = (props: Props): JSX.Element => {
 				return;
 			}
 
-			const yTopPos = moonTopPos - crosshairSize / 2;
-			const yCenterPos = moonTopPos + (moonSize / 2 - crosshairSize / 2);
-			const yBottomPos = moonTopPos + moonSize - crosshairSize / 2;
+			const yTopPos = moonTopPos - CROSSHAIR_SIZE / 2;
+			const yCenterPos = moonTopPos + (MOON_SIZE / 2 - CROSSHAIR_SIZE / 2);
+			const yBottomPos = moonTopPos + MOON_SIZE - CROSSHAIR_SIZE / 2;
 
-			const xCenterPos = moonSize / 2 - crosshairSize / 2;
-			const xLeftPos = moonSize - crosshairSize / 2;
-			const xRightPos = -crosshairSize / 2;
+			const xCenterPos = MOON_SIZE / 2 - CROSSHAIR_SIZE / 2;
+			const xLeftPos = MOON_SIZE - CROSSHAIR_SIZE / 2;
+			const xRightPos = -CROSSHAIR_SIZE / 2;
 
 			await controls.start({
 				top: [yTopPos, yCenterPos, yBottomPos, yCenterPos, yCenterPos],
@@ -57,14 +59,14 @@ const HeroSection = (props: Props): JSX.Element => {
 
 	useLayoutEffect(() => {
 		if (hasAnimated) {
-			controls.set({top: moonTopPos + (moonSize / 2 - crosshairSize / 2)});
+			controls.set({top: moonTopPos + (MOON_SIZE / 2 - CROSSHAIR_SIZE / 2)});
 		}
 	}, [controls, hasAnimated, moonTopPos]);
 
-	const nbSpace = '\u00A0';
-	const firstRow = `Hi${nbSpace}there,${nbSpace}I’m${nbSpace}Max.`.split('');
+	const firstRow = `Hi${NB_SPACE}there,${NB_SPACE}I’m${NB_SPACE}`.split('');
+	const highlightedRow = 'Max'.split('');
 	const secondRow =
-		`I’m${nbSpace}a${nbSpace}software${nbSpace}engineer.`.split('');
+		`I’m${NB_SPACE}a${NB_SPACE}software${NB_SPACE}engineer`.split('');
 
 	const calcCharDelay = (i: number) => i / 15;
 
@@ -91,8 +93,7 @@ const HeroSection = (props: Props): JSX.Element => {
 								</motion.span>
 							);
 						})}
-						<br />
-						{secondRow.map((char, i) => {
+						{highlightedRow.map((char, i) => {
 							return (
 								<motion.span
 									// TODO: fix eslint error
@@ -108,6 +109,28 @@ const HeroSection = (props: Props): JSX.Element => {
 											calcCharDelay(i),
 									}}
 								>
+									<Typography variant="highlight">{char}</Typography>
+								</motion.span>
+							);
+						})}
+						<br />
+						{secondRow.map((char, i) => {
+							return (
+								<motion.span
+									// TODO: fix eslint error
+									// eslint-disable-next-line react/no-array-index-key
+									key={i}
+									className="inline-block"
+									initial={{y: 20, opacity: 0}}
+									animate={{y: 0, opacity: 1}}
+									transition={{
+										duration: 0.1,
+										delay:
+											calcCharDelay(
+												firstRow.length + highlightedRow.length,
+											) + calcCharDelay(i),
+									}}
+								>
 									{char}
 								</motion.span>
 							);
@@ -117,7 +140,7 @@ const HeroSection = (props: Props): JSX.Element => {
 				<HeroMoon
 					className="absolute right-0 z-[-2]"
 					style={{top: moonTopPos}}
-					size={moonSize}
+					size={MOON_SIZE}
 				/>
 				<MotionCrosshairSimple
 					className={classNames('absolute top-0 right-0', {
@@ -125,7 +148,7 @@ const HeroSection = (props: Props): JSX.Element => {
 					})}
 					animate={controls}
 					color={Color.PRIMARY.main}
-					size={crosshairSize}
+					size={CROSSHAIR_SIZE}
 					weight="thin"
 				/>
 				<HeroDownButton className="absolute bottom-6 left-[50%] translate-x-[-50%]" />

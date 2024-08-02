@@ -1,6 +1,6 @@
 import {z} from 'zod';
 
-const vars = {
+const VARS = {
 	SMTP_HOST: process.env.SMTP_HOST,
 	SMTP_PORT: process.env.SMTP_PORT,
 	SMTP_USER: process.env.SMTP_USER,
@@ -25,7 +25,7 @@ const stringToNumber = (value: string, ctx: z.RefinementCtx) => {
 	return transformed;
 };
 
-const varsValidationSchema = z.object({
+const validationSchema = z.object({
 	SMTP_HOST: commonValidation(),
 	SMTP_PORT: commonValidation().transform(stringToNumber),
 	SMTP_USER: commonValidation().email(),
@@ -33,5 +33,5 @@ const varsValidationSchema = z.object({
 	EMAIL_TO: commonValidation().email(),
 });
 
-const env = varsValidationSchema.parse(vars);
+const env = validationSchema.parse(VARS);
 export default env;
