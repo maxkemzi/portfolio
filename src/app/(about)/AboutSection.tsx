@@ -11,10 +11,10 @@ const TRANSITION_CONFIG: Transition = {duration: 1, ease: 'easeOut'};
 const AboutSection = () => {
 	return (
 		<section id={Anchor.ABOUT} className="py-20">
-			<Container variant="content">
+			<Container size="sm">
 				<div className="flex justify-center items-center gap-12">
 					<motion.div
-						className="relative shrink-0 size-[350px] bg-secondary-main rounded-full overflow-hidden"
+						className="relative shrink-0 flex-1 aspect-square bg-secondary-main rounded-full overflow-hidden"
 						initial={{x: -50, opacity: 0}}
 						whileInView={{x: 0, opacity: 1}}
 						viewport={VIEWPORT_CONFIG}
@@ -30,13 +30,13 @@ const AboutSection = () => {
 						/>
 					</motion.div>
 					<motion.div
-						className="grow"
+						className="flex-1"
 						initial={{x: 50, opacity: 0}}
 						whileInView={{x: 0, opacity: 1}}
 						viewport={VIEWPORT_CONFIG}
 						transition={{...TRANSITION_CONFIG, delay: 0.6}}
 					>
-						<Typography className="mb-4" variant="h2">
+						<Typography className="mb-3" variant="h2">
 							About me
 						</Typography>
 						<Typography>

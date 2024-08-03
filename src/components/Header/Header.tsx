@@ -13,7 +13,7 @@ const Header = (props: Props): JSX.Element => {
 
 	return (
 		<header className="absolute top-0 left-0 right-0 z-50 py-5">
-			<Container>
+			<Container size="lg">
 				<div className="flex items-center justify-between">
 					<Logo />
 					<Navbar ref={navbarRef}>
@@ -34,7 +34,12 @@ const Header = (props: Props): JSX.Element => {
 							</NavbarLink>
 						</NavbarItem>
 						<NavbarItem>
-							<Link className="group" href="https://github.com/maxkemzi">
+							<Link
+								className="group"
+								href="https://github.com/maxkemzi"
+								target="_blank"
+								rel="noreferrer noopenner"
+							>
 								<GithubLogo
 									className="fill-background-contrastText transition-colors duration-300 group-hover:fill-primary-main"
 									size={28}
@@ -43,7 +48,12 @@ const Header = (props: Props): JSX.Element => {
 							</Link>
 						</NavbarItem>
 						<NavbarItem>
-							<Link className="group" href="https://t.me/maxkemzi">
+							<Link
+								className="group"
+								href="https://t.me/maxkemzi"
+								target="_blank"
+								rel="noreferrer noopenner"
+							>
 								<TelegramLogo
 									className="fill-background-contrastText gtransition-colors duration-300 group-hover:fill-primary-main"
 									size={28}

@@ -40,7 +40,7 @@ const PROJECTS: Project[] = [
 const ProjectsSection = () => {
 	return (
 		<section id={Anchor.PROJECTS} className="py-20">
-			<Container variant="content">
+			<Container>
 				<Typography className="mb-14" variant="h2" align="center">
 					Projects
 				</Typography>

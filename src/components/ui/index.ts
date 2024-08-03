@@ -3,3 +3,6 @@ export {Typography} from './Typography';
 export {Logo} from './Logo';
 export {Container} from './Container';
 export {Link} from './Link';
+export {TextField} from './TextField';
+export {Button} from './Button';
+export {AnimatedText, calcAnimatedCharDelay} from './AnimatedText';

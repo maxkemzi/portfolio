@@ -1,19 +1,19 @@
 const Color = {
 	PRIMARY: {
-		main: '#CF30AA',
-		contrastText: '#FFFFFF',
+		MAIN: '#CF30AA',
+		CONTRAST_TEXT: '#FFFFFF',
 	},
 	SECONDARY: {
-		main: '#6336D0',
-		contrastText: '#FFFFFF',
+		MAIN: '#6336D0',
+		CONTRAST_TEXT: '#FFFFFF',
 	},
 	BACKGROUND: {
-		main: '#0D0D32',
-		contrastText: '#FFFFFF',
+		MAIN: '#0D0D32',
+		CONTRAST_TEXT: '#FFFFFF',
 	},
 	SURFACE: {
-		main: '#2C2C51',
-		contrastText: '#FFFFFF',
+		MAIN: '#2C2C51',
+		CONTRAST_TEXT: '#FFFFFF',
 	},
 };
 

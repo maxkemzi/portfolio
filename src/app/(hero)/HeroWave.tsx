@@ -32,8 +32,8 @@ const HeroWave = (props: Props): JSX.Element => {
 					y2="133.5"
 					gradientUnits="userSpaceOnUse"
 				>
-					<stop stopColor={Color.PRIMARY.main} />
-					<stop offset="1" stopColor={Color.SECONDARY.main} />
+					<stop stopColor={Color.PRIMARY.MAIN} />
+					<stop offset="1" stopColor={Color.SECONDARY.MAIN} />
 				</linearGradient>
 			</defs>
 		</svg>

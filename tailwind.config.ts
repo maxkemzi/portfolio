@@ -16,10 +16,22 @@ const config: Config = {
 			},
 		},
 		colors: {
-			primary: Color.PRIMARY,
-			secondary: Color.SECONDARY,
-			background: Color.BACKGROUND,
-			surface: Color.SURFACE,
+			primary: {
+				main: Color.PRIMARY.MAIN,
+				contrastText: Color.PRIMARY.CONTRAST_TEXT,
+			},
+			secondary: {
+				main: Color.SECONDARY.MAIN,
+				contrastText: Color.SECONDARY.CONTRAST_TEXT,
+			},
+			background: {
+				main: Color.BACKGROUND.MAIN,
+				contrastText: Color.BACKGROUND.CONTRAST_TEXT,
+			},
+			surface: {
+				main: Color.SURFACE.MAIN,
+				contrastText: Color.SURFACE.CONTRAST_TEXT,
+			},
 		},
 	},
 	plugins: [],

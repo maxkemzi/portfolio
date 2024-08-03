@@ -31,7 +31,7 @@ const HeroDownButton = (props: Props): JSX.Element => {
 			>
 				<RocketLaunch
 					className="rotate-[135deg]"
-					color={Color.BACKGROUND.contrastText}
+					color={Color.BACKGROUND.CONTRAST_TEXT}
 					size={32}
 					weight="thin"
 				/>

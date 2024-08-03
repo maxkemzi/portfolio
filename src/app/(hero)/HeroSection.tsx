@@ -1,9 +1,14 @@
 'use client';
 
-import {Container, Typography} from '@/components/ui';
+import {
+	AnimatedText,
+	calcAnimatedCharDelay,
+	Container,
+	Typography,
+} from '@/components/ui';
 import {CrosshairSimple} from '@phosphor-icons/react/dist/ssr';
 import {motion, useAnimation} from 'framer-motion';
-import {useLayoutEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Anchor, Color} from '@/constants';
 import classNames from 'classnames';
 import HeroWave from './HeroWave';
@@ -15,12 +20,13 @@ interface Props {
 	moonTopPos: number;
 }
 
-const MotionCrosshairSimple = motion(CrosshairSimple);
-
 const MOON_SIZE = 370;
 const CROSSHAIR_SIZE = 260;
 
 const NB_SPACE = '\u00A0';
+const FIRST_TITLE_ROW = `Hi${NB_SPACE}there,${NB_SPACE}I’m${NB_SPACE}`;
+const FIRST_TITLE_HIGHLIGHTED_ROW = 'Max';
+const SECOND_TITLE_ROW = `I’m${NB_SPACE}a${NB_SPACE}software${NB_SPACE}engineer`;
 
 const HeroSection = (props: Props): JSX.Element => {
 	const {waveWidth, moonTopPos} = props;
@@ -28,12 +34,13 @@ const HeroSection = (props: Props): JSX.Element => {
 	const controls = useAnimation();
 	const [hasAnimated, setHasAnimated] = useState(false);
 
-	useLayoutEffect(() => {
-		const startAnimation = async () => {
-			if (hasAnimated) {
-				return;
-			}
+	useEffect(() => {
+		if (hasAnimated) {
+			controls.set({top: moonTopPos + (MOON_SIZE / 2 - CROSSHAIR_SIZE / 2)});
+			return;
+		}
 
+		const startAnimation = async () => {
 			const yTopPos = moonTopPos - CROSSHAIR_SIZE / 2;
 			const yCenterPos = moonTopPos + (MOON_SIZE / 2 - CROSSHAIR_SIZE / 2);
 			const yBottomPos = moonTopPos + MOON_SIZE - CROSSHAIR_SIZE / 2;
@@ -57,84 +64,25 @@ const HeroSection = (props: Props): JSX.Element => {
 		startAnimation();
 	}, [controls, hasAnimated, moonTopPos]);
 
-	useLayoutEffect(() => {
-		if (hasAnimated) {
-			controls.set({top: moonTopPos + (MOON_SIZE / 2 - CROSSHAIR_SIZE / 2)});
-		}
-	}, [controls, hasAnimated, moonTopPos]);
-
-	const firstRow = `Hi${NB_SPACE}there,${NB_SPACE}I’m${NB_SPACE}`.split('');
-	const highlightedRow = 'Max'.split('');
-	const secondRow =
-		`I’m${NB_SPACE}a${NB_SPACE}software${NB_SPACE}engineer`.split('');
-
-	const calcCharDelay = (i: number) => i / 15;
-
 	return (
 		<section id={Anchor.HOME} className="h-screen">
-			<Container>
+			<Container size="lg">
 				<div className="h-full flex flex-col justify-center">
 					<Typography variant="h1" align="center">
-						{firstRow.map((char, i) => {
-							return (
-								<motion.span
-									// TODO: fix eslint error
-									// eslint-disable-next-line react/no-array-index-key
-									key={i}
-									className="inline-block"
-									initial={{y: 20, opacity: 0}}
-									animate={{y: 0, opacity: 1}}
-									transition={{
-										duration: 0.1,
-										delay: calcCharDelay(i),
-									}}
-								>
-									{char}
-								</motion.span>
-							);
-						})}
-						{highlightedRow.map((char, i) => {
-							return (
-								<motion.span
-									// TODO: fix eslint error
-									// eslint-disable-next-line react/no-array-index-key
-									key={i}
-									className="inline-block"
-									initial={{y: 20, opacity: 0}}
-									animate={{y: 0, opacity: 1}}
-									transition={{
-										duration: 0.1,
-										delay:
-											calcCharDelay(firstRow.length) +
-											calcCharDelay(i),
-									}}
-								>
-									<Typography variant="highlight">{char}</Typography>
-								</motion.span>
-							);
-						})}
+						<AnimatedText text={FIRST_TITLE_ROW} />
+						<AnimatedText
+							variant="highlight"
+							text={FIRST_TITLE_HIGHLIGHTED_ROW}
+							delay={calcAnimatedCharDelay(FIRST_TITLE_ROW.length)}
+						/>
 						<br />
-						{secondRow.map((char, i) => {
-							return (
-								<motion.span
-									// TODO: fix eslint error
-									// eslint-disable-next-line react/no-array-index-key
-									key={i}
-									className="inline-block"
-									initial={{y: 20, opacity: 0}}
-									animate={{y: 0, opacity: 1}}
-									transition={{
-										duration: 0.1,
-										delay:
-											calcCharDelay(
-												firstRow.length + highlightedRow.length,
-											) + calcCharDelay(i),
-									}}
-								>
-									{char}
-								</motion.span>
-							);
-						})}
+						<AnimatedText
+							text={SECOND_TITLE_ROW}
+							delay={calcAnimatedCharDelay(
+								FIRST_TITLE_ROW.length +
+									FIRST_TITLE_HIGHLIGHTED_ROW.length,
+							)}
+						/>
 					</Typography>
 				</div>
 				<HeroMoon
@@ -142,15 +90,18 @@ const HeroSection = (props: Props): JSX.Element => {
 					style={{top: moonTopPos}}
 					size={MOON_SIZE}
 				/>
-				<MotionCrosshairSimple
+				<motion.div
 					className={classNames('absolute top-0 right-0', {
 						'z-[-1]': hasAnimated,
 					})}
 					animate={controls}
-					color={Color.PRIMARY.main}
-					size={CROSSHAIR_SIZE}
-					weight="thin"
-				/>
+				>
+					<CrosshairSimple
+						color={Color.PRIMARY.MAIN}
+						size={CROSSHAIR_SIZE}
+						weight="thin"
+					/>
+				</motion.div>
 				<HeroDownButton className="absolute bottom-6 left-[50%] translate-x-[-50%]" />
 			</Container>
 			<HeroWave

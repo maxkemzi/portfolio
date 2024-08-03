@@ -1,25 +1,28 @@
 import classNames from 'classnames';
 import {ReactNode} from 'react';
 
-type Variant = 'main' | 'content';
+type Size = 'sm' | 'md' | 'lg';
 
 interface Props {
 	children?: ReactNode;
-	variant?: Variant;
+	size?: Size;
 }
 
-const VARIANT_TO_CLASSES_MAPPING: {[key in Variant]: string} = {
-	main: 'max-w-[1472px] px-4',
-	content: 'max-w-[1172px]',
+const SIZE_TO_CLASS_NAMES_MAPPING: {[key in Size]: string} = {
+	lg: 'max-w-[1472px]',
+	md: 'max-w-[1172px]',
+	sm: 'max-w-[872px]',
 };
 
 const Container = (props: Props): JSX.Element => {
-	const {children, variant = 'main'} = props;
+	const {children, size = 'md'} = props;
 
-	const variantClasses = VARIANT_TO_CLASSES_MAPPING[variant];
+	const sizeClassNames = SIZE_TO_CLASS_NAMES_MAPPING[size];
 
 	return (
-		<div className={classNames(variantClasses, 'h-full mx-auto relative')}>
+		<div
+			className={classNames(sizeClassNames, 'h-full mx-auto relative px-4')}
+		>
 			{children}
 		</div>
 	);

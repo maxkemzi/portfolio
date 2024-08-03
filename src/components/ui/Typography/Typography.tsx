@@ -1,9 +1,18 @@
 import classNames from 'classnames';
-import {ElementType, ReactNode} from 'react';
+import {ElementType, ForwardedRef, forwardRef, ReactNode} from 'react';
 
 type Color = 'primary' | 'secondary' | 'background' | 'surface';
 
-type Variant = 'h1' | 'h2' | 'h3' | 'body1' | 'highlight' | 'link' | 'logo';
+type Variant =
+	| 'h1'
+	| 'h2'
+	| 'h3'
+	| 'body1'
+	| 'highlight'
+	| 'link'
+	| 'logo'
+	| 'button'
+	| 'inherit';
 
 type Align = 'center' | 'left' | 'right';
 
@@ -33,6 +42,8 @@ const VARIANT_TO_ELEMENT_MAPPING: {[key in Variant]: ElementType} = {
 	highlight: 'span',
 	link: 'span',
 	logo: 'p',
+	button: 'span',
+	inherit: 'span',
 };
 
 const VARIANT_TO_CLASSES_MAPPING: {[key in Variant]: string} = {
@@ -43,6 +54,8 @@ const VARIANT_TO_CLASSES_MAPPING: {[key in Variant]: string} = {
 	highlight: 'text-primary-main',
 	link: 'text-base font-normal uppercase',
 	logo: 'text-xl font-bold uppercase tracking-widest',
+	button: 'text-base font-bold uppercase tracking-wider',
+	inherit: '',
 };
 
 const ALIGN_TO_CLASSES_MAPPING: {[key in Align]: string} = {
@@ -51,36 +64,40 @@ const ALIGN_TO_CLASSES_MAPPING: {[key in Align]: string} = {
 	right: 'text-right',
 };
 
-const Typography = (props: Props): JSX.Element => {
-	const {
-		className,
-		as,
-		color = 'background',
-		variant = 'body1',
-		align = 'left',
-		isUppercase = false,
-		truncate = false,
-		children,
-	} = props;
+const Typography = forwardRef(
+	(props: Props, ref: ForwardedRef<HTMLElement>): JSX.Element => {
+		const {
+			className,
+			as,
+			color = 'background',
+			variant = 'body1',
+			align = 'left',
+			isUppercase = false,
+			truncate = false,
+			children,
+		} = props;
 
-	const Element = as ?? VARIANT_TO_ELEMENT_MAPPING[variant];
-	const colorClasses = COLOR_TO_CLASSES_MAPPING[color];
-	const variantClasses = VARIANT_TO_CLASSES_MAPPING[variant];
-	const alignClass = ALIGN_TO_CLASSES_MAPPING[align];
+		const Element = as ?? VARIANT_TO_ELEMENT_MAPPING[variant];
+		const colorClasses = COLOR_TO_CLASSES_MAPPING[color];
+		const variantClasses = VARIANT_TO_CLASSES_MAPPING[variant];
+		const alignClass = ALIGN_TO_CLASSES_MAPPING[align];
 
-	return (
-		<Element
-			className={classNames(
-				colorClasses,
-				variantClasses,
-				alignClass,
-				{uppercase: isUppercase, truncate},
-				className,
-			)}
-		>
-			{children}
-		</Element>
-	);
-};
+		return (
+			<Element
+				ref={ref}
+				className={classNames(
+					colorClasses,
+					variantClasses,
+					alignClass,
+					{uppercase: isUppercase, truncate},
+					className,
+				)}
+			>
+				{children}
+			</Element>
+		);
+	},
+);
 
+export type {Props as TypographyProps};
 export default Typography;
