@@ -1,5 +1,5 @@
 const Anchor = {
-	HOME: 'home',
+	HERO: 'hero',
 	ABOUT: 'about',
 	PROJECTS: 'projects',
 	CONTACT: 'contact',

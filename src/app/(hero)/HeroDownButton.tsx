@@ -33,7 +33,7 @@ const HeroDownButton = (props: Props): JSX.Element => {
 					className="rotate-[135deg]"
 					color={Color.BACKGROUND.CONTRAST_TEXT}
 					size={32}
-					weight="thin"
+					weight="light"
 				/>
 			</motion.div>
 		</Link>

@@ -15,7 +15,7 @@ const Button = (props: Props): JSX.Element => {
 	return (
 		<button
 			className={classNames(
-				'px-6 py-3 bg-primary-main text-primary-contrastText rounded-lg transition-all duration-300 hover:bg-[#C0219B] hover:shadow-[0_0_38px] hover:shadow-[#C0219B]',
+				'px-6 py-3 bg-primary-main text-primary-contrastText rounded-lg transition-all duration-500 ease-in-out hover:bg-[#C0219B] hover:shadow-[0_0_38px] hover:shadow-[#C0219B]',
 				className,
 			)}
 			type={isSubmit ? 'submit' : 'button'}
