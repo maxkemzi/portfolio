@@ -10,9 +10,9 @@ interface Props {
 }
 
 const TextField = (props: Props): JSX.Element => {
-	const {label, value, placeholder, isMultiline} = props;
+	const {label, name, value, placeholder, isMultiline} = props;
 
-	const commonProps = {placeholder};
+	const commonProps = {name, placeholder};
 	const commonClasses = 'w-full px-4 py-3 bg-surface-main rounded-lg';
 
 	return (

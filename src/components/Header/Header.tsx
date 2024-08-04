@@ -24,7 +24,7 @@ const Header = forwardRef(
 				})}
 			>
 				<Container size="lg">
-					<div className="flex items-center justify-between">
+					<div className="flex items-center justify-between gap-7">
 						<NextLink href={`#${Anchor.HERO}`}>
 							<Logo />
 						</NextLink>

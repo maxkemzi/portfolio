@@ -24,7 +24,9 @@ const validationSchema = zfd.formData({
 
 const sendContactMail = actionClient
 	.schema(validationSchema)
-	.action(async ({parsedInput: {name, email, message}}) => {
+	.action(async ({parsedInput}) => {
+		const {name, email, message} = parsedInput;
+
 		await transporter.sendMail({
 			from: env.SMTP_USER,
 			to: env.EMAIL_TO,

@@ -9,8 +9,8 @@ import {AboutSection} from './(about)';
 import ProjectsSection from './(projects)';
 import ContactSection from './(contact)';
 
-const WAVE_SPACING = 16;
 const MOON_SPACING = 32;
+const WAVE_SPACING = 16;
 const FIXED_HEADER_TRANSITION_DURATION = 0.5;
 
 const MotionHeader = motion(Header);
@@ -38,9 +38,8 @@ const Home = () => {
 			}
 
 			const {top, left} = navbarRef.current.getBoundingClientRect();
-
-			setHeroWaveWidth(left - WAVE_SPACING);
-			setHeroMoonTopPos(top + MOON_SPACING);
+			setHeroMoonTopPos(top + window.scrollY + MOON_SPACING);
+			setHeroWaveWidth(left - window.scrollX - WAVE_SPACING);
 		};
 
 		updateHeroWaveWidth();
@@ -65,6 +64,8 @@ const Home = () => {
 			const {height: heroHeight} = heroRef.current.getBoundingClientRect();
 			setFixedHeaderIsVisible(window.scrollY >= heroHeight);
 		};
+
+		updateFixedHeaderIsVisible();
 
 		window.addEventListener('scroll', updateFixedHeaderIsVisible);
 

@@ -49,8 +49,12 @@ const ProjectCard = (props: Props): JSX.Element => {
 				<Typography className="mb-4">{description}</Typography>
 				<TechnologyChipList className="mb-4" technologies={technologies} />
 				<div className="flex gap-4">
-					<Link href={liveUrl}>LIVE APP</Link>
-					<Link href={githubUrl}>GITHUB</Link>
+					<Link href={liveUrl} isExternal>
+						LIVE APP
+					</Link>
+					<Link href={githubUrl} isExternal>
+						GITHUB
+					</Link>
 					<Link href={`/projects/${id}`}>CASE-STUDY</Link>
 				</div>
 			</div>
