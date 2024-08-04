@@ -17,9 +17,10 @@ const Header = forwardRef(
 		return (
 			<header
 				ref={ref}
-				className={classNames('top-0 left-0 right-0 z-50', {
-					'absolute py-5': !isFixed,
-					'fixed bg-secondary-main bg-opacity-90 shadow-lg py-4': isFixed,
+				className={classNames('top-0 left-0 right-0 py-4 z-50', {
+					absolute: !isFixed,
+					'fixed bg-secondary-main bg-opacity-90 shadow-lg backdrop-blur-sm':
+						isFixed,
 				})}
 			>
 				<Container size="lg">
@@ -52,7 +53,7 @@ const Header = forwardRef(
 									rel="noreferrer noopenner"
 								>
 									<GithubLogo
-										className="fill-background-contrastText transition-colors duration-500 ease-in-out group-hover:fill-primary-main"
+										className="fill-background-contrastText transition-colors duration-300 ease-in-out group-hover:fill-primary-main"
 										size={28}
 										weight="light"
 									/>
@@ -66,7 +67,7 @@ const Header = forwardRef(
 									rel="noreferrer noopenner"
 								>
 									<TelegramLogo
-										className="fill-background-contrastText gtransition-colors duration-500 ease-in-out group-hover:fill-primary-main"
+										className="fill-background-contrastText gtransition-colors duration-300 ease-in-out group-hover:fill-primary-main"
 										size={28}
 										weight="light"
 									/>
