@@ -10,7 +10,7 @@ const Navbar = forwardRef<HTMLElement, Props>((props, ref): JSX.Element => {
 
 	return (
 		<nav ref={ref} className={className}>
-			<ul className="flex items-center gap-6">{children}</ul>
+			<ul className="flex items-center">{children}</ul>
 		</nav>
 	);
 });

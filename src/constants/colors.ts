@@ -15,6 +15,10 @@ const Color = {
 		MAIN: '#2C2C51',
 		CONTRAST_TEXT: '#FFFFFF',
 	},
+	DANGER: {
+		MAIN: '#f02c57',
+		CONTRAST_TEXT: '#FFFFFF',
+	},
 };
 
 export default Color;

@@ -2,6 +2,7 @@
 
 import {
 	AnimatedText,
+	Button,
 	calcAnimatedCharDelay,
 	Container,
 	Typography,
@@ -27,6 +28,8 @@ const NB_SPACE = '\u00A0';
 const FIRST_TITLE_ROW = `Hi${NB_SPACE}there,${NB_SPACE}I’m${NB_SPACE}`;
 const FIRST_TITLE_HIGHLIGHTED_ROW = 'Max';
 const SECOND_TITLE_ROW = `I’m${NB_SPACE}a${NB_SPACE}software${NB_SPACE}engineer`;
+
+const MotionButton = motion(Button);
 
 const HeroSection = forwardRef(
 	(props: Props, ref: ForwardedRef<HTMLElement>): JSX.Element => {
@@ -71,8 +74,8 @@ const HeroSection = forwardRef(
 		return (
 			<section ref={ref} id={Anchor.HERO} className="h-screen">
 				<Container size="lg">
-					<div className="h-full flex flex-col justify-center">
-						<Typography variant="h1" align="center">
+					<div className="h-full flex flex-col items-center justify-center">
+						<Typography className="mb-9" variant="h1" align="center">
 							<AnimatedText text={FIRST_TITLE_ROW} />
 							<AnimatedText
 								variant="highlight"
@@ -88,14 +91,28 @@ const HeroSection = forwardRef(
 								)}
 							/>
 						</Typography>
+						<MotionButton
+							initial={{y: 5, opacity: 0}}
+							animate={{y: 0, opacity: 1}}
+							transition={{
+								delay: calcAnimatedCharDelay(
+									FIRST_TITLE_ROW.length +
+										FIRST_TITLE_HIGHLIGHTED_ROW.length +
+										SECOND_TITLE_ROW.length,
+								),
+								duration: 0.5,
+							}}
+						>
+							Download CV
+						</MotionButton>
 					</div>
 					<HeroMoon
-						className="absolute right-0 z-[-2]"
+						className="absolute right-0 z-[-2] opacity-80"
 						style={{top: moonTopPos}}
 						size={MOON_SIZE}
 					/>
 					<motion.div
-						className={classNames('absolute top-0 right-0', {
+						className={classNames('absolute top-0 right-0 opacity-80', {
 							'z-[-1]': hasAnimated,
 						})}
 						animate={controls}

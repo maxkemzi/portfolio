@@ -3,8 +3,7 @@
 import {actionClient} from '@/actions';
 import {env} from '@/config';
 import nodemailer from 'nodemailer';
-import {z} from 'zod';
-import {zfd} from 'zod-form-data';
+import {schema} from './schema';
 
 const transporter = nodemailer.createTransport({
 	host: env.SMTP_HOST,
@@ -16,14 +15,8 @@ const transporter = nodemailer.createTransport({
 	},
 });
 
-const validationSchema = zfd.formData({
-	name: zfd.text(z.string().trim().min(1)),
-	email: zfd.text(z.string().trim().min(1).email()),
-	message: zfd.text(z.string().trim().min(1)),
-});
-
 const sendContactMail = actionClient
-	.schema(validationSchema)
+	.schema(schema)
 	.action(async ({parsedInput}) => {
 		const {name, email, message} = parsedInput;
 

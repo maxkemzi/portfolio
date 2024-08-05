@@ -20,7 +20,7 @@ const RootLayout = ({
 			<body
 				className={classNames(
 					exo2Font.className,
-					'relative bg-background-main text-background-contrastText overflow-x-hidden',
+					'relative bg-background-main bg-grid bg-[length:50px_50px] text-background-contrastText overflow-x-hidden',
 				)}
 			>
 				{children}

@@ -1,34 +1,46 @@
 'use client';
 
-import {useAction} from 'next-safe-action/hooks';
-import {sendContactMail} from './actions';
+import {useForm} from 'react-hook-form';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {z} from 'zod';
 import {Button, TextField, Typography} from '../ui';
+import {schema} from './schema';
+import {sendContactMail} from './actions';
 
 const ContactForm = () => {
-	const {execute} = useAction(sendContactMail);
+	const {
+		register,
+		handleSubmit,
+		formState: {errors},
+	} = useForm<z.infer<typeof schema>>({
+		resolver: zodResolver(schema),
+	});
 
 	return (
 		<div>
 			<Typography className="mb-3" align="center" variant="h2">
 				Contact
 			</Typography>
-			<form action={execute}>
+			<form onSubmit={handleSubmit(data => sendContactMail(data))}>
 				<div className="flex flex-col gap-4 mb-5 w-full">
 					<TextField
 						label="Your name"
-						name="name"
-						placeholder="Enter your name"
+						placeholder="John Doe (HR)"
+						error={errors.name?.message}
+						{...register('name')}
 					/>
 					<TextField
 						label="Your email"
-						name="email"
-						placeholder="Enter your email"
+						placeholder="j.doe@bestcompany.com"
+						error={errors.email?.message}
+						{...register('email')}
 					/>
 					<TextField
 						label="Your message"
-						name="message"
-						placeholder="Enter your message"
+						placeholder="We'd like to see you in our team."
+						error={errors.message?.message}
 						isMultiline
+						{...register('message')}
 					/>
 				</div>
 				<Button className="block ml-auto mr-auto w-full" isSubmit>

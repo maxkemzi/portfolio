@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import {ElementType, ForwardedRef, forwardRef, ReactNode} from 'react';
 
-type Color = 'primary' | 'secondary' | 'background' | 'surface';
+type Color = 'primary' | 'secondary' | 'background' | 'surface' | 'danger';
 
 type Variant =
 	| 'h1'
@@ -27,11 +27,12 @@ interface Props {
 	children?: ReactNode;
 }
 
-const COLOR_TO_CLASSES_MAPPING: {[key in Color]: string} = {
+const COLOR_TO_CLASS_NAME_MAPPING: {[key in Color]: string} = {
 	primary: 'text-primary-contrastText',
 	secondary: 'text-secondary-contrastText',
 	background: 'text-background-contrastText',
 	surface: 'text-surface-contrastText',
+	danger: 'text-danger-main',
 };
 
 const VARIANT_TO_ELEMENT_MAPPING: {[key in Variant]: ElementType} = {
@@ -46,7 +47,7 @@ const VARIANT_TO_ELEMENT_MAPPING: {[key in Variant]: ElementType} = {
 	inherit: 'span',
 };
 
-const VARIANT_TO_CLASSES_MAPPING: {[key in Variant]: string} = {
+const VARIANT_TO_CLASS_NAMES_MAPPING: {[key in Variant]: string} = {
 	h1: 'text-6xl font-bold',
 	h2: 'text-5xl font-bold',
 	h3: 'text-4xl font-semibold',
@@ -58,7 +59,19 @@ const VARIANT_TO_CLASSES_MAPPING: {[key in Variant]: string} = {
 	inherit: '',
 };
 
-const ALIGN_TO_CLASSES_MAPPING: {[key in Align]: string} = {
+const VARIANT_TO_COLOR_CLASS_NAME_MAPPING: {[key in Variant]: string} = {
+	h1: 'text-background-contrastText',
+	h2: 'text-background-contrastText',
+	h3: 'text-background-contrastText',
+	body1: 'text-background-contrastText',
+	highlight: 'text-[transparent]',
+	link: 'text-background-contrastText',
+	logo: 'text-background-contrastText',
+	button: 'text-background-contrastText',
+	inherit: 'text-[inherit]',
+};
+
+const ALIGN_TO_CLASS_NAME_MAPPING: {[key in Align]: string} = {
 	center: 'text-center',
 	left: 'text-left',
 	right: 'text-right',
@@ -69,25 +82,27 @@ const Typography = forwardRef(
 		const {
 			className,
 			as,
-			color = 'background',
+			color,
 			variant = 'body1',
 			align = 'left',
-			isUppercase = false,
-			truncate = false,
+			isUppercase,
+			truncate,
 			children,
 		} = props;
 
 		const Element = as ?? VARIANT_TO_ELEMENT_MAPPING[variant];
-		const colorClasses = COLOR_TO_CLASSES_MAPPING[color];
-		const variantClasses = VARIANT_TO_CLASSES_MAPPING[variant];
-		const alignClass = ALIGN_TO_CLASSES_MAPPING[align];
+		const variantClasses = VARIANT_TO_CLASS_NAMES_MAPPING[variant];
+		const colorClassNames = color
+			? COLOR_TO_CLASS_NAME_MAPPING[color]
+			: VARIANT_TO_COLOR_CLASS_NAME_MAPPING[variant];
+		const alignClass = ALIGN_TO_CLASS_NAME_MAPPING[align];
 
 		return (
 			<Element
 				ref={ref}
 				className={classNames(
-					colorClasses,
 					variantClasses,
+					colorClassNames,
 					alignClass,
 					{uppercase: isUppercase, truncate},
 					className,

@@ -12,7 +12,7 @@ const NavbarLink = (props: Props): JSX.Element => {
 
 	return (
 		<Link
-			className="group relative pb-1.5 after:content-[''] after:absolute after:bottom-0 after:right-0 after:rounded-lg after:w-0 after:h-[2px] after:bg-primary-main after:transition-all after:duration-300 after:ease-in-out  hover:after:w-full hover:after:left-0"
+			className="group inline-block relative pb-2 px-3.5 after:content-[''] after:absolute after:bottom-0 after:left-[50%] after:translate-x-[-50%] after:rounded-lg after:w-0 after:h-[1px] after:bg-primary-main after:transition-all after:duration-300 after:ease-out hover:after:w-[100%]"
 			href={href}
 		>
 			<Typography

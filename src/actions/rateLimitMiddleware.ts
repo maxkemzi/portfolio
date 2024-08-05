@@ -3,14 +3,14 @@ import {MiddlewareFn} from 'next-safe-action';
 import {headers} from 'next/headers';
 
 const getIp = () => {
-	const fallbackIp = '0.0.0.0';
+	const FALLBACK_IP = '0.0.0.0';
 	const forwardedFor = headers().get('x-forwarded-for');
 
 	if (forwardedFor) {
-		return forwardedFor.split(',')[0] ?? fallbackIp;
+		return forwardedFor.split(',')[0] ?? FALLBACK_IP;
 	}
 
-	return headers().get('x-real-ip') ?? fallbackIp;
+	return headers().get('x-real-ip') ?? FALLBACK_IP;
 };
 
 const rateLimitMiddleware: MiddlewareFn<
@@ -20,24 +20,25 @@ const rateLimitMiddleware: MiddlewareFn<
 	null
 > = async ({next}) => {
 	const ip = getIp();
-	const requestLimit = 5;
-	const resetAfterMs = 60 * 1000;
+	const REQUEST_LIMIT = 5;
+	const RESET_AFTER_MS = 60 * 1000;
 
 	let rateLimit = await prisma.rateLimit.findUnique({where: {ip}});
 	if (!rateLimit) {
 		rateLimit = await prisma.rateLimit.create({
-			data: {ip, resetTime: Date.now() + resetAfterMs},
+			data: {ip, resetTime: Date.now() + RESET_AFTER_MS},
 		});
 	}
 
-	if (Date.now() > rateLimit.resetTime) {
+	const isResetTime = Date.now() > rateLimit.resetTime;
+	if (isResetTime) {
 		await prisma.rateLimit.update({
-			data: {requestCount: 0, resetTime: Date.now() + resetAfterMs},
+			data: {requestCount: 0, resetTime: Date.now() + RESET_AFTER_MS},
 			where: {id: rateLimit.id},
 		});
 	}
 
-	if (rateLimit.requestCount >= requestLimit) {
+	if (rateLimit.requestCount >= REQUEST_LIMIT) {
 		throw new Error('Too many requests.');
 	}
 
