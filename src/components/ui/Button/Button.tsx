@@ -17,13 +17,20 @@ const Button = forwardRef(
 			<button
 				ref={ref}
 				className={classNames(
-					'px-6 py-3 bg-gradient-to-br from-primary-main to-secondary-main bg-[length:200%_auto] text-primary-contrastText rounded-lg transition-all duration-300 ease-out hover:bg-[#C0219B] hover:shadow-[0_0_38px] hover:shadow-[#C0219B]',
+					'inline-block px-6 py-3 bg-gradient-to-br from-primary-main to-secondary-main bg-[length:250%_auto] text-primary-contrastText rounded-lg transition-all duration-300 ease-out hover:brightness-90',
 					className,
 				)}
 				type={isSubmit ? 'submit' : 'button'}
 				disabled={isDisabled}
 			>
-				<Typography variant="button">{children}</Typography>
+				<Typography
+					as="span"
+					weight="bold"
+					letterSpacing="wider"
+					textTransform="uppercase"
+				>
+					{children}
+				</Typography>
 			</button>
 		);
 	},

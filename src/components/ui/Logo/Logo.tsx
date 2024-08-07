@@ -1,7 +1,16 @@
 import {Typography} from '../Typography';
 
 const Logo = (): JSX.Element => {
-	return <Typography variant="logo">Max Kemzi</Typography>;
+	return (
+		<Typography
+			size="xl"
+			weight="bold"
+			letterSpacing="widest"
+			textTransform="uppercase"
+		>
+			Max Kemzi
+		</Typography>
+	);
 };
 
 export default Logo;

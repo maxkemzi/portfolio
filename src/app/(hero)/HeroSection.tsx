@@ -1,7 +1,7 @@
 'use client';
 
 import {
-	AnimatedText,
+	AnimatedTypography,
 	Button,
 	calcAnimatedCharDelay,
 	Container,
@@ -16,20 +16,37 @@ import HeroWave from './HeroWave';
 import HeroMoon from './HeroMoon';
 import HeroDownButton from './HeroDownButton';
 
-interface Props {
-	waveWidth: number;
-	moonTopPos: number;
-}
+const MotionButton = motion(Button);
+const MotionTypography = motion(Typography);
 
 const MOON_SIZE = 370;
 const CROSSHAIR_SIZE = 260;
 
 const NB_SPACE = '\u00A0';
-const FIRST_TITLE_ROW = `Hi${NB_SPACE}there,${NB_SPACE}I’m${NB_SPACE}`;
-const FIRST_TITLE_HIGHLIGHTED_ROW = 'Max';
-const SECOND_TITLE_ROW = `I’m${NB_SPACE}a${NB_SPACE}software${NB_SPACE}engineer`;
+const FIRST_TEXT = `Hi${NB_SPACE}there,${NB_SPACE}I’m${NB_SPACE}`;
+const HIGHLIGHTED_TEXT = 'Max';
+const SECOND_TEXT = `I’m${NB_SPACE}a${NB_SPACE}software${NB_SPACE}engineer`;
 
-const MotionButton = motion(Button);
+let animDuration = 0;
+
+const highlightedTextAnimDelay = calcAnimatedCharDelay(FIRST_TEXT.length);
+animDuration = highlightedTextAnimDelay;
+
+const secondTextAnimDelay =
+	animDuration + calcAnimatedCharDelay(HIGHLIGHTED_TEXT.length);
+animDuration = secondTextAnimDelay;
+
+const buttonAnimDelay =
+	animDuration + calcAnimatedCharDelay(SECOND_TEXT.length);
+animDuration = buttonAnimDelay;
+
+const BUTTON_ANIM_DURATION = 0.5;
+const crosshairAnimDuration = animDuration + BUTTON_ANIM_DURATION;
+
+interface Props {
+	waveWidth: number;
+	moonTopPos: number;
+}
 
 const HeroSection = forwardRef(
 	(props: Props, ref: ForwardedRef<HTMLElement>): JSX.Element => {
@@ -60,7 +77,7 @@ const HeroSection = forwardRef(
 					top: [yTopPos, yCenterPos, yBottomPos, yCenterPos, yCenterPos],
 					right: [xCenterPos, xLeftPos, xCenterPos, xRightPos, xCenterPos],
 					transition: {
-						duration: 4,
+						duration: crosshairAnimDuration,
 						ease: 'easeInOut',
 					},
 				});
@@ -76,43 +93,36 @@ const HeroSection = forwardRef(
 				<Container size="lg">
 					<div className="h-full flex flex-col items-center justify-center">
 						<Typography className="mb-9" variant="h1" align="center">
-							<AnimatedText text={FIRST_TITLE_ROW} />
-							<AnimatedText
-								variant="highlight"
-								text={FIRST_TITLE_HIGHLIGHTED_ROW}
-								delay={calcAnimatedCharDelay(FIRST_TITLE_ROW.length)}
+							<AnimatedTypography text={FIRST_TEXT} />
+							<AnimatedTypography
+								color="primary"
+								text={HIGHLIGHTED_TEXT}
+								delay={highlightedTextAnimDelay}
 							/>
 							<br />
-							<AnimatedText
-								text={SECOND_TITLE_ROW}
-								delay={calcAnimatedCharDelay(
-									FIRST_TITLE_ROW.length +
-										FIRST_TITLE_HIGHLIGHTED_ROW.length,
-								)}
+							<AnimatedTypography
+								text={SECOND_TEXT}
+								delay={secondTextAnimDelay}
 							/>
 						</Typography>
 						<MotionButton
 							initial={{y: 5, opacity: 0}}
 							animate={{y: 0, opacity: 1}}
 							transition={{
-								delay: calcAnimatedCharDelay(
-									FIRST_TITLE_ROW.length +
-										FIRST_TITLE_HIGHLIGHTED_ROW.length +
-										SECOND_TITLE_ROW.length,
-								),
-								duration: 0.5,
+								duration: BUTTON_ANIM_DURATION,
+								delay: buttonAnimDelay,
 							}}
 						>
 							Download CV
 						</MotionButton>
 					</div>
 					<HeroMoon
-						className="absolute right-0 z-[-2] opacity-80"
+						className="absolute right-0 z-[-2] brightness-75"
 						style={{top: moonTopPos}}
 						size={MOON_SIZE}
 					/>
 					<motion.div
-						className={classNames('absolute top-0 right-0 opacity-80', {
+						className={classNames('absolute top-0 right-0', {
 							'z-[-1]': hasAnimated,
 						})}
 						animate={controls}
@@ -122,6 +132,23 @@ const HeroSection = forwardRef(
 							size={CROSSHAIR_SIZE}
 							weight="light"
 						/>
+						<MotionTypography
+							className="inline-block absolute top-0 left-[50%]"
+							color="primary"
+							align="center"
+							noWrap
+							initial={{
+								opacity: 0,
+								rotate: '14deg',
+								scale: 0.5,
+								x: '-50%',
+								y: '-100%',
+							}}
+							animate={{opacity: 1, scale: 1}}
+							transition={{delay: crosshairAnimDuration}}
+						>
+							Aimed for the moon!
+						</MotionTypography>
 					</motion.div>
 					<HeroDownButton className="absolute bottom-6 left-[50%] translate-x-[-50%]" />
 				</Container>

@@ -6,15 +6,18 @@ import {Typography, TypographyProps} from '../Typography';
 interface Props {
 	text: string;
 	variant?: TypographyProps['variant'];
+	color?: TypographyProps['color'];
 	delay?: number;
 }
 
 const MotionTypography = motion(Typography);
 
-const calcCharDelay = (i: number) => i / 15;
+const CHAR_ANIM_DURATION = 0.1;
 
-const AnimatedText = memo((props: Props): JSX.Element => {
-	const {text, variant = 'inherit', delay = 0} = props;
+const calcAnimatedCharDelay = (i: number) => i * (CHAR_ANIM_DURATION / 1.5);
+
+const AnimatedTypography = memo((props: Props): JSX.Element => {
+	const {text, variant = 'inherit', color, delay = 0} = props;
 
 	const chars = text.split('');
 
@@ -28,10 +31,11 @@ const AnimatedText = memo((props: Props): JSX.Element => {
 						initial={{y: 20, opacity: 0}}
 						animate={{y: 0, opacity: 1}}
 						transition={{
-							duration: 0.1,
-							delay: delay + calcCharDelay(i),
+							delay: delay + calcAnimatedCharDelay(i),
+							duration: CHAR_ANIM_DURATION,
 						}}
 						variant={variant}
+						color={color}
 					>
 						{char}
 					</MotionTypography>
@@ -41,5 +45,5 @@ const AnimatedText = memo((props: Props): JSX.Element => {
 	);
 });
 
-export {calcCharDelay as calcAnimatedCharDelay};
-export default AnimatedText;
+export {calcAnimatedCharDelay};
+export default AnimatedTypography;

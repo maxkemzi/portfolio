@@ -1,38 +1,98 @@
 import classNames from 'classnames';
 import {ElementType, ForwardedRef, forwardRef, ReactNode} from 'react';
 
-type Color = 'primary' | 'secondary' | 'background' | 'surface' | 'danger';
+type Variant = 'h1' | 'h2' | 'h3' | 'body1' | 'inherit';
 
-type Variant =
-	| 'h1'
-	| 'h2'
-	| 'h3'
-	| 'body1'
-	| 'highlight'
-	| 'link'
-	| 'logo'
-	| 'button'
+type Size = '6xl' | '5xl' | '4xl' | 'xl' | 'base' | 'inherit';
+
+type Weight = 'bold' | 'semibold' | 'medium' | 'normal' | 'inherit';
+
+type Color =
+	| 'primary'
+	| 'primaryText'
+	| 'secondary'
+	| 'secondaryText'
+	| 'background'
+	| 'backgroundText'
+	| 'surface'
+	| 'surfaceText'
+	| 'danger'
+	| 'dangerText'
 	| 'inherit';
 
-type Align = 'center' | 'left' | 'right';
+type LetterSpacing = 'widest' | 'wider' | 'wide' | 'inherit';
+
+type TextTransform = 'uppercase' | 'capitalize' | 'inherit';
+
+type Align = 'right' | 'center' | 'inherit';
 
 interface Props {
 	className?: string;
 	as?: ElementType;
-	color?: Color;
 	variant?: Variant;
+	size?: Size;
+	weight?: Weight;
+	color?: Color;
+	letterSpacing?: LetterSpacing;
+	textTransform?: TextTransform;
 	align?: Align;
-	isUppercase?: boolean;
 	truncate?: boolean;
+	noWrap?: boolean;
 	children?: ReactNode;
 }
 
-const COLOR_TO_CLASS_NAME_MAPPING: {[key in Color]: string} = {
-	primary: 'text-primary-contrastText',
-	secondary: 'text-secondary-contrastText',
-	background: 'text-background-contrastText',
-	surface: 'text-surface-contrastText',
-	danger: 'text-danger-main',
+const STYLES_TO_CLASS_NAMES_MAPPING: {
+	size: {[key in Size]: string};
+	weight: {[key in Weight]: string};
+	color: {[key in Color]: string};
+	letterSpacing: {[key in LetterSpacing]: string};
+	textTransform: {[key in TextTransform]: string};
+	align: {[key in Align]: string};
+} = {
+	size: {
+		'6xl': 'text-6xl',
+		'5xl': 'text-5xl',
+		'4xl': 'text-4xl',
+		xl: 'text-xl',
+		base: 'text-base',
+		inherit: '[font-size:inherit]',
+	},
+	weight: {
+		bold: 'font-bold',
+		semibold: 'font-semibold',
+		medium: 'font-medium',
+		normal: 'font-normal',
+		inherit: '[font-weight:inherit]',
+	},
+	color: {
+		primary: 'text-primary-main',
+		primaryText: 'text-primary-contrastText',
+		secondary: 'text-secondary-main',
+		secondaryText: 'text-secondary-contrastText',
+		background: 'text-background-main',
+		backgroundText: 'text-background-contrastText',
+		surface: 'text-surface-main',
+		surfaceText: 'text-surface-contrastText',
+		danger: 'text-danger-main',
+		dangerText: 'text-danger-contrastText',
+		inherit: '[color:inherit]',
+	},
+	letterSpacing: {
+		widest: 'tracking-widest',
+		wider: 'tracking-wider',
+		wide: 'tracking-wide',
+		inherit: '[letter-spacing:inherit]',
+	},
+	textTransform: {
+		uppercase: 'uppercase',
+		capitalize: 'capitalize',
+		inherit: '[text-transform:inherit]',
+	},
+	align: {
+		right: 'text-right',
+		center: 'text-center',
+		inherit: '[text-align:inherit]',
+	},
 };
 
 const VARIANT_TO_ELEMENT_MAPPING: {[key in Variant]: ElementType} = {
@@ -40,41 +100,44 @@ const VARIANT_TO_ELEMENT_MAPPING: {[key in Variant]: ElementType} = {
 	h2: 'h2',
 	h3: 'h3',
 	body1: 'p',
-	highlight: 'span',
-	link: 'span',
-	logo: 'p',
-	button: 'span',
 	inherit: 'span',
 };
 
-const VARIANT_TO_CLASS_NAMES_MAPPING: {[key in Variant]: string} = {
-	h1: 'text-6xl font-bold',
-	h2: 'text-5xl font-bold',
-	h3: 'text-4xl font-semibold',
-	body1: 'text-base font-normal',
-	highlight: 'text-primary-main',
-	link: 'text-base font-normal uppercase',
-	logo: 'text-xl font-bold uppercase tracking-widest',
-	button: 'text-base font-bold uppercase tracking-wider',
-	inherit: '',
-};
-
-const VARIANT_TO_COLOR_CLASS_NAME_MAPPING: {[key in Variant]: string} = {
-	h1: 'text-background-contrastText',
-	h2: 'text-background-contrastText',
-	h3: 'text-background-contrastText',
-	body1: 'text-background-contrastText',
-	highlight: 'text-[transparent]',
-	link: 'text-background-contrastText',
-	logo: 'text-background-contrastText',
-	button: 'text-background-contrastText',
-	inherit: 'text-[inherit]',
-};
-
-const ALIGN_TO_CLASS_NAME_MAPPING: {[key in Align]: string} = {
-	center: 'text-center',
-	left: 'text-left',
-	right: 'text-right',
+const VARIANT_TO_STYLES_MAPPING: {
+	[key in Variant]: {
+		size?: Size;
+		weight?: Weight;
+		color?: Color;
+		letterSpacing?: LetterSpacing;
+		textTransform?: TextTransform;
+	};
+} = {
+	h1: {
+		size: '6xl',
+		weight: 'bold',
+		color: 'backgroundText',
+	},
+	h2: {
+		size: '5xl',
+		weight: 'bold',
+		color: 'backgroundText',
+	},
+	h3: {
+		size: '4xl',
+		weight: 'semibold',
+		color: 'backgroundText',
+	},
+	body1: {
+		size: 'base',
+		weight: 'normal',
+		color: 'backgroundText',
+	},
+	inherit: {
+		size: 'inherit',
+		weight: 'inherit',
+		color: 'inherit',
+		letterSpacing: 'inherit',
+	},
 };
 
 const Typography = forwardRef(
@@ -82,29 +145,54 @@ const Typography = forwardRef(
 		const {
 			className,
 			as,
-			color,
 			variant = 'body1',
-			align = 'left',
-			isUppercase,
+			align,
 			truncate,
+			noWrap,
 			children,
 		} = props;
 
 		const Element = as ?? VARIANT_TO_ELEMENT_MAPPING[variant];
-		const variantClasses = VARIANT_TO_CLASS_NAMES_MAPPING[variant];
-		const colorClassNames = color
-			? COLOR_TO_CLASS_NAME_MAPPING[color]
-			: VARIANT_TO_COLOR_CLASS_NAME_MAPPING[variant];
-		const alignClass = ALIGN_TO_CLASS_NAME_MAPPING[align];
+
+		let {size, weight, color, letterSpacing, textTransform} = props;
+		const variantStyles = VARIANT_TO_STYLES_MAPPING[variant];
+
+		size = size ?? variantStyles.size;
+		weight = weight ?? variantStyles.weight;
+		color = color ?? variantStyles.color;
+		letterSpacing = letterSpacing ?? variantStyles.letterSpacing;
+		textTransform = textTransform ?? variantStyles.textTransform;
+
+		const sizeClassName = size
+			? STYLES_TO_CLASS_NAMES_MAPPING.size[size]
+			: undefined;
+		const weightClassName = weight
+			? STYLES_TO_CLASS_NAMES_MAPPING.weight[weight]
+			: undefined;
+		const colorClassName = color
+			? STYLES_TO_CLASS_NAMES_MAPPING.color[color]
+			: undefined;
+		const letterSpacingClassName = letterSpacing
+			? STYLES_TO_CLASS_NAMES_MAPPING.letterSpacing[letterSpacing]
+			: undefined;
+		const textTransformClassName = textTransform
+			? STYLES_TO_CLASS_NAMES_MAPPING.textTransform[textTransform]
+			: undefined;
+		const alignClassName = align
+			? STYLES_TO_CLASS_NAMES_MAPPING.align[align]
+			: undefined;
 
 		return (
 			<Element
 				ref={ref}
 				className={classNames(
-					variantClasses,
-					colorClassNames,
-					alignClass,
-					{uppercase: isUppercase, truncate},
+					sizeClassName,
+					weightClassName,
+					colorClassName,
+					letterSpacingClassName,
+					textTransformClassName,
+					alignClassName,
+					{truncate, 'text-nowrap': noWrap},
 					className,
 				)}
 			>

@@ -5,4 +5,4 @@ export {Container} from './Container';
 export {Link} from './Link';
 export {TextField} from './TextField';
 export {Button} from './Button';
-export {AnimatedText, calcAnimatedCharDelay} from './AnimatedText';
+export {AnimatedTypography, calcAnimatedCharDelay} from './AnimatedTypography';

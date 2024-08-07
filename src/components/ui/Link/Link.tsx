@@ -19,7 +19,9 @@ const Link = (props: Props): JSX.Element => {
 			href={href}
 			{...(isExternal ? externalProps : {})}
 		>
-			<Typography isUppercase>{children}</Typography>
+			<Typography as="span" textTransform="uppercase">
+				{children}
+			</Typography>
 		</NextLink>
 	);
 };

@@ -17,7 +17,8 @@ const NavbarLink = (props: Props): JSX.Element => {
 		>
 			<Typography
 				className="transition-colors duration-300 ease-in-out group-hover:text-primary-main"
-				variant="link"
+				as="span"
+				textTransform="uppercase"
 			>
 				{children}
 			</Typography>
