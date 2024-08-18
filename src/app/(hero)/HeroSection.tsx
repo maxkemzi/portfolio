@@ -122,9 +122,10 @@ const HeroSection = forwardRef(
 						size={MOON_SIZE}
 					/>
 					<motion.div
-						className={classNames('absolute top-0 right-0', {
-							'z-[-1]': hasAnimated,
-						})}
+						className={classNames(
+							'absolute top-0 right-0 brightness-90',
+							{'z-[-1]': hasAnimated},
+						)}
 						animate={controls}
 					>
 						<CrosshairSimple
@@ -133,13 +134,14 @@ const HeroSection = forwardRef(
 							weight="light"
 						/>
 						<MotionTypography
-							className="inline-block absolute top-0 left-[50%]"
+							className="inline-block absolute top-4 left-[50%]"
+							weight="bold"
 							color="primary"
 							align="center"
 							noWrap
 							initial={{
 								opacity: 0,
-								rotate: '14deg',
+								rotate: '12deg',
 								scale: 0.5,
 								x: '-50%',
 								y: '-100%',
