@@ -106,6 +106,9 @@ const HeroSection = forwardRef(
 							/>
 						</Typography>
 						<MotionButton
+							asLink
+							href="/files/cv.pdf"
+							download="CV_Maksym_Kyrychenko"
 							initial={{y: 5, opacity: 0}}
 							animate={{y: 0, opacity: 1}}
 							transition={{

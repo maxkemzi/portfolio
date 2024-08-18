@@ -8,45 +8,49 @@ import {
 } from 'react';
 import {Typography} from '../Typography';
 
-type CommonProps<T extends Element> = {
+type CommonProps = {
+	containerRef?: RefObject<HTMLDivElement>;
 	label: string;
 	name: string;
 	value?: string;
 	placeholder?: string;
 	error?: string;
+};
+
+type CallbackProps<T extends HTMLElement> = {
 	onChange?: ChangeEventHandler<T>;
 	onBlur?: FocusEventHandler<T>;
 };
 
-type NonMultilineProps = CommonProps<HTMLInputElement> & {
-	inputRef?: RefObject<HTMLInputElement>;
-	textareaRef?: never;
-	isMultiline?: never;
-};
+type NonMultilineProps = CommonProps &
+	CallbackProps<HTMLInputElement> & {
+		isMultiline?: false;
+	};
 
-type MultilineProps = CommonProps<HTMLTextAreaElement> & {
-	textareaRef?: RefObject<HTMLTextAreaElement>;
-	inputRef?: never;
-	isMultiline: true;
-};
+type MultilineProps = CommonProps &
+	CallbackProps<HTMLTextAreaElement> & {
+		isMultiline: true;
+	};
 
 type Props = NonMultilineProps | MultilineProps;
 
 const TextField = forwardRef(
-	(props: Props, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
-		const {isMultiline, label, error} = props;
+	(
+		props: Props,
+		ref: ForwardedRef<HTMLInputElement | HTMLTextAreaElement>,
+	): JSX.Element => {
+		const {containerRef, isMultiline, label, error} = props;
 
-		const commonClasses = 'block w-full px-4 py-3 bg-surface-main rounded-lg';
+		const commonClassNames =
+			'block w-full px-4 py-3 bg-surface-main rounded-lg';
 
 		const renderElement = () => {
 			if (isMultiline) {
-				const {textareaRef, name, value, placeholder, onChange, onBlur} =
-					props;
-
+				const {name, value, placeholder, onChange, onBlur} = props;
 				return (
 					<textarea
-						ref={textareaRef}
-						className={classNames(commonClasses, 'resize-none')}
+						ref={ref as ForwardedRef<HTMLTextAreaElement>}
+						className={classNames(commonClassNames, 'resize-none')}
 						name={name}
 						placeholder={placeholder}
 						onChange={onChange}
@@ -57,12 +61,11 @@ const TextField = forwardRef(
 				);
 			}
 
-			const {inputRef, name, value, placeholder, onChange, onBlur} = props;
-
+			const {name, value, placeholder, onChange, onBlur} = props;
 			return (
 				<input
-					ref={inputRef}
-					className={commonClasses}
+					ref={ref as ForwardedRef<HTMLInputElement>}
+					className={commonClassNames}
 					name={name}
 					value={value}
 					placeholder={placeholder}
@@ -73,7 +76,7 @@ const TextField = forwardRef(
 		};
 
 		return (
-			<div ref={ref}>
+			<div ref={containerRef}>
 				<label className="block">
 					<Typography className="mb-1">{label}</Typography>
 					{renderElement()}
