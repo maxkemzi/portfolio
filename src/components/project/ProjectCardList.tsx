@@ -1,40 +1,52 @@
 import {Project} from '@/types';
-import {motion, Transition} from 'framer-motion';
+import {ForwardedRef, forwardRef} from 'react';
 import ProjectCard from './ProjectCard';
 
 interface Props {
 	projects: Project[];
 }
 
-const VIEWPORT_CONFIG = {once: true, amount: 0.5};
-const TRANSITION_CONFIG: Transition = {duration: 1, ease: 'easeOut'};
+const COLS = 2;
 
-const ProjectCardList = (props: Props) => {
-	const {projects} = props;
+const calcItemHeight = (index: number, length: number) => {
+	const SMALL_HEIGHT = 350;
+	const LARGE_HEIGHT = 450;
+	const rowIndex = index % COLS;
 
-	return (
-		<ul className="flex flex-col gap-12">
-			{projects.map((p, i) => {
-				let flipOrder;
+	const distributionIsEven = length % COLS === 0;
+	const itemInFirstHalf = index < Math.ceil(length / 2);
 
-				if ((i + 1) % 2 === 0) {
-					flipOrder = true;
-				}
+	const evenPattern = [SMALL_HEIGHT, LARGE_HEIGHT];
+	const oddPattern = [LARGE_HEIGHT, SMALL_HEIGHT];
 
-				return (
-					<motion.li
-						key={p.id}
-						initial={{x: flipOrder ? 50 : -50, opacity: 0}}
-						whileInView={{x: 0, opacity: 1}}
-						viewport={VIEWPORT_CONFIG}
-						transition={TRANSITION_CONFIG}
-					>
-						<ProjectCard project={p} flipOrder={flipOrder} />
-					</motion.li>
-				);
-			})}
-		</ul>
-	);
+	const heightPattern =
+		distributionIsEven || itemInFirstHalf ? evenPattern : oddPattern;
+
+	return heightPattern[rowIndex];
 };
+
+const ProjectCardList = forwardRef(
+	(props: Props, ref: ForwardedRef<HTMLUListElement>) => {
+		const {projects} = props;
+
+		return (
+			<ul ref={ref} className="gap-7 -mb-7" style={{columns: COLS}}>
+				{projects.map((p, i) => {
+					return (
+						<li
+							key={p.id}
+							className="mb-7"
+							style={{
+								height: calcItemHeight(i, projects.length),
+							}}
+						>
+							<ProjectCard project={p} />
+						</li>
+					);
+				})}
+			</ul>
+		);
+	},
+);
 
 export default ProjectCardList;

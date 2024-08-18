@@ -1,64 +1,37 @@
 import {Project} from '@/types';
-import classNames from 'classnames';
 import Image from 'next/image';
-import {Link, Typography} from '../ui';
+import Link from 'next/link';
+import {Typography} from '../ui';
 import {TechnologyChipList} from '../technology';
 
 interface Props {
 	project: Project;
-	flipOrder?: boolean;
 }
 
 const ProjectCard = (props: Props): JSX.Element => {
 	const {
-		project: {
-			id,
-			title,
-			description,
-			screenshot,
-			technologies,
-			liveUrl,
-			githubUrl,
-		},
-		flipOrder,
+		project: {id, title, description, screenshot, technologies},
 	} = props;
 
 	return (
-		<div
-			className={classNames('flex items-center gap-8', {
-				'flex-row-reverse': flipOrder,
-			})}
+		<Link
+			className="group block relative h-full rounded-lg overflow-hidden before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:z-10 before:opacity-0 before:bg-[linear-gradient(rgba(0,0,0,0.1)_10%,_rgba(0,0,0,0.78)_80%)] before:transition-opacity before:duration-300 hover:before:opacity-100"
+			href={`/projects/${id}`}
 		>
-			<div className="relative flex-1 h-[350px] bg-surface-main rounded-lg">
-				<div
-					className={classNames(
-						'w-[90%] h-[90%] absolute bottom-0 overflow-hidden',
-						{
-							'right-0 rounded-tl-lg rounded-br-lg': !flipOrder,
-							'left-0 rounded-tr-lg rounded-bl-lg': flipOrder,
-						},
-					)}
-				>
-					<Image src={screenshot} fill alt={`${title} screenshot`} />
-				</div>
-			</div>
-			<div className="flex-1 overflow-hidden">
-				<Typography className="mb-2" variant="h3" truncate>
+			<Image
+				className="absolute top-0 left-0 object-cover"
+				src={screenshot}
+				fill
+				alt={`${title} screenshot`}
+			/>
+			<div className="absolute bottom-0 left-0 p-6 w-full z-20 transition-all duration-300 translate-y-[50px] opacity-0 group-hover:opacity-100 group-hover:translate-y-0">
+				<Typography className="mb-2" variant="h3">
 					{title}
 				</Typography>
 				<Typography className="mb-4">{description}</Typography>
-				<TechnologyChipList className="mb-4" technologies={technologies} />
-				<div className="flex gap-4">
-					<Link href={liveUrl} isExternal>
-						LIVE APP
-					</Link>
-					<Link href={githubUrl} isExternal>
-						GITHUB
-					</Link>
-					<Link href={`/projects/${id}`}>CASE-STUDY</Link>
-				</div>
+				<TechnologyChipList technologies={technologies} />
 			</div>
-		</div>
+		</Link>
 	);
 };
 

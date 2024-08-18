@@ -11,7 +11,7 @@ const TechnologyChipList = (props: Props): JSX.Element => {
 	const {technologies, className} = props;
 
 	return (
-		<ul className={classNames('flex flex-wrap gap-3', className)}>
+		<ul className={classNames('flex flex-wrap gap-2', className)}>
 			{technologies.map(t => (
 				<li key={t.id}>
 					<TechnologyChip technology={t} />

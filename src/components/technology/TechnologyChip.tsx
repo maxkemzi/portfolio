@@ -12,7 +12,7 @@ const TechnologyChip = (props: Props): JSX.Element => {
 
 	return (
 		<div className="bg-surface-main rounded-lg py-1 px-3">
-			<Typography>{name}</Typography>
+			<Typography variant="body2">{name}</Typography>
 		</div>
 	);
 };

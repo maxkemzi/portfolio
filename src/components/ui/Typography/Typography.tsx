@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import {ElementType, ForwardedRef, forwardRef, ReactNode} from 'react';
 
-type Variant = 'h1' | 'h2' | 'h3' | 'body1' | 'inherit';
+type Variant = 'h1' | 'h2' | 'h3' | 'body1' | 'body2' | 'inherit';
 
-type Size = '6xl' | '5xl' | '4xl' | 'xl' | 'base' | 'inherit';
+type Size = '6xl' | '5xl' | '4xl' | 'xl' | 'base' | 'sm' | 'inherit';
 
 type Weight = 'bold' | 'semibold' | 'medium' | 'normal' | 'inherit';
 
@@ -55,6 +55,7 @@ const STYLES_TO_CLASS_NAMES_MAPPING: {
 		'4xl': 'text-4xl',
 		xl: 'text-xl',
 		base: 'text-base',
+		sm: 'text-sm',
 		inherit: '[font-size:inherit]',
 	},
 	weight: {
@@ -100,6 +101,7 @@ const VARIANT_TO_ELEMENT_MAPPING: {[key in Variant]: ElementType} = {
 	h2: 'h2',
 	h3: 'h3',
 	body1: 'p',
+	body2: 'p',
 	inherit: 'span',
 };
 
@@ -129,6 +131,11 @@ const VARIANT_TO_STYLES_MAPPING: {
 	},
 	body1: {
 		size: 'base',
+		weight: 'normal',
+		color: 'backgroundText',
+	},
+	body2: {
+		size: 'sm',
 		weight: 'normal',
 		color: 'backgroundText',
 	},
