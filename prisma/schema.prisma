@@ -7,9 +7,34 @@ datasource db {
    url      = env("DATABASE_URL")
 }
 
-model rateLimit {
+model RateLimit {
    id           String @id @default(auto()) @map("_id") @db.ObjectId
    ip           String @unique
    requestCount Int    @default(0)
    resetTime    BigInt
+}
+
+model Project {
+   id                  String                @id @default(auto()) @map("_id") @db.ObjectId
+   title               String                @unique
+   description         String
+   overview            String                @unique
+   image               String                @unique
+   liveUrl             String                @unique
+   repoUrl             String                @unique
+   projectTechnologies ProjectTechnologies[]
+}
+
+model Technology {
+   id                  String                @id @default(auto()) @map("_id") @db.ObjectId
+   name                String                @unique
+   projectTechnologies ProjectTechnologies[]
+}
+
+model ProjectTechnologies {
+   id           String     @id @default(auto()) @map("_id") @db.ObjectId
+   project      Project    @relation(fields: [projectId], references: [id])
+   projectId    String     @db.ObjectId
+   technology   Technology @relation(fields: [technologyId], references: [id])
+   technologyId String     @db.ObjectId
 }

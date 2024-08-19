@@ -1,3 +1,5 @@
+'use client';
+
 import {Typography} from '@/components/ui';
 import {Anchor, Color} from '@/constants';
 import {RocketLaunch} from '@phosphor-icons/react/dist/ssr';

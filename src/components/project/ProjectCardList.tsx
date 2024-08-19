@@ -1,9 +1,9 @@
-import {Project} from '@/types';
 import {ForwardedRef, forwardRef} from 'react';
+import {ProjectWithTechnologies} from '@/types';
 import ProjectCard from './ProjectCard';
 
 interface Props {
-	projects: Project[];
+	projects: ProjectWithTechnologies[];
 }
 
 const COLS = 2;

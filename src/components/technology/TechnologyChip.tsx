@@ -1,4 +1,4 @@
-import {Technology} from '@/types';
+import {Technology} from '@prisma/client';
 import {Typography} from '../ui';
 
 interface Props {

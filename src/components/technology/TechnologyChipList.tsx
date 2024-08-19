@@ -1,5 +1,5 @@
-import {Technology} from '@/types';
 import classNames from 'classnames';
+import {Technology} from '@prisma/client';
 import TechnologyChip from './TechnologyChip';
 
 interface Props {

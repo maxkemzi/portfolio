@@ -1,3 +1,5 @@
+'use client';
+
 import {ContactForm} from '@/components';
 import {Container} from '@/components/ui';
 import {motion, Transition} from 'framer-motion';

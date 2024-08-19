@@ -1,16 +1,11 @@
-interface Technology {
-	id: string;
-	name: string;
-}
+import {Prisma} from '@prisma/client';
 
-interface Project {
-	id: string;
-	title: string;
-	description: string;
-	technologies: Technology[];
-	screenshot: string;
-	liveUrl: string;
-	githubUrl: string;
-}
+const projectWithTechnologies = Prisma.validator<Prisma.ProjectDefaultArgs>()({
+	include: {projectTechnologies: {include: {technology: true}}},
+});
 
-export type {Project, Technology};
+type ProjectWithTechnologies = Prisma.ProjectGetPayload<
+	typeof projectWithTechnologies
+>;
+
+export type {ProjectWithTechnologies};

@@ -5,48 +5,52 @@ import {GithubLogo, TelegramLogo} from '@phosphor-icons/react/dist/ssr';
 import classNames from 'classnames';
 import {Container, Logo, Navbar, NavbarItem, NavbarLink} from '../ui';
 
+type Position = 'absolute' | 'fixed' | 'relative';
+
 interface Props {
 	navbarRef?: RefObject<HTMLElement>;
-	isFixed?: boolean;
+	position?: Position;
+	isBlurred?: boolean;
 }
 
 const Header = forwardRef(
 	(props: Props, ref: ForwardedRef<HTMLElement>): JSX.Element => {
-		const {navbarRef, isFixed = false} = props;
+		const {navbarRef, position = 'absolute', isBlurred} = props;
 
 		return (
 			<header
 				ref={ref}
-				className={classNames('top-0 left-0 right-0 py-5 z-50', {
-					absolute: !isFixed,
-					'fixed bg-transparent bg-opacity-90 shadow-lg backdrop-blur':
-						isFixed,
+				className={classNames('py-5 z-50', {
+					'absolute top-0 left-0 right-0': position === 'absolute',
+					'fixed top-0 left-0 right-0': position === 'fixed',
+					relative: position === 'relative',
+					'shadow-lg backdrop-blur': isBlurred,
 				})}
 			>
 				<Container size="lg">
 					<div className="flex items-center justify-between gap-7">
-						<NextLink href={`#${Anchor.HERO}`}>
+						<NextLink href={`/#${Anchor.HERO}`}>
 							<Logo />
 						</NextLink>
 						<div className="flex items-center gap-3.5">
 							<Navbar ref={navbarRef}>
 								<NavbarItem>
-									<NavbarLink href={`#${Anchor.HERO}`}>
+									<NavbarLink href={`/#${Anchor.HERO}`}>
 										Hero
 									</NavbarLink>
 								</NavbarItem>
 								<NavbarItem>
-									<NavbarLink href={`#${Anchor.ABOUT}`}>
+									<NavbarLink href={`/#${Anchor.ABOUT}`}>
 										About
 									</NavbarLink>
 								</NavbarItem>
 								<NavbarItem>
-									<NavbarLink href={`#${Anchor.PROJECTS}`}>
+									<NavbarLink href={`/#${Anchor.PROJECTS}`}>
 										Projects
 									</NavbarLink>
 								</NavbarItem>
 								<NavbarItem>
-									<NavbarLink href={`#${Anchor.CONTACT}`}>
+									<NavbarLink href={`/#${Anchor.CONTACT}`}>
 										Contact
 									</NavbarLink>
 								</NavbarItem>

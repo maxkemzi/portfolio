@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import {ElementType, ForwardedRef, forwardRef, ReactNode} from 'react';
 
-type Variant = 'h1' | 'h2' | 'h3' | 'body1' | 'body2' | 'inherit';
+type Variant = 'h1' | 'h2' | 'h3' | 'h4' | 'body1' | 'body2' | 'inherit';
 
-type Size = '6xl' | '5xl' | '4xl' | 'xl' | 'base' | 'sm' | 'inherit';
+type Size = '6xl' | '5xl' | '4xl' | '2xl' | 'xl' | 'base' | 'sm' | 'inherit';
 
 type Weight = 'bold' | 'semibold' | 'medium' | 'normal' | 'inherit';
 
@@ -53,6 +53,7 @@ const STYLES_TO_CLASS_NAMES_MAPPING: {
 		'6xl': 'text-6xl',
 		'5xl': 'text-5xl',
 		'4xl': 'text-4xl',
+		'2xl': 'text-2xl',
 		xl: 'text-xl',
 		base: 'text-base',
 		sm: 'text-sm',
@@ -100,6 +101,7 @@ const VARIANT_TO_ELEMENT_MAPPING: {[key in Variant]: ElementType} = {
 	h1: 'h1',
 	h2: 'h2',
 	h3: 'h3',
+	h4: 'h4',
 	body1: 'p',
 	body2: 'p',
 	inherit: 'span',
@@ -126,6 +128,11 @@ const VARIANT_TO_STYLES_MAPPING: {
 	},
 	h3: {
 		size: '4xl',
+		weight: 'semibold',
+		color: 'backgroundText',
+	},
+	h4: {
+		size: '2xl',
 		weight: 'semibold',
 		color: 'backgroundText',
 	},
