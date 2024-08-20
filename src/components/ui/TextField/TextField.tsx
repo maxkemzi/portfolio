@@ -24,12 +24,12 @@ type CallbackProps<T extends HTMLElement> = {
 
 type NonMultilineProps = CommonProps &
 	CallbackProps<HTMLInputElement> & {
-		isMultiline?: false;
+		multiline?: false;
 	};
 
 type MultilineProps = CommonProps &
 	CallbackProps<HTMLTextAreaElement> & {
-		isMultiline: true;
+		multiline: true;
 	};
 
 type Props = NonMultilineProps | MultilineProps;
@@ -39,13 +39,13 @@ const TextField = forwardRef(
 		props: Props,
 		ref: ForwardedRef<HTMLInputElement | HTMLTextAreaElement>,
 	): JSX.Element => {
-		const {containerRef, isMultiline, label, error} = props;
+		const {containerRef, multiline, label, error} = props;
 
 		const commonClassNames =
 			'block w-full px-4 py-3 bg-surface-main rounded-lg';
 
 		const renderElement = () => {
-			if (isMultiline) {
+			if (multiline) {
 				const {name, value, placeholder, onChange, onBlur} = props;
 				return (
 					<textarea

@@ -11,8 +11,8 @@ type ButtonProps = CommonProps & {
 	asLink?: false;
 	href?: never;
 	download?: never;
-	isSubmit?: boolean;
-	isDisabled?: boolean;
+	submit?: boolean;
+	disabled?: boolean;
 };
 
 type ButtonAsLinkProps = CommonProps & {
@@ -61,13 +61,13 @@ const Button = forwardRef(
 			);
 		}
 
-		const {isSubmit, isDisabled} = props;
+		const {submit, disabled} = props;
 		return (
 			<button
 				ref={ref as ForwardedRef<HTMLButtonElement>}
 				className={commonClassNames}
-				type={isSubmit ? 'submit' : 'button'}
-				disabled={isDisabled}
+				type={submit ? 'submit' : 'button'}
+				disabled={disabled}
 			>
 				{commonChildren}
 			</button>

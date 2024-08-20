@@ -1,7 +1,7 @@
 'use client';
 
 import {ContactForm} from '@/components';
-import {Container} from '@/components/ui';
+import {Container, Section} from '@/components/ui';
 import {motion, Transition} from 'framer-motion';
 import {Anchor} from '@/constants';
 import ContactCouple from './ContactCouple';
@@ -11,7 +11,7 @@ const TRANSITION_CONFIG: Transition = {duration: 1, ease: 'easeOut'};
 
 const ContactSection = () => {
 	return (
-		<section id={Anchor.CONTACT} className="py-20">
+		<Section id={Anchor.CONTACT}>
 			<Container size="sm">
 				<div className="flex justify-center items-center gap-12">
 					<motion.div
@@ -34,7 +34,7 @@ const ContactSection = () => {
 					</motion.div>
 				</div>
 			</Container>
-		</section>
+		</Section>
 	);
 };
 

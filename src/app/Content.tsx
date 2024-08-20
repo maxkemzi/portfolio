@@ -92,7 +92,7 @@ const Content = (props: Props): JSX.Element => {
 				{fixedHeaderIsVisible ? (
 					<MotionHeader
 						position="fixed"
-						isBlurred
+						blurred
 						initial={{y: '-100%', opacity: 0}}
 						animate={{
 							y: 0,

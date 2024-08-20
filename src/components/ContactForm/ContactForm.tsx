@@ -11,7 +11,7 @@ const ContactForm = () => {
 	const {
 		register,
 		handleSubmit,
-		formState: {errors},
+		formState: {errors, isLoading},
 	} = useForm<z.infer<typeof schema>>({
 		resolver: zodResolver(schema),
 	});
@@ -39,11 +39,15 @@ const ContactForm = () => {
 						label="Your message"
 						placeholder="We'd like to see you in our team."
 						error={errors.message?.message}
-						isMultiline
+						multiline
 						{...register('message')}
 					/>
 				</div>
-				<Button className="block ml-auto mr-auto w-full" isSubmit>
+				<Button
+					className="block ml-auto mr-auto w-full"
+					submit
+					disabled={isLoading}
+				>
 					Submit
 				</Button>
 			</form>

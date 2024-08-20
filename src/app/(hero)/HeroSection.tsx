@@ -5,6 +5,7 @@ import {
 	Button,
 	calcAnimatedCharDelay,
 	Container,
+	Section,
 	Typography,
 } from '@/components/ui';
 import {CrosshairSimple} from '@phosphor-icons/react/dist/ssr';
@@ -89,7 +90,7 @@ const HeroSection = forwardRef(
 		}, [controls, hasAnimated, moonTopPos]);
 
 		return (
-			<section ref={ref} id={Anchor.HERO} className="h-screen">
+			<Section ref={ref} id={Anchor.HERO} fullscreen>
 				<Container size="lg">
 					<div className="h-full flex flex-col items-center justify-center">
 						<Typography className="mb-9" variant="h1" align="center">
@@ -161,7 +162,7 @@ const HeroSection = forwardRef(
 					className="absolute top-0 left-0 z-[-3]"
 					style={{width: waveWidth}}
 				/>
-			</section>
+			</Section>
 		);
 	},
 );

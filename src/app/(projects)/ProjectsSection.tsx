@@ -1,7 +1,7 @@
 'use client';
 
 import {ProjectCardList} from '@/components';
-import {Container, Typography} from '@/components/ui';
+import {Container, Section, Typography} from '@/components/ui';
 import {Anchor} from '@/constants';
 import {ProjectWithTechnologies} from '@/types';
 import {motion, Transition} from 'framer-motion';
@@ -18,7 +18,7 @@ const TRANSITION_CONFIG: Transition = {duration: 1, ease: 'easeOut'};
 const ProjectsSection = (props: Props): JSX.Element => {
 	const {projects} = props;
 	return (
-		<section id={Anchor.PROJECTS} className="py-20">
+		<Section id={Anchor.PROJECTS}>
 			<Container>
 				<Typography className="mb-14" variant="h2" align="center">
 					Projects
@@ -31,7 +31,7 @@ const ProjectsSection = (props: Props): JSX.Element => {
 					transition={TRANSITION_CONFIG}
 				/>
 			</Container>
-		</section>
+		</Section>
 	);
 };
 

@@ -1,16 +1,16 @@
 'use client';
 
-import {Container, Typography} from '@/components/ui';
-import {Anchor} from '@/constants';
+import {Container, Section, Typography} from '@/components/ui';
 import Image from 'next/image';
 import {motion, Transition} from 'framer-motion';
+import {Anchor} from '@/constants';
 
 const VIEWPORT_CONFIG = {once: true, amount: 0.5};
 const TRANSITION_CONFIG: Transition = {duration: 1, ease: 'easeOut'};
 
 const AboutSection = () => {
 	return (
-		<section id={Anchor.ABOUT} className="py-20">
+		<Section id={Anchor.ABOUT}>
 			<Container size="sm">
 				<div className="flex justify-center items-center gap-12">
 					<motion.div
@@ -50,7 +50,7 @@ const AboutSection = () => {
 					</motion.div>
 				</div>
 			</Container>
-		</section>
+		</Section>
 	);
 };
 

@@ -10,12 +10,13 @@ type Position = 'absolute' | 'fixed' | 'relative';
 interface Props {
 	navbarRef?: RefObject<HTMLElement>;
 	position?: Position;
-	isBlurred?: boolean;
+	blurred?: boolean;
+	bordered?: boolean;
 }
 
 const Header = forwardRef(
 	(props: Props, ref: ForwardedRef<HTMLElement>): JSX.Element => {
-		const {navbarRef, position = 'absolute', isBlurred} = props;
+		const {navbarRef, position = 'absolute', blurred, bordered} = props;
 
 		return (
 			<header
@@ -24,7 +25,8 @@ const Header = forwardRef(
 					'absolute top-0 left-0 right-0': position === 'absolute',
 					'fixed top-0 left-0 right-0': position === 'fixed',
 					relative: position === 'relative',
-					'shadow-lg backdrop-blur': isBlurred,
+					'shadow-lg backdrop-blur': blurred,
+					'border-b border-surface-main': bordered,
 				})}
 			>
 				<Container size="lg">

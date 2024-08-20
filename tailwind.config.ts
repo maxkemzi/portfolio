@@ -17,6 +17,7 @@ const config: Config = {
 			},
 		},
 		colors: {
+			transparent: 'transparent',
 			primary: {
 				main: Color.PRIMARY.MAIN,
 				contrastText: Color.PRIMARY.CONTRAST_TEXT,

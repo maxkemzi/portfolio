@@ -6,3 +6,4 @@ export {Link} from './Link';
 export {TextField} from './TextField';
 export {Button} from './Button';
 export {AnimatedTypography, calcAnimatedCharDelay} from './AnimatedTypography';
+export {Section} from './Section';
