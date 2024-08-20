@@ -38,6 +38,10 @@ const config: Config = {
 				main: Color.DANGER.MAIN,
 				contrastText: Color.DANGER.CONTRAST_TEXT,
 			},
+			success: {
+				main: Color.SUCCESS.MAIN,
+				contrastText: Color.SUCCESS.CONTRAST_TEXT,
+			},
 		},
 	},
 	plugins: [],

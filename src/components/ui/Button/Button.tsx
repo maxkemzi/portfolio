@@ -30,10 +30,10 @@ const Button = forwardRef(
 	): JSX.Element => {
 		const {children, className, asLink} = props;
 
-		const commonClassNames = classNames(
-			'inline-block px-6 py-3 bg-gradient-to-br from-primary-main to-secondary-main bg-[length:250%_auto] text-primary-contrastText rounded-lg transition-all duration-300 ease-out hover:brightness-90',
-			className,
-		);
+		const commonClassNames =
+			'inline-block px-6 py-3 text-primary-contrastText rounded-lg transition-all duration-300 ease-out hover:brightness-90';
+		const backgroundClassNames =
+			'bg-gradient-to-br from-primary-main to-secondary-main bg-[length:250%_auto] ';
 
 		const commonChildren = (
 			<Typography
@@ -51,7 +51,11 @@ const Button = forwardRef(
 			return (
 				<a
 					ref={ref as ForwardedRef<HTMLAnchorElement>}
-					className={commonClassNames}
+					className={classNames(
+						commonClassNames,
+						backgroundClassNames,
+						className,
+					)}
 					href={href}
 					download={download}
 					rel="noopener noreferrer"
@@ -65,7 +69,11 @@ const Button = forwardRef(
 		return (
 			<button
 				ref={ref as ForwardedRef<HTMLButtonElement>}
-				className={commonClassNames}
+				className={classNames(
+					commonClassNames,
+					{[backgroundClassNames]: !disabled, 'bg-surface-main': disabled},
+					className,
+				)}
 				type={submit ? 'submit' : 'button'}
 				disabled={disabled}
 			>

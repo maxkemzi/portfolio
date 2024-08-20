@@ -19,6 +19,10 @@ const Color = {
 		MAIN: '#f02c57',
 		CONTRAST_TEXT: '#FFFFFF',
 	},
+	SUCCESS: {
+		MAIN: '#9ece6a',
+		CONTRAST_TEXT: '#FFFFFF',
+	},
 };
 
 export default Color;

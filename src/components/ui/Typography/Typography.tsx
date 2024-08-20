@@ -18,6 +18,8 @@ type Color =
 	| 'surfaceText'
 	| 'danger'
 	| 'dangerText'
+	| 'success'
+	| 'successText'
 	| 'inherit';
 
 type LetterSpacing = 'widest' | 'wider' | 'wide' | 'inherit';
@@ -77,6 +79,8 @@ const STYLES_TO_CLASS_NAMES_MAPPING: {
 		surfaceText: 'text-surface-contrastText',
 		danger: 'text-danger-main',
 		dangerText: 'text-danger-contrastText',
+		success: 'text-success-main',
+		successText: 'text-success-contrastText',
 		inherit: '[color:inherit]',
 	},
 	letterSpacing: {
