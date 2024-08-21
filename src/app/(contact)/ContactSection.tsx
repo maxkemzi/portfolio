@@ -6,7 +6,7 @@ import {motion, Transition} from 'framer-motion';
 import {Anchor} from '@/constants';
 import ContactCouple from './ContactCouple';
 
-const VIEWPORT_CONFIG = {once: true, amount: 0.5};
+const VIEWPORT_CONFIG = {once: true, amount: 0, margin: '0px 0px -100px 0px'};
 const TRANSITION_CONFIG: Transition = {duration: 1, ease: 'easeOut'};
 
 const ContactSection = () => {

@@ -1,5 +1,5 @@
-import classNames from 'classnames';
 import {ElementType, ForwardedRef, forwardRef, ReactNode} from 'react';
+import {twMerge} from 'tailwind-merge';
 
 type Variant = 'h1' | 'h2' | 'h3' | 'h4' | 'body1' | 'body2' | 'inherit';
 
@@ -203,14 +203,15 @@ const Typography = forwardRef(
 		return (
 			<Element
 				ref={ref}
-				className={classNames(
+				className={twMerge(
 					sizeClassName,
 					weightClassName,
 					colorClassName,
 					letterSpacingClassName,
 					textTransformClassName,
 					alignClassName,
-					{truncate, 'text-nowrap': noWrap},
+					truncate && 'truncate',
+					noWrap && 'text-nowrap',
 					className,
 				)}
 			>

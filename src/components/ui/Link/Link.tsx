@@ -1,6 +1,6 @@
 import NextLink, {LinkProps} from 'next/link';
 import {ReactNode} from 'react';
-import classNames from 'classnames';
+import {twMerge} from 'tailwind-merge';
 import {Typography, TypographyProps} from '../Typography';
 
 type Variant = 'underline' | 'block';
@@ -15,7 +15,7 @@ interface Props {
 
 const VARIANT_TO_CLASS_NAMES_MAPPING: {[key in Variant]: string} = {
 	underline:
-		'pb-1 border-b border-transparent ease-out transition-color duration-300 hover:border-primary-main',
+		'border-b border-transparent ease-out transition-color duration-300 hover:border-primary-main',
 	block: "relative py-2 px-3 after:content-[''] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:z-[-1] after:bg-primary-main after:transition-[height,_border-radius] after:delay-[0ms,_300ms] after:duration-300 after:ease-out hover:after:h-full hover:after:rounded-lg",
 };
 
@@ -43,11 +43,16 @@ const Link = (props: Props): JSX.Element => {
 
 	return (
 		<NextLink
-			className={classNames(variantClassNames, className)}
+			className={twMerge(variantClassNames, className)}
 			href={href}
 			{...(external ? externalProps : {})}
 		>
-			<Typography color={color} textTransform={textTransform} as="span">
+			<Typography
+				color={color}
+				textTransform={textTransform}
+				weight="semibold"
+				as="span"
+			>
 				{children}
 			</Typography>
 		</NextLink>

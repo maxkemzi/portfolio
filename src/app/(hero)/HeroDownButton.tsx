@@ -3,26 +3,32 @@
 import {Typography} from '@/components/ui';
 import {Anchor, Color} from '@/constants';
 import {RocketLaunch} from '@phosphor-icons/react/dist/ssr';
-import classNames from 'classnames';
 import {motion} from 'framer-motion';
 import Link from 'next/link';
+import {twMerge} from 'tailwind-merge';
 
 interface Props {
 	className?: string;
 }
+
+const MotionRocketLaunch = motion(RocketLaunch);
 
 const HeroDownButton = (props: Props): JSX.Element => {
 	const {className} = props;
 
 	return (
 		<Link
-			className={classNames('flex flex-col items-center gap-2', className)}
+			className={twMerge('flex flex-col items-center gap-2', className)}
 			href={`#${Anchor.ABOUT}`}
 		>
 			<Typography as="span" align="center">
 				Continue journey
 			</Typography>
-			<motion.div
+			<MotionRocketLaunch
+				color={Color.BACKGROUND.CONTRAST_TEXT}
+				size={32}
+				weight="light"
+				initial={{rotate: 135}}
 				animate={{y: [0, 6, 0]}}
 				transition={{
 					duration: 1.5,
@@ -30,14 +36,7 @@ const HeroDownButton = (props: Props): JSX.Element => {
 					repeatType: 'loop',
 					ease: 'easeInOut',
 				}}
-			>
-				<RocketLaunch
-					className="rotate-[135deg]"
-					color={Color.BACKGROUND.CONTRAST_TEXT}
-					size={32}
-					weight="light"
-				/>
-			</motion.div>
+			/>
 		</Link>
 	);
 };

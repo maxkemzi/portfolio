@@ -12,7 +12,7 @@ import {CrosshairSimple} from '@phosphor-icons/react/dist/ssr';
 import {motion, useAnimation} from 'framer-motion';
 import {ForwardedRef, forwardRef, useEffect, useState} from 'react';
 import {Anchor, Color} from '@/constants';
-import classNames from 'classnames';
+import {twJoin} from 'tailwind-merge';
 import HeroWave from './HeroWave';
 import HeroMoon from './HeroMoon';
 import HeroDownButton from './HeroDownButton';
@@ -126,9 +126,9 @@ const HeroSection = forwardRef(
 						size={MOON_SIZE}
 					/>
 					<motion.div
-						className={classNames(
+						className={twJoin(
 							'absolute top-0 right-0 brightness-90',
-							{'z-[-1]': hasAnimated},
+							hasAnimated && 'z-[-1]',
 						)}
 						animate={controls}
 					>

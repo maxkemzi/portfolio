@@ -1,5 +1,5 @@
-import classNames from 'classnames';
 import {ForwardedRef, forwardRef, ReactNode} from 'react';
+import {twMerge} from 'tailwind-merge';
 
 interface Props {
 	id?: string;
@@ -15,11 +15,9 @@ const Section = forwardRef(
 			<section
 				ref={ref}
 				id={id}
-				className={classNames(
-					{
-						'h-screen': fullscreen,
-						'py-20': !fullscreen,
-					},
+				className={twMerge(
+					fullscreen && 'h-screen',
+					!fullscreen && 'py-20',
 					className,
 				)}
 			>

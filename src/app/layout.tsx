@@ -1,7 +1,7 @@
-import classNames from 'classnames';
 import type {Metadata} from 'next';
 import {Exo_2} from 'next/font/google';
 import './globals.css';
+import {twJoin} from 'tailwind-merge';
 
 const exo2Font = Exo_2({subsets: ['latin']});
 
@@ -18,7 +18,7 @@ const RootLayout = ({
 	return (
 		<html lang="en" className="scroll-smooth">
 			<body
-				className={classNames(
+				className={twJoin(
 					exo2Font.className,
 					'relative bg-background-main bg-grid bg-[length:50px_50px] text-background-contrastText overflow-x-hidden',
 				)}

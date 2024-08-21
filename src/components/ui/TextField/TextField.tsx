@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import {
 	ChangeEventHandler,
 	FocusEventHandler,
@@ -6,6 +5,7 @@ import {
 	forwardRef,
 	RefObject,
 } from 'react';
+import {twJoin} from 'tailwind-merge';
 import {Typography} from '../Typography';
 
 type CommonProps = {
@@ -42,7 +42,7 @@ const TextField = forwardRef(
 		const {containerRef, multiline, label, error} = props;
 
 		const commonClassNames =
-			'block w-full px-4 py-3 bg-surface-main rounded-lg';
+			'block w-full px-4 py-3 bg-transparent border border-surface-main rounded-lg focus:bg-background-dark outline-none placeholder:text-[#948FA3]';
 
 		const renderElement = () => {
 			if (multiline) {
@@ -50,7 +50,7 @@ const TextField = forwardRef(
 				return (
 					<textarea
 						ref={ref as ForwardedRef<HTMLTextAreaElement>}
-						className={classNames(commonClassNames, 'resize-none')}
+						className={twJoin(commonClassNames, 'resize-none')}
 						name={name}
 						placeholder={placeholder}
 						onChange={onChange}

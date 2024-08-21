@@ -2,7 +2,7 @@ import {Anchor} from '@/constants';
 import {ForwardedRef, forwardRef, RefObject} from 'react';
 import NextLink from 'next/link';
 import {GithubLogo, TelegramLogo} from '@phosphor-icons/react/dist/ssr';
-import classNames from 'classnames';
+import {twJoin} from 'tailwind-merge';
 import {Container, Logo, Navbar, NavbarItem, NavbarLink} from '../ui';
 
 type Position = 'absolute' | 'fixed' | 'relative';
@@ -21,13 +21,14 @@ const Header = forwardRef(
 		return (
 			<header
 				ref={ref}
-				className={classNames('py-5 z-50', {
-					'absolute top-0 left-0 right-0': position === 'absolute',
-					'fixed top-0 left-0 right-0': position === 'fixed',
-					relative: position === 'relative',
-					'shadow-lg backdrop-blur': blurred,
-					'border-b border-surface-main': bordered,
-				})}
+				className={twJoin(
+					'py-5 z-50',
+					position === 'absolute' && 'absolute top-0 left-0 right-0',
+					position === 'fixed' && 'fixed top-0 left-0 right-0',
+					position === 'relative' && 'relative',
+					blurred && 'shadow-lg backdrop-blur',
+					bordered && 'border-b border-surface-main',
+				)}
 			>
 				<Container size="lg">
 					<div className="flex items-center justify-between gap-7">

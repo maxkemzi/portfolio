@@ -39,6 +39,18 @@ const Content = (props: Props): JSX.Element => {
 			return;
 		}
 
+		const {hash} = window.location;
+		if (hash) {
+			const section = document.querySelector(hash);
+			section?.scrollIntoView({behavior: 'instant'});
+		}
+	}, [isClient]);
+
+	useLayoutEffect(() => {
+		if (!isClient) {
+			return;
+		}
+
 		const updateHeroWaveWidth = () => {
 			if (!navbarRef.current) {
 				return;

@@ -1,5 +1,5 @@
 import {ForwardedRef, forwardRef, ReactNode} from 'react';
-import classNames from 'classnames';
+import {twMerge} from 'tailwind-merge';
 import {Typography} from '../Typography';
 
 type CommonProps = {
@@ -31,14 +31,14 @@ const Button = forwardRef(
 		const {children, className, asLink} = props;
 
 		const commonClassNames =
-			'inline-block px-6 py-3 text-primary-contrastText rounded-lg transition-all duration-300 ease-out hover:brightness-90';
+			'inline-block px-6 py-3 text-primary-contrastText rounded-lg transition-all duration-300 ease-out';
 		const backgroundClassNames =
 			'bg-gradient-to-br from-primary-main to-secondary-main bg-[length:250%_auto] ';
 
 		const commonChildren = (
 			<Typography
 				as="span"
-				weight="bold"
+				weight="semibold"
 				letterSpacing="wider"
 				textTransform="uppercase"
 			>
@@ -51,7 +51,7 @@ const Button = forwardRef(
 			return (
 				<a
 					ref={ref as ForwardedRef<HTMLAnchorElement>}
-					className={classNames(
+					className={twMerge(
 						commonClassNames,
 						backgroundClassNames,
 						className,
@@ -69,9 +69,10 @@ const Button = forwardRef(
 		return (
 			<button
 				ref={ref as ForwardedRef<HTMLButtonElement>}
-				className={classNames(
+				className={twMerge(
 					commonClassNames,
-					{[backgroundClassNames]: !disabled, 'bg-surface-main': disabled},
+					backgroundClassNames,
+					disabled && 'brightness-75',
 					className,
 				)}
 				type={submit ? 'submit' : 'button'}

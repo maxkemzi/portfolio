@@ -12,7 +12,7 @@ interface Props {
 
 const MotionProjectCardList = motion(ProjectCardList);
 
-const VIEWPORT_CONFIG = {once: true, amount: 0};
+const VIEWPORT_CONFIG = {once: true, amount: 0, margin: '0px 0px -100px 0px'};
 const TRANSITION_CONFIG: Transition = {duration: 1, ease: 'easeOut'};
 
 const ProjectsSection = (props: Props): JSX.Element => {
