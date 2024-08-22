@@ -1,0 +1,30 @@
+name: CI
+on:
+   push:
+      branches:
+         - main
+         - develop
+   pull_request:
+      branches:
+         - main
+jobs:
+   ci:
+      runs-on: ubuntu-latest
+      steps:
+         - name: Checkout code
+           uses: actions/checkout@v3
+
+         - name: Install dependencies
+           run: npm install
+
+         - name: Check code style
+           run: npm run lint
+
+         - name: Run tests
+           run: npm test -- --reporter=html --outputFile=./reports/tests/index.html
+
+         - name: Upload lint and test results
+           uses: actions/upload-artifact@v3
+           with:
+              name: ci-results
+              path: ./reports/
