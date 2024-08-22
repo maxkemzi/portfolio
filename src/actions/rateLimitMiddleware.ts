@@ -32,7 +32,7 @@ const rateLimitMiddleware: MiddlewareFn<
 
 	const isResetTime = Date.now() > rateLimit.resetTime;
 	if (isResetTime) {
-		await prisma.rateLimit.update({
+		rateLimit = await prisma.rateLimit.update({
 			data: {requestCount: 0, resetTime: Date.now() + RESET_AFTER_MS},
 			where: {id: rateLimit.id},
 		});
