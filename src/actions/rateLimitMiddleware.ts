@@ -13,12 +13,9 @@ const getIp = () => {
 	return headers().get('x-real-ip') ?? FALLBACK_IP;
 };
 
-const rateLimitMiddleware: MiddlewareFn<
-	string,
-	undefined,
-	undefined,
-	null
-> = async ({next}) => {
+const rateLimitMiddleware: MiddlewareFn<string, undefined, {}, {}> = async ({
+	next,
+}) => {
 	const ip = getIp();
 	const REQUEST_LIMIT = 5;
 	const RESET_AFTER_MS = 60 * 1000;
@@ -47,7 +44,7 @@ const rateLimitMiddleware: MiddlewareFn<
 		where: {id: rateLimit.id},
 	});
 
-	return next({ctx: null});
+	return next({ctx: {}});
 };
 
 export default rateLimitMiddleware;
