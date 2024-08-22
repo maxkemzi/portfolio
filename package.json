@@ -6,8 +6,8 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint && tsc --noEmit --incremental && prettier --check \"**/*.js\" \"**/*.json\" \"**/*.md\" \"**/.*rc\" \"**/*.ts\"",
-		"fmt": "prettier --write \"**/*.js\" \"**/*.json\" \"**/*.md\" \"**/.*rc\" \"**/*.ts\"",
+		"lint": "next lint && tsc --noEmit --incremental && prettier --check **/*.{js,jsx,ts,tsx,json,md,rc}",
+		"fmt": "prettier --write **/*.{js,jsx,ts,tsx,json,md,rc}",
 		"test": "vitest"
 	},
 	"dependencies": {
