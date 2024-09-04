@@ -15,7 +15,7 @@ import {Anchor, Color} from '@/constants';
 import {twJoin} from 'tailwind-merge';
 import HeroWave from './HeroWave';
 import HeroMoon from './HeroMoon';
-import HeroDownButton from './HeroDownButton';
+import HeroScrollDownLink from './HeroScrollDownLink';
 
 const MotionButton = motion(Button);
 const MotionTypography = motion(Typography);
@@ -156,7 +156,7 @@ const HeroSection = forwardRef(
 							Aimed for the moon!
 						</MotionTypography>
 					</motion.div>
-					<HeroDownButton className="absolute bottom-6 left-[50%] translate-x-[-50%]" />
+					<HeroScrollDownLink className="absolute bottom-6 left-[50%] translate-x-[-50%]" />
 				</Container>
 				<HeroWave
 					className="absolute top-0 left-0 z-[-3]"

@@ -13,7 +13,7 @@ interface Props {
 
 const MotionRocketLaunch = motion(RocketLaunch);
 
-const HeroDownButton = (props: Props): JSX.Element => {
+const HeroScrollDownLink = (props: Props): JSX.Element => {
 	const {className} = props;
 
 	return (
@@ -25,6 +25,7 @@ const HeroDownButton = (props: Props): JSX.Element => {
 				Continue journey
 			</Typography>
 			<MotionRocketLaunch
+				data-testid="rocket-icon"
 				color={Color.BACKGROUND.CONTRAST_TEXT}
 				size={32}
 				weight="light"
@@ -41,4 +42,4 @@ const HeroDownButton = (props: Props): JSX.Element => {
 	);
 };
 
-export default HeroDownButton;
+export default HeroScrollDownLink;
