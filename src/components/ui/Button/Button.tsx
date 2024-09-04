@@ -1,4 +1,4 @@
-import {ForwardedRef, forwardRef, ReactNode} from 'react';
+import {ForwardedRef, forwardRef, MouseEventHandler, ReactNode} from 'react';
 import {twMerge} from 'tailwind-merge';
 import {Typography} from '../Typography';
 
@@ -9,6 +9,7 @@ type CommonProps = {
 
 type ButtonProps = CommonProps & {
 	asLink?: false;
+	onClick?: MouseEventHandler<HTMLButtonElement>;
 	href?: never;
 	download?: never;
 	submit?: boolean;
@@ -65,7 +66,7 @@ const Button = forwardRef(
 			);
 		}
 
-		const {submit, disabled} = props;
+		const {submit, disabled, onClick} = props;
 		return (
 			<button
 				ref={ref as ForwardedRef<HTMLButtonElement>}
@@ -77,6 +78,7 @@ const Button = forwardRef(
 				)}
 				type={submit ? 'submit' : 'button'}
 				disabled={disabled}
+				onClick={onClick}
 			>
 				{commonChildren}
 			</button>
