@@ -1,12 +1,12 @@
 import {prisma} from '@/db';
-import Content from './Content';
+import HomeContent from './HomeContent';
 
 const Home = async () => {
 	const projects = await prisma.project.findMany({
 		include: {projectTechnologies: {include: {technology: true}}},
 	});
 
-	return <Content projects={projects} />;
+	return <HomeContent projects={projects} />;
 };
 
 export default Home;

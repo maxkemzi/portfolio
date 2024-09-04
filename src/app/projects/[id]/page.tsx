@@ -44,6 +44,14 @@ const Project = async ({params}: {params: {id: string}}) => {
 		</Link>
 	);
 
+	const renderMarkdownParagraph = ({
+		children,
+	}: AnchorHTMLAttributes<HTMLParagraphElement>) => (
+		<Typography>{children}</Typography>
+	);
+
+	const markdown = overview.replace(/\\n/g, '\n');
+
 	return (
 		<div className="flex flex-col min-h-screen">
 			<Header position="relative" bordered />
@@ -77,14 +85,16 @@ const Project = async ({params}: {params: {id: string}}) => {
 											Overview
 										</Typography>
 										<Markdown
+											className="flex flex-col gap-2"
 											remarkPlugins={[remarkGfm]}
-											allowedElements={['p', 'a']}
+											allowedElements={['p', 'a', 'ul', 'li', 'br']}
 											unwrapDisallowed
 											components={{
 												a: renderMarkdownLink,
+												p: renderMarkdownParagraph,
 											}}
 										>
-											{overview}
+											{markdown}
 										</Markdown>
 									</div>
 									<div>

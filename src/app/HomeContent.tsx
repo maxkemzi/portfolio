@@ -20,7 +20,7 @@ const FIXED_HEADER_TRANSITION_DURATION = 0.5;
 
 const MotionHeader = motion(Header);
 
-const Content = (props: Props): JSX.Element => {
+const HomeContent = (props: Props): JSX.Element => {
 	const {projects} = props;
 
 	const [isClient, setIsClient] = useState(false);
@@ -140,4 +140,4 @@ const Content = (props: Props): JSX.Element => {
 	);
 };
 
-export default Content;
+export default HomeContent;

@@ -6,11 +6,11 @@ const getIp = () => {
 	const FALLBACK_IP = '0.0.0.0';
 	const forwardedFor = headers().get('x-forwarded-for');
 
-	if (forwardedFor) {
-		return forwardedFor.split(',')[0] ?? FALLBACK_IP;
-	}
+	const ip = forwardedFor
+		? forwardedFor.split(',')[0]
+		: headers().get('x-real-ip');
 
-	return headers().get('x-real-ip') ?? FALLBACK_IP;
+	return ip ?? FALLBACK_IP;
 };
 
 const rateLimitMiddleware: MiddlewareFn<string, undefined, {}, {}> = async ({
