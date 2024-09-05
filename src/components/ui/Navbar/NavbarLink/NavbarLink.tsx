@@ -4,7 +4,7 @@ import {Typography} from '../../Typography';
 
 interface Props {
 	href: LinkProps['href'];
-	children?: ReactNode;
+	children: ReactNode;
 }
 
 const NavbarLink = (props: Props): JSX.Element => {

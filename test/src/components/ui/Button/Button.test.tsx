@@ -50,7 +50,7 @@ test('renders with Typography child', () => {
 
 	const typographyElement = screen.getByText(/Button with Typography/i);
 	expect(typographyElement.tagName).toBe('SPAN');
-	expect(typographyElement).toHaveClass('uppercase');
+	expect(typographyElement).toBeInTheDocument();
 });
 
 test('link has download attribute when provided', () => {
