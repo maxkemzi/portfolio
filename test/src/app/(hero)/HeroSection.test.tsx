@@ -1,12 +1,17 @@
 import {HeroSection} from '@/app/(hero)';
 import {render, screen} from '@testing-library/react';
+import HeroScrollDownLink from '@/app/(hero)/HeroScrollDownLink';
+
+vi.mock('@/app/(hero)/HeroScrollDownLink', () => ({
+	default: vi.fn(() => <div data-testid="scroll-down" />),
+}));
+
+const defaultProps = {
+	waveWidth: 1000,
+	moonTopPos: 100,
+};
 
 describe('download CV button', () => {
-	const defaultProps = {
-		waveWidth: 1000,
-		moonTopPos: 100,
-	};
-
 	test('renders the download button with correct text', () => {
 		render(<HeroSection {...defaultProps} />);
 
@@ -31,4 +36,13 @@ describe('download CV button', () => {
 			'CV_Maksym_Kyrychenko',
 		);
 	});
+});
+
+test('renders HeroScrollDownLink component', () => {
+	render(<HeroSection {...defaultProps} />);
+
+	expect(HeroScrollDownLink).toHaveBeenCalled();
+
+	const scrollDownLinkElement = screen.getByTestId('scroll-down');
+	expect(scrollDownLinkElement).toBeInTheDocument();
 });
