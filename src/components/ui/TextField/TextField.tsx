@@ -45,29 +45,30 @@ const TextField = forwardRef(
 			'block w-full px-4 py-3 bg-transparent border border-surface-main rounded-lg focus:bg-background-dark outline-none placeholder:text-[#948FA3]';
 
 		const renderElement = () => {
+			const {name, value, placeholder} = props;
+
 			if (multiline) {
-				const {name, value, placeholder, onChange, onBlur} = props;
+				const {onChange, onBlur} = props;
 				return (
 					<textarea
 						ref={ref as ForwardedRef<HTMLTextAreaElement>}
 						className={twJoin(commonClassNames, 'resize-none')}
 						name={name}
+						{...(onChange ? {value} : {defaultValue: value})}
 						placeholder={placeholder}
 						onChange={onChange}
 						onBlur={onBlur}
-					>
-						{value}
-					</textarea>
+					/>
 				);
 			}
 
-			const {name, value, placeholder, onChange, onBlur} = props;
+			const {onChange, onBlur} = props;
 			return (
 				<input
 					ref={ref as ForwardedRef<HTMLInputElement>}
 					className={commonClassNames}
 					name={name}
-					value={value}
+					{...(onChange ? {value} : {defaultValue: value})}
 					placeholder={placeholder}
 					onChange={onChange}
 					onBlur={onBlur}
@@ -91,4 +92,5 @@ const TextField = forwardRef(
 	},
 );
 
+export type {Props as TextFieldProps};
 export default TextField;
