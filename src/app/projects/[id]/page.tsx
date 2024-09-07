@@ -4,7 +4,7 @@ import {prisma} from '@/db';
 import {ProjectWithTechnologies} from '@/types';
 import Image from 'next/image';
 import {notFound} from 'next/navigation';
-import {AnchorHTMLAttributes} from 'react';
+import {AnchorHTMLAttributes, PropsWithChildren} from 'react';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
@@ -44,10 +44,24 @@ const Project = async ({params}: {params: {id: string}}) => {
 		</Link>
 	);
 
-	const renderMarkdownParagraph = ({
-		children,
-	}: AnchorHTMLAttributes<HTMLParagraphElement>) => (
-		<Typography>{children}</Typography>
+	const renderMarkdownParagraph = ({children}: PropsWithChildren) => (
+		<Typography className="mb-4 last:mb-0">{children}</Typography>
+	);
+
+	const renderMarkdownUl = ({children}: PropsWithChildren) => (
+		<ul className="mb-4 last:mb-0">{children}</ul>
+	);
+
+	const renderMarkdownH2 = ({children}: PropsWithChildren) => (
+		<Typography className="mb-1" variant="h4">
+			{children}
+		</Typography>
+	);
+
+	const renderMarkdownStrong = ({children}: PropsWithChildren) => (
+		<Typography weight="semibold" variant="inherit" as="strong">
+			{children}
+		</Typography>
 	);
 
 	const markdown = overview.replace(/\\n/g, '\n');
@@ -57,17 +71,12 @@ const Project = async ({params}: {params: {id: string}}) => {
 			<Header position="relative" bordered />
 			<main className="flex-1">
 				<Section>
-					<Container>
+					<Container size="sm">
 						<div className="flex flex-col">
 							<Typography className="mb-3" align="center" variant="h1">
 								{title}
 							</Typography>
-							<Typography
-								className="mb-6"
-								align="center"
-								variant="h2"
-								weight="semibold"
-							>
+							<Typography className="mb-6" align="center" variant="h3">
 								{description}
 							</Typography>
 							<div className="flex gap-4 mx-auto mb-8">
@@ -78,40 +87,47 @@ const Project = async ({params}: {params: {id: string}}) => {
 									Repository
 								</Link>
 							</div>
-							<div className="flex items-start justify-between gap-4">
-								<div className="flex-1">
-									<div className="mb-6">
-										<Typography className="mb-3" variant="h3">
-											Overview
-										</Typography>
-										<Markdown
-											className="flex flex-col gap-2"
-											remarkPlugins={[remarkGfm]}
-											allowedElements={['p', 'a', 'ul', 'li', 'br']}
-											unwrapDisallowed
-											components={{
-												a: renderMarkdownLink,
-												p: renderMarkdownParagraph,
-											}}
-										>
-											{markdown}
-										</Markdown>
-									</div>
-									<div>
-										<Typography className="mb-3" variant="h3">
-											Technologies
-										</Typography>
-										<TechnologyChipList technologies={technologies} />
-									</div>
-								</div>
-								<div className="flex-1 relative aspect-[16/10] border-surface-main overflow-hidden rounded-lg">
-									<Image
-										className="object-cover"
-										src={image}
-										fill
-										alt={`${title} image`}
-									/>
-								</div>
+							<div className="mb-6">
+								<Typography className="mb-3" variant="h3">
+									Case study
+								</Typography>
+								<Markdown
+									className="flex flex-col"
+									remarkPlugins={[remarkGfm]}
+									allowedElements={[
+										'p',
+										'a',
+										'ul',
+										'li',
+										'br',
+										'h2',
+										'strong',
+									]}
+									unwrapDisallowed
+									components={{
+										a: renderMarkdownLink,
+										p: renderMarkdownParagraph,
+										ul: renderMarkdownUl,
+										h2: renderMarkdownH2,
+										strong: renderMarkdownStrong,
+									}}
+								>
+									{markdown}
+								</Markdown>
+							</div>
+							<div className="mb-6">
+								<Typography className="mb-3" variant="h3">
+									Technologies
+								</Typography>
+								<TechnologyChipList technologies={technologies} />
+							</div>
+							<div className="relative aspect-[16/10] overflow-hidden rounded-lg">
+								<Image
+									className="object-cover"
+									src={image}
+									fill
+									alt={`${title} image`}
+								/>
 							</div>
 						</div>
 					</Container>
