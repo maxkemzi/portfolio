@@ -1,12 +1,9 @@
-import {Footer, Header, TechnologyChipList} from '@/components';
+import {CustomMarkdown, Footer, Header, TechnologyChipList} from '@/components';
 import {Container, Link, Section, Typography} from '@/components/ui';
 import {prisma} from '@/db';
 import {ProjectWithTechnologies} from '@/types';
 import Image from 'next/image';
 import {notFound} from 'next/navigation';
-import {AnchorHTMLAttributes, PropsWithChildren} from 'react';
-import Markdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 
 const Project = async ({params}: {params: {id: string}}) => {
 	const {id} = params;
@@ -35,35 +32,6 @@ const Project = async ({params}: {params: {id: string}}) => {
 	} = project;
 	const technologies = projectTechnologies.map(pt => pt.technology);
 
-	const renderMarkdownLink = ({
-		href,
-		children,
-	}: AnchorHTMLAttributes<HTMLAnchorElement>) => (
-		<Link href={href ?? '#'} external>
-			{children}
-		</Link>
-	);
-
-	const renderMarkdownParagraph = ({children}: PropsWithChildren) => (
-		<Typography className="mb-4 last:mb-0">{children}</Typography>
-	);
-
-	const renderMarkdownUl = ({children}: PropsWithChildren) => (
-		<ul className="mb-4 last:mb-0">{children}</ul>
-	);
-
-	const renderMarkdownH2 = ({children}: PropsWithChildren) => (
-		<Typography className="mb-1" variant="h4">
-			{children}
-		</Typography>
-	);
-
-	const renderMarkdownStrong = ({children}: PropsWithChildren) => (
-		<Typography weight="semibold" variant="inherit" as="strong">
-			{children}
-		</Typography>
-	);
-
 	const markdown = overview.replace(/\\n/g, '\n');
 
 	return (
@@ -91,29 +59,7 @@ const Project = async ({params}: {params: {id: string}}) => {
 								<Typography className="mb-3" variant="h3">
 									Case study
 								</Typography>
-								<Markdown
-									className="flex flex-col"
-									remarkPlugins={[remarkGfm]}
-									allowedElements={[
-										'p',
-										'a',
-										'ul',
-										'li',
-										'br',
-										'h2',
-										'strong',
-									]}
-									unwrapDisallowed
-									components={{
-										a: renderMarkdownLink,
-										p: renderMarkdownParagraph,
-										ul: renderMarkdownUl,
-										h2: renderMarkdownH2,
-										strong: renderMarkdownStrong,
-									}}
-								>
-									{markdown}
-								</Markdown>
+								<CustomMarkdown markdown={markdown} />
 							</div>
 							<div className="mb-6">
 								<Typography className="mb-3" variant="h3">

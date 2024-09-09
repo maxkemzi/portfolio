@@ -10,11 +10,12 @@ const TechnologyChip = (props: Props): JSX.Element => {
 		technology: {name},
 	} = props;
 
+	const capitalized =
+		name.length !== 0 ? `${name[0].toUpperCase()}${name.slice(1)}` : null;
+
 	return (
 		<div className="bg-surface-main rounded-lg py-1 px-3">
-			<Typography variant="body2" textTransform="capitalize">
-				{name}
-			</Typography>
+			<Typography variant="body2">{capitalized}</Typography>
 		</div>
 	);
 };
