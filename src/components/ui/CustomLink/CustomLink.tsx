@@ -1,4 +1,4 @@
-import NextLink, {LinkProps} from 'next/link';
+import Link, {LinkProps} from 'next/link';
 import {ReactNode} from 'react';
 import {twMerge} from 'tailwind-merge';
 import {Typography, TypographyProps} from '../Typography';
@@ -31,7 +31,7 @@ const VARIANT_TO_TEXT_TRANSFORM_MAPPING: {
 	block: 'uppercase',
 };
 
-const Link = (props: Props): JSX.Element => {
+const CustomLink = (props: Props): JSX.Element => {
 	const {className, children, href, external, variant = 'underline'} = props;
 
 	const variantClassNames = VARIANT_TO_CLASS_NAMES_MAPPING[variant];
@@ -42,7 +42,7 @@ const Link = (props: Props): JSX.Element => {
 	const textTransform = VARIANT_TO_TEXT_TRANSFORM_MAPPING[variant];
 
 	return (
-		<NextLink
+		<Link
 			className={twMerge(variantClassNames, className)}
 			href={href}
 			{...(external ? externalProps : {})}
@@ -55,8 +55,8 @@ const Link = (props: Props): JSX.Element => {
 			>
 				{children}
 			</Typography>
-		</NextLink>
+		</Link>
 	);
 };
 
-export default Link;
+export default CustomLink;

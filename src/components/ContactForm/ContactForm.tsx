@@ -4,7 +4,7 @@ import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {z} from 'zod';
 import {useAction} from 'next-safe-action/hooks';
-import {Button, Link, TextField, Typography} from '../ui';
+import {Button, CustomLink, TextField, Typography} from '../ui';
 import {schema} from './schema';
 import {sendContactMail} from './actions';
 import ContactFormStatus from './ContactFormStatus';
@@ -27,9 +27,9 @@ const ContactForm = () => {
 			</Typography>
 			<Typography className="mb-3" align="center" noWrap>
 				Or shoot an email directly on <br />
-				<Link href="mailto:iam.maxkyrychenko@gmail.com" external>
+				<CustomLink href="mailto:iam.maxkyrychenko@gmail.com" external>
 					iam.maxkyrychenko@gmail.com
-				</Link>
+				</CustomLink>
 			</Typography>
 			<form onSubmit={handleSubmit(data => execute(data))}>
 				<ContactFormStatus

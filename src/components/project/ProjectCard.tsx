@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import NextLink from 'next/link';
+import Link from 'next/link';
 import {ProjectWithTechnologies} from '@/types';
 import {Typography} from '../ui';
 import {TechnologyChipList} from '../technology';
@@ -15,7 +15,7 @@ const ProjectCard = (props: Props): JSX.Element => {
 	const technologies = projectTechnologies.map(pt => pt.technology);
 
 	return (
-		<NextLink
+		<Link
 			className="group block relative h-full rounded-lg overflow-hidden before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:z-10 before:opacity-0 before:bg-[linear-gradient(rgba(0,0,0,0.1)_10%,_rgba(0,0,0,0.78)_80%)] before:transition-opacity before:duration-300 hover:before:opacity-100"
 			href={`/projects/${id}`}
 		>
@@ -32,7 +32,7 @@ const ProjectCard = (props: Props): JSX.Element => {
 				<Typography className="mb-4">{description}</Typography>
 				<TechnologyChipList technologies={technologies} />
 			</div>
-		</NextLink>
+		</Link>
 	);
 };
 

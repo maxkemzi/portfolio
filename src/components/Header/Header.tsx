@@ -1,6 +1,6 @@
 import {Anchor} from '@/constants';
 import {ForwardedRef, forwardRef, RefObject} from 'react';
-import NextLink from 'next/link';
+import Link from 'next/link';
 import {GithubLogo, TelegramLogo} from '@phosphor-icons/react/dist/ssr';
 import {twJoin} from 'tailwind-merge';
 import {Container, Logo, Navbar, NavbarItem, NavbarLink} from '../ui';
@@ -32,9 +32,9 @@ const Header = forwardRef(
 			>
 				<Container size="lg">
 					<div className="flex items-center justify-between gap-7">
-						<NextLink href={`/#${Anchor.HERO}`}>
+						<Link href={`/#${Anchor.HERO}`}>
 							<Logo />
-						</NextLink>
+						</Link>
 						<div className="flex items-center gap-3.5">
 							<Navbar ref={navbarRef}>
 								<NavbarItem>
@@ -60,7 +60,7 @@ const Header = forwardRef(
 							</Navbar>
 							<ul className="flex items-center">
 								<li>
-									<NextLink
+									<Link
 										className="group inline-block px-3.5"
 										href="https://github.com/maxkemzi"
 										target="_blank"
@@ -71,10 +71,10 @@ const Header = forwardRef(
 											size={28}
 											weight="light"
 										/>
-									</NextLink>
+									</Link>
 								</li>
 								<li>
-									<NextLink
+									<Link
 										className="group inline-block px-3.5"
 										href="https://t.me/maxkemzi"
 										target="_blank"
@@ -85,7 +85,7 @@ const Header = forwardRef(
 											size={28}
 											weight="light"
 										/>
-									</NextLink>
+									</Link>
 								</li>
 							</ul>
 						</div>

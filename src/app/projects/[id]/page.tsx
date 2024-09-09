@@ -1,5 +1,5 @@
 import {CustomMarkdown, Footer, Header, TechnologyChipList} from '@/components';
-import {Container, Link, Section, Typography} from '@/components/ui';
+import {Container, CustomLink, Section, Typography} from '@/components/ui';
 import {prisma} from '@/db';
 import {ProjectWithTechnologies} from '@/types';
 import Image from 'next/image';
@@ -48,12 +48,12 @@ const Project = async ({params}: {params: {id: string}}) => {
 								{description}
 							</Typography>
 							<div className="flex gap-4 mx-auto mb-8">
-								<Link variant="block" href={liveUrl} external>
+								<CustomLink variant="block" href={liveUrl} external>
 									Live app
-								</Link>
-								<Link variant="block" href={repoUrl} external>
+								</CustomLink>
+								<CustomLink variant="block" href={repoUrl} external>
 									Repository
-								</Link>
+								</CustomLink>
 							</div>
 							<div className="mb-6">
 								<Typography className="mb-3" variant="h3">

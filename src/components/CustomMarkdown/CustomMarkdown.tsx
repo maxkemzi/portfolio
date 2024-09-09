@@ -1,7 +1,7 @@
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import {PropsWithChildren, AnchorHTMLAttributes} from 'react';
-import {Typography, Link} from '../ui';
+import {Typography, CustomLink} from '../ui';
 
 const Paragraph = ({children}: PropsWithChildren): JSX.Element => (
 	<Typography className="mb-4 last:mb-0">{children}</Typography>
@@ -11,9 +11,9 @@ const Anchor = ({
 	children,
 	href,
 }: AnchorHTMLAttributes<HTMLAnchorElement>): JSX.Element => (
-	<Link href={href ?? '#'} external>
+	<CustomLink href={href ?? '#'} external>
 		{children}
-	</Link>
+	</CustomLink>
 );
 
 const UnorderedList = ({children}: PropsWithChildren): JSX.Element => (
