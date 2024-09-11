@@ -1,5 +1,6 @@
 import {Technology} from '@prisma/client';
 import {Typography} from '../ui';
+import {capitalizeName} from './helpers';
 
 interface Props {
 	technology: Technology;
@@ -10,8 +11,7 @@ const TechnologyChip = (props: Props): JSX.Element => {
 		technology: {name},
 	} = props;
 
-	const capitalized =
-		name.length !== 0 ? `${name[0].toUpperCase()}${name.slice(1)}` : null;
+	const capitalized = capitalizeName(name);
 
 	return (
 		<div className="bg-surface-main rounded-lg py-1 px-3">
