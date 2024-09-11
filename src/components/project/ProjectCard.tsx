@@ -26,10 +26,10 @@ const ProjectCard = (props: Props): JSX.Element => {
 				alt={`${title} screenshot`}
 			/>
 			<div className="absolute bottom-0 left-0 p-6 w-full z-20 transition-all duration-300 translate-y-[50px] opacity-0 group-hover:opacity-100 group-hover:translate-y-0">
-				<Typography className="mb-2" variant="h3">
+				<Typography className="mb-1" variant="h3">
 					{title}
 				</Typography>
-				<Typography className="mb-4">{description}</Typography>
+				<Typography className="mb-3">{description}</Typography>
 				<TechnologyChipList technologies={technologies} />
 			</div>
 		</Link>

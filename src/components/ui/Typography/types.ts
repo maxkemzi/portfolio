@@ -60,6 +60,7 @@ enum TextTransform {
 	UPPERCASE = 'uppercase',
 	CAPITALIZE = 'capitalize',
 	LOWERCASE = 'lowercase',
+	NONE = 'none',
 	INHERIT = 'inherit',
 }
 type TextTransformValue = `${TextTransform}`;

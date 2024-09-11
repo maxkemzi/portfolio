@@ -44,7 +44,7 @@ const Project = async ({params}: {params: {id: string}}) => {
 							<Typography className="mb-3" align="center" variant="h1">
 								{title}
 							</Typography>
-							<Typography className="mb-6" align="center" variant="h3">
+							<Typography className="mb-6" align="center" variant="h4">
 								{description}
 							</Typography>
 							<div className="flex gap-4 mx-auto mb-8">

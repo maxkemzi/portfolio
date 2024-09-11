@@ -93,7 +93,12 @@ const HeroSection = forwardRef(
 			<Section ref={ref} id={Anchor.HERO} fullscreen>
 				<Container size="lg">
 					<div className="h-full flex flex-col items-center justify-center">
-						<Typography className="mb-9" variant="h1" align="center">
+						<Typography
+							className="mb-9"
+							variant="h1"
+							textTransform="none"
+							align="center"
+						>
 							<AnimatedTypography text={FIRST_TEXT} />
 							<AnimatedTypography
 								color="primary"

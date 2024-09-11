@@ -37,21 +37,25 @@ const VARIANT_TO_STYLES_MAPPING: Record<
 		size: '6xl',
 		weight: 'bold',
 		color: 'backgroundText',
+		textTransform: 'capitalize',
 	},
 	[Variant.H2]: {
 		size: '5xl',
 		weight: 'bold',
 		color: 'backgroundText',
+		textTransform: 'capitalize',
 	},
 	[Variant.H3]: {
 		size: '4xl',
 		weight: 'semibold',
 		color: 'backgroundText',
+		textTransform: 'capitalize',
 	},
 	[Variant.H4]: {
 		size: '2xl',
 		weight: 'semibold',
 		color: 'backgroundText',
+		textTransform: 'capitalize',
 	},
 	[Variant.BODY1]: {
 		size: 'base',
@@ -119,6 +123,7 @@ const TEXT_TRANSFORM_TO_CLASS_NAME_MAPPING: Record<TextTransform, string> = {
 	[TextTransform.UPPERCASE]: 'uppercase',
 	[TextTransform.CAPITALIZE]: 'capitalize',
 	[TextTransform.LOWERCASE]: 'lowercase',
+	[TextTransform.NONE]: 'normal-case',
 	[TextTransform.INHERIT]: '[text-transform:inherit]',
 };
 

@@ -33,7 +33,12 @@ const Heading2 = ({children}: PropsWithChildren): JSX.Element => (
 );
 
 const Strong = ({children}: PropsWithChildren): JSX.Element => (
-	<Typography weight="semibold" variant="inherit" as="strong">
+	<Typography
+		weight="semibold"
+		variant="inherit"
+		as="strong"
+		textTransform="capitalize"
+	>
 		{children}
 	</Typography>
 );

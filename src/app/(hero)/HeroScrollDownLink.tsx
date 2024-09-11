@@ -21,7 +21,7 @@ const HeroScrollDownLink = (props: Props): JSX.Element => {
 			className={twMerge('flex flex-col items-center gap-2', className)}
 			href={`#${Anchor.ABOUT}`}
 		>
-			<Typography as="span" align="center">
+			<Typography as="span" align="center" textTransform="capitalize">
 				Continue journey
 			</Typography>
 			<MotionRocketLaunch
