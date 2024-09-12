@@ -1,0 +1,50 @@
+const Palette = {
+	HOT_PINK: '#CF30AA',
+	DEEP_PURPLE: '#6336D0',
+	MIDNIGHT_BLUE: '#030327',
+	CHARCOAL_BLUE: '#2C2C51',
+	BERRY_RED: '#AC0D58',
+	TEAL: '#3EADAD',
+	LIGHTER_BLUE: '#e6eef1',
+	INKY_BLUE: '#000020',
+	MUTED_YELLOW: '#F4D35E',
+	LIGHT_BLUE: '#5CAFE2',
+} as const;
+
+const ThemeColor = {
+	PRIMARY: {
+		MAIN: Palette.HOT_PINK,
+		CONTRAST_TEXT: Palette.LIGHTER_BLUE,
+	},
+	SECONDARY: {
+		MAIN: Palette.DEEP_PURPLE,
+		CONTRAST_TEXT: Palette.LIGHTER_BLUE,
+	},
+	BACKGROUND: {
+		MAIN: Palette.MIDNIGHT_BLUE,
+		DARK: Palette.INKY_BLUE,
+		CONTRAST_TEXT: Palette.LIGHTER_BLUE,
+	},
+	SURFACE: {
+		MAIN: Palette.CHARCOAL_BLUE,
+		CONTRAST_TEXT: Palette.LIGHTER_BLUE,
+	},
+	DANGER: {
+		MAIN: Palette.BERRY_RED,
+		CONTRAST_TEXT: Palette.LIGHTER_BLUE,
+	},
+	SUCCESS: {
+		MAIN: Palette.TEAL,
+		CONTRAST_TEXT: Palette.LIGHTER_BLUE,
+	},
+	INFORMATION: {
+		MAIN: Palette.LIGHT_BLUE,
+		CONTRAST_TEXT: Palette.LIGHTER_BLUE,
+	},
+	WARNING: {
+		MAIN: Palette.MUTED_YELLOW,
+		CONTRAST_TEXT: Palette.LIGHTER_BLUE,
+	},
+} as const;
+
+export {ThemeColor};

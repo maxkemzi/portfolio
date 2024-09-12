@@ -18,11 +18,19 @@ model Project {
    id                  String                @id @default(auto()) @map("_id") @db.ObjectId
    title               String                @unique
    description         String
+   status              Status
    overview            String                @unique
    image               String                @unique
    liveUrl             String                @unique
    repoUrl             String                @unique
    projectTechnologies ProjectTechnologies[]
+}
+
+enum Status {
+   inProgress
+   dropped
+   completed
+   onHold
 }
 
 model Technology {

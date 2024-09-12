@@ -1,4 +1,4 @@
-import {Color} from '@/constants';
+import {ThemeColor} from '@/constants';
 
 const Footer = () => {
 	return (
@@ -23,8 +23,8 @@ const Footer = () => {
 						y2="267"
 						gradientUnits="userSpaceOnUse"
 					>
-						<stop stopColor={Color.SECONDARY.MAIN} />
-						<stop offset="1" stopColor={Color.PRIMARY.MAIN} />
+						<stop stopColor={ThemeColor.SECONDARY.MAIN} />
+						<stop offset="1" stopColor={ThemeColor.PRIMARY.MAIN} />
 					</linearGradient>
 				</defs>
 			</svg>

@@ -1,3 +1,6 @@
+import {Status} from '@prisma/client';
+import {ColorValue} from '../ui/types';
+
 const calcItemHeight = (index: number, length: number, cols: number) => {
 	const SMALL_HEIGHT = 350;
 	const LARGE_HEIGHT = 450;
@@ -15,4 +18,32 @@ const calcItemHeight = (index: number, length: number, cols: number) => {
 	return heightPattern[rowIndex % 2];
 };
 
-export {calcItemHeight};
+const getStatusText = (status: Status): string | undefined => {
+	switch (status) {
+		case 'inProgress':
+			return 'in progress';
+		case 'dropped':
+			return 'dropped';
+		case 'completed':
+			return 'completed';
+		case 'onHold':
+			return 'on hold';
+		default:
+	}
+};
+
+const getStatusColor = (status: Status): ColorValue | undefined => {
+	switch (status) {
+		case 'inProgress':
+			return 'success';
+		case 'dropped':
+			return 'danger';
+		case 'completed':
+			return 'success';
+		case 'onHold':
+			return 'warning';
+		default:
+	}
+};
+
+export {calcItemHeight, getStatusText, getStatusColor};

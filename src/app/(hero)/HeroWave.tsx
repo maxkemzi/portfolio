@@ -1,4 +1,4 @@
-import {Color} from '@/constants';
+import {ThemeColor} from '@/constants';
 import {CSSProperties} from 'react';
 
 interface Props {
@@ -32,8 +32,8 @@ const HeroWave = (props: Props): JSX.Element => {
 					y2="267"
 					gradientUnits="userSpaceOnUse"
 				>
-					<stop stopColor={Color.PRIMARY.MAIN} />
-					<stop offset="1" stopColor={Color.SECONDARY.MAIN} />
+					<stop stopColor={ThemeColor.PRIMARY.MAIN} />
+					<stop offset="1" stopColor={ThemeColor.SECONDARY.MAIN} />
 				</linearGradient>
 			</defs>
 		</svg>

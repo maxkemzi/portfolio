@@ -14,11 +14,11 @@ import {
 	VariantValue,
 	SizeValue,
 	WeightValue,
-	ColorValue,
 	LetterSpacingValue,
 	TextTransformValue,
 	AlignValue,
 } from './types';
+import {ColorValue} from '../types';
 
 interface Props {
 	className?: string;

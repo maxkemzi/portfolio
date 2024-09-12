@@ -1,34 +1,38 @@
+import {ElementType} from 'react';
 import {
 	Size,
 	Weight,
-	Color,
 	LetterSpacing,
 	TextTransform,
 	Align,
 	Variant,
 	SizeValue,
 	WeightValue,
-	ColorValue,
 	LetterSpacingValue,
 	TextTransformValue,
+	TypographyColorValue,
+	VariantValue,
+	AlignValue,
 } from './types';
+import {Color as TypographyColor} from '../types';
 
-const VARIANT_TO_ELEMENT_MAPPING: Record<Variant, string> = {
+const VARIANT_TO_ELEMENT_MAPPING: Record<VariantValue, ElementType> = {
 	[Variant.H1]: 'h1',
 	[Variant.H2]: 'h2',
 	[Variant.H3]: 'h3',
 	[Variant.H4]: 'h4',
 	[Variant.BODY1]: 'p',
 	[Variant.BODY2]: 'p',
+	[Variant.BODY3]: 'p',
 	[Variant.INHERIT]: 'span',
-};
+} as const;
 
 const VARIANT_TO_STYLES_MAPPING: Record<
-	Variant,
+	VariantValue,
 	Partial<{
 		size: SizeValue;
 		weight: WeightValue;
-		color: ColorValue;
+		color: TypographyColorValue;
 		letterSpacing: LetterSpacingValue;
 		textTransform: TextTransformValue;
 	}>
@@ -67,6 +71,11 @@ const VARIANT_TO_STYLES_MAPPING: Record<
 		weight: 'normal',
 		color: 'backgroundText',
 	},
+	[Variant.BODY3]: {
+		size: 'xs',
+		weight: 'normal',
+		color: 'backgroundText',
+	},
 	[Variant.INHERIT]: {
 		size: 'inherit',
 		weight: 'inherit',
@@ -74,9 +83,9 @@ const VARIANT_TO_STYLES_MAPPING: Record<
 		letterSpacing: 'inherit',
 		textTransform: 'inherit',
 	},
-};
+} as const;
 
-const SIZE_TO_CLASS_NAME_MAPPING: Record<Size, string> = {
+const SIZE_TO_CLASS_NAME_MAPPING: Record<SizeValue, string> = {
 	[Size['6XL']]: 'text-6xl',
 	[Size['5XL']]: 'text-5xl',
 	[Size['4XL']]: 'text-4xl',
@@ -84,55 +93,62 @@ const SIZE_TO_CLASS_NAME_MAPPING: Record<Size, string> = {
 	[Size.XL]: 'text-xl',
 	[Size.BASE]: 'text-base',
 	[Size.SM]: 'text-sm',
+	[Size.XS]: 'text-xs',
 	[Size.INHERIT]: '[font-size:inherit]',
-};
+} as const;
 
-const WEIGHT_TO_CLASS_NAME_MAPPING: Record<Weight, string> = {
+const WEIGHT_TO_CLASS_NAME_MAPPING: Record<WeightValue, string> = {
 	[Weight.BOLD]: 'font-bold',
 	[Weight.SEMIBOLD]: 'font-semibold',
 	[Weight.MEDIUM]: 'font-medium',
 	[Weight.NORMAL]: 'font-normal',
 	[Weight.INHERIT]: '[font-weight:inherit]',
-};
+} as const;
 
-const COLOR_TO_CLASS_NAME_MAPPING: Record<Color, string> = {
-	[Color.PRIMARY]: 'text-primary-main',
-	[Color.PRIMARY_TEXT]: 'text-primary-contrastText',
-	[Color.SECONDARY]: 'text-secondary-main',
-	[Color.SECONDARY_TEXT]: 'text-secondary-contrastText',
-	[Color.BACKGROUND]: 'text-background-main',
-	[Color.BACKGROUND_TEXT]: 'text-background-contrastText',
-	[Color.SURFACE]: 'text-surface-main',
-	[Color.SURFACE_TEXT]: 'text-surface-contrastText',
-	[Color.DANGER]: 'text-danger-main',
-	[Color.DANGER_TEXT]: 'text-danger-contrastText',
-	[Color.SUCCESS]: 'text-success-main',
-	[Color.SUCCESS_TEXT]: 'text-success-contrastText',
-	[Color.INHERIT]: '[color:inherit]',
-};
+const COLOR_TO_CLASS_NAME_MAPPING: Record<TypographyColorValue, string> = {
+	[TypographyColor.PRIMARY]: 'text-primary-main',
+	[TypographyColor.PRIMARY_TEXT]: 'text-primary-contrastText',
+	[TypographyColor.SECONDARY]: 'text-secondary-main',
+	[TypographyColor.SECONDARY_TEXT]: 'text-secondary-contrastText',
+	[TypographyColor.BACKGROUND]: 'text-background-main',
+	[TypographyColor.BACKGROUND_TEXT]: 'text-background-contrastText',
+	[TypographyColor.SURFACE]: 'text-surface-main',
+	[TypographyColor.SURFACE_TEXT]: 'text-surface-contrastText',
+	[TypographyColor.DANGER]: 'text-danger-main',
+	[TypographyColor.DANGER_TEXT]: 'text-danger-contrastText',
+	[TypographyColor.SUCCESS]: 'text-success-main',
+	[TypographyColor.SUCCESS_TEXT]: 'text-success-contrastText',
+	[TypographyColor.INFORMATION]: 'text-information-main',
+	[TypographyColor.INFORMATION_TEXT]: 'text-information-contrastText',
+	[TypographyColor.WARNING]: 'text-warning-main',
+	[TypographyColor.WARNING_TEXT]: 'text-warning-contrastText',
+	[TypographyColor.INHERIT]: '[color:inherit]',
+} as const;
 
-const LETTER_SPACING_TO_CLASS_NAME_MAPPING: Record<LetterSpacing, string> = {
-	[LetterSpacing.WIDEST]: 'tracking-widest',
-	[LetterSpacing.WIDER]: 'tracking-wider',
-	[LetterSpacing.WIDE]: 'tracking-wide',
-	[LetterSpacing.NORMAL]: 'tracking-normal',
-	[LetterSpacing.INHERIT]: '[letter-spacing:inherit]',
-};
+const LETTER_SPACING_TO_CLASS_NAME_MAPPING: Record<LetterSpacingValue, string> =
+	{
+		[LetterSpacing.WIDEST]: 'tracking-widest',
+		[LetterSpacing.WIDER]: 'tracking-wider',
+		[LetterSpacing.WIDE]: 'tracking-wide',
+		[LetterSpacing.NORMAL]: 'tracking-normal',
+		[LetterSpacing.INHERIT]: '[letter-spacing:inherit]',
+	} as const;
 
-const TEXT_TRANSFORM_TO_CLASS_NAME_MAPPING: Record<TextTransform, string> = {
-	[TextTransform.UPPERCASE]: 'uppercase',
-	[TextTransform.CAPITALIZE]: 'capitalize',
-	[TextTransform.LOWERCASE]: 'lowercase',
-	[TextTransform.NONE]: 'normal-case',
-	[TextTransform.INHERIT]: '[text-transform:inherit]',
-};
+const TEXT_TRANSFORM_TO_CLASS_NAME_MAPPING: Record<TextTransformValue, string> =
+	{
+		[TextTransform.UPPERCASE]: 'uppercase',
+		[TextTransform.CAPITALIZE]: 'capitalize',
+		[TextTransform.LOWERCASE]: 'lowercase',
+		[TextTransform.NONE]: 'normal-case',
+		[TextTransform.INHERIT]: '[text-transform:inherit]',
+	} as const;
 
-const ALIGN_TO_CLASS_NAME_MAPPING: Record<Align, string> = {
+const ALIGN_TO_CLASS_NAME_MAPPING: Record<AlignValue, string> = {
 	[Align.RIGHT]: 'text-right',
 	[Align.CENTER]: 'text-center',
 	[Align.LEFT]: 'text-left',
 	[Align.INHERIT]: '[text-align:inherit]',
-};
+} as const;
 
 export {
 	VARIANT_TO_ELEMENT_MAPPING,

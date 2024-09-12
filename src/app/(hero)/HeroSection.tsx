@@ -11,7 +11,7 @@ import {
 import {CrosshairSimple} from '@phosphor-icons/react/dist/ssr';
 import {motion, useAnimation} from 'framer-motion';
 import {ForwardedRef, forwardRef, useEffect, useState} from 'react';
-import {Anchor, Color} from '@/constants';
+import {Anchor, ThemeColor} from '@/constants';
 import {twJoin} from 'tailwind-merge';
 import HeroWave from './HeroWave';
 import HeroMoon from './HeroMoon';
@@ -138,7 +138,7 @@ const HeroSection = forwardRef(
 						animate={controls}
 					>
 						<CrosshairSimple
-							color={Color.PRIMARY.MAIN}
+							color={ThemeColor.PRIMARY.MAIN}
 							size={CROSSHAIR_SIZE}
 							weight="light"
 						/>

@@ -1,7 +1,6 @@
 import {
 	Align,
 	ALIGN_TO_CLASS_NAME_MAPPING,
-	Color,
 	COLOR_TO_CLASS_NAME_MAPPING,
 	LETTER_SPACING_TO_CLASS_NAME_MAPPING,
 	LetterSpacing,
@@ -10,6 +9,7 @@ import {
 	TEXT_TRANSFORM_TO_CLASS_NAME_MAPPING,
 	TextTransform,
 	Typography,
+	TypographyColor,
 	Variant,
 	VARIANT_TO_ELEMENT_MAPPING,
 	Weight,
@@ -63,7 +63,7 @@ test('renders with correct class names based on the weight prop', () => {
 });
 
 test('renders with correct class names based on the color prop', () => {
-	Object.values(Color).forEach(color => {
+	Object.values(TypographyColor).forEach(color => {
 		render(<Typography color={color}>Test</Typography>);
 
 		const element = screen.getByText('Test');

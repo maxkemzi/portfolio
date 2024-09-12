@@ -3,6 +3,6 @@ const Anchor = {
 	ABOUT: 'about',
 	PROJECTS: 'projects',
 	CONTACT: 'contact',
-};
+} as const;
 
 export default Anchor;

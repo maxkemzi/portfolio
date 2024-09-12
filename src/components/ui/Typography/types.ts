@@ -1,84 +1,83 @@
-enum Variant {
-	H1 = 'h1',
-	H2 = 'h2',
-	H3 = 'h3',
-	H4 = 'h4',
-	BODY1 = 'body1',
-	BODY2 = 'body2',
-	INHERIT = 'inherit',
-}
-type VariantValue = `${Variant}`;
+import {Color} from '../types';
 
-enum Size {
-	'6XL' = '6xl',
-	'5XL' = '5xl',
-	'4XL' = '4xl',
-	'2XL' = '2xl',
-	XL = 'xl',
-	BASE = 'base',
-	SM = 'sm',
-	INHERIT = 'inherit',
-}
-type SizeValue = `${Size}`;
+const Variant = {
+	H1: 'h1',
+	H2: 'h2',
+	H3: 'h3',
+	H4: 'h4',
+	BODY1: 'body1',
+	BODY2: 'body2',
+	BODY3: 'body3',
+	INHERIT: 'inherit',
+} as const;
+type VariantValue = (typeof Variant)[keyof typeof Variant];
 
-enum Weight {
-	BOLD = 'bold',
-	SEMIBOLD = 'semibold',
-	MEDIUM = 'medium',
-	NORMAL = 'normal',
-	INHERIT = 'inherit',
-}
-type WeightValue = `${Weight}`;
+const Size = {
+	'6XL': '6xl',
+	'5XL': '5xl',
+	'4XL': '4xl',
+	'2XL': '2xl',
+	XL: 'xl',
+	BASE: 'base',
+	SM: 'sm',
+	XS: 'xs',
+	INHERIT: 'inherit',
+} as const;
+type SizeValue = (typeof Size)[keyof typeof Size];
 
-enum Color {
-	PRIMARY = 'primary',
-	PRIMARY_TEXT = 'primaryText',
-	SECONDARY = 'secondary',
-	SECONDARY_TEXT = 'secondaryText',
-	BACKGROUND = 'background',
-	BACKGROUND_TEXT = 'backgroundText',
-	SURFACE = 'surface',
-	SURFACE_TEXT = 'surfaceText',
-	DANGER = 'danger',
-	DANGER_TEXT = 'dangerText',
-	SUCCESS = 'success',
-	SUCCESS_TEXT = 'successText',
-	INHERIT = 'inherit',
-}
-type ColorValue = `${Color}`;
+const Weight = {
+	BOLD: 'bold',
+	SEMIBOLD: 'semibold',
+	MEDIUM: 'medium',
+	NORMAL: 'normal',
+	INHERIT: 'inherit',
+} as const;
+type WeightValue = (typeof Weight)[keyof typeof Weight];
 
-enum LetterSpacing {
-	WIDEST = 'widest',
-	WIDER = 'wider',
-	WIDE = 'wide',
-	NORMAL = 'normal',
-	INHERIT = 'inherit',
-}
-type LetterSpacingValue = `${LetterSpacing}`;
+const TypographyColor = Color;
+type TypographyColorValue =
+	(typeof TypographyColor)[keyof typeof TypographyColor];
 
-enum TextTransform {
-	UPPERCASE = 'uppercase',
-	CAPITALIZE = 'capitalize',
-	LOWERCASE = 'lowercase',
-	NONE = 'none',
-	INHERIT = 'inherit',
-}
-type TextTransformValue = `${TextTransform}`;
+const LetterSpacing = {
+	WIDEST: 'widest',
+	WIDER: 'wider',
+	WIDE: 'wide',
+	NORMAL: 'normal',
+	INHERIT: 'inherit',
+} as const;
+type LetterSpacingValue = (typeof LetterSpacing)[keyof typeof LetterSpacing];
 
-enum Align {
-	RIGHT = 'right',
-	CENTER = 'center',
-	LEFT = 'left',
-	INHERIT = 'inherit',
-}
-type AlignValue = `${Align}`;
+const TextTransform = {
+	UPPERCASE: 'uppercase',
+	CAPITALIZE: 'capitalize',
+	LOWERCASE: 'lowercase',
+	NONE: 'none',
+	INHERIT: 'inherit',
+} as const;
+type TextTransformValue = (typeof TextTransform)[keyof typeof TextTransform];
 
-export {Variant, Size, Weight, Color, LetterSpacing, TextTransform, Align};
+const Align = {
+	RIGHT: 'right',
+	CENTER: 'center',
+	LEFT: 'left',
+	INHERIT: 'inherit',
+} as const;
+type AlignValue = (typeof Align)[keyof typeof Align];
+
+export {
+	Variant,
+	Size,
+	Weight,
+	TypographyColor,
+	LetterSpacing,
+	TextTransform,
+	Align,
+};
 export type {
 	VariantValue,
 	SizeValue,
 	WeightValue,
-	ColorValue,
+	TypographyColorValue,
 	LetterSpacingValue,
 	TextTransformValue,
 	AlignValue,

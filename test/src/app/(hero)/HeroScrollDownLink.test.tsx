@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import {render, screen} from '@testing-library/react';
 import HeroScrollDownLink from '@/app/(hero)/HeroScrollDownLink';
 import {RocketLaunch} from '@phosphor-icons/react/dist/ssr';
-import {Anchor, Color} from '@/constants';
+import {Anchor, ThemeColor} from '@/constants';
 import react, {ComponentType} from 'react';
 
 vi.mock('framer-motion', async () => {
@@ -41,7 +41,7 @@ test('renders the RocketLaunch icon with correct properties', async () => {
 
 	expect(RocketLaunch).toHaveBeenCalledWith(
 		expect.objectContaining({
-			color: Color.BACKGROUND.CONTRAST_TEXT,
+			color: ThemeColor.BACKGROUND.CONTRAST_TEXT,
 			size: 32,
 			weight: 'light',
 		}),

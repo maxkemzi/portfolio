@@ -1,5 +1,5 @@
 import type {Config} from 'tailwindcss';
-import {Color} from './src/constants';
+import {ThemeColor} from './src/constants';
 
 const config: Config = {
 	content: [
@@ -19,29 +19,37 @@ const config: Config = {
 		colors: {
 			transparent: 'transparent',
 			primary: {
-				main: Color.PRIMARY.MAIN,
-				contrastText: Color.PRIMARY.CONTRAST_TEXT,
+				main: ThemeColor.PRIMARY.MAIN,
+				contrastText: ThemeColor.PRIMARY.CONTRAST_TEXT,
 			},
 			secondary: {
-				main: Color.SECONDARY.MAIN,
-				contrastText: Color.SECONDARY.CONTRAST_TEXT,
+				main: ThemeColor.SECONDARY.MAIN,
+				contrastText: ThemeColor.SECONDARY.CONTRAST_TEXT,
 			},
 			background: {
-				main: Color.BACKGROUND.MAIN,
-				dark: Color.BACKGROUND.DARK,
-				contrastText: Color.BACKGROUND.CONTRAST_TEXT,
+				main: ThemeColor.BACKGROUND.MAIN,
+				dark: ThemeColor.BACKGROUND.DARK,
+				contrastText: ThemeColor.BACKGROUND.CONTRAST_TEXT,
 			},
 			surface: {
-				main: Color.SURFACE.MAIN,
-				contrastText: Color.SURFACE.CONTRAST_TEXT,
+				main: ThemeColor.SURFACE.MAIN,
+				contrastText: ThemeColor.SURFACE.CONTRAST_TEXT,
 			},
 			danger: {
-				main: Color.DANGER.MAIN,
-				contrastText: Color.DANGER.CONTRAST_TEXT,
+				main: ThemeColor.DANGER.MAIN,
+				contrastText: ThemeColor.DANGER.CONTRAST_TEXT,
 			},
 			success: {
-				main: Color.SUCCESS.MAIN,
-				contrastText: Color.SUCCESS.CONTRAST_TEXT,
+				main: ThemeColor.SUCCESS.MAIN,
+				contrastText: ThemeColor.SUCCESS.CONTRAST_TEXT,
+			},
+			information: {
+				main: ThemeColor.INFORMATION.MAIN,
+				contrastText: ThemeColor.INFORMATION.CONTRAST_TEXT,
+			},
+			warning: {
+				main: ThemeColor.WARNING.MAIN,
+				contrastText: ThemeColor.WARNING.CONTRAST_TEXT,
 			},
 		},
 	},

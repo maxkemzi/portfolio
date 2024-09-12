@@ -1,7 +1,7 @@
 'use client';
 
 import {Typography} from '@/components/ui';
-import {Anchor, Color} from '@/constants';
+import {Anchor, ThemeColor} from '@/constants';
 import {RocketLaunch} from '@phosphor-icons/react/dist/ssr';
 import {motion} from 'framer-motion';
 import Link from 'next/link';
@@ -26,7 +26,7 @@ const HeroScrollDownLink = (props: Props): JSX.Element => {
 			</Typography>
 			<MotionRocketLaunch
 				data-testid="rocket-icon"
-				color={Color.BACKGROUND.CONTRAST_TEXT}
+				color={ThemeColor.BACKGROUND.CONTRAST_TEXT}
 				size={32}
 				weight="light"
 				initial={{rotate: 135}}
