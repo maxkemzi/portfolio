@@ -48,7 +48,7 @@ const Chip = (props: Props): JSX.Element => {
 	return (
 		<div
 			className={twMerge(
-				'inline-block rounded-lg bg-opacity-25 py-1 px-2.5',
+				'inline-block rounded-full bg-opacity-35 py-1 px-2.5',
 				color && COLOR_TO_CLASS_NAME_MAPPING[color],
 				size && SIZE_TO_CLASS_NAMES_MAPPING[size],
 				className,

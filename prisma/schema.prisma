@@ -23,7 +23,9 @@ model Project {
    image               String                @unique
    liveUrl             String                @unique
    repoUrl             String                @unique
-   projectTechnologies ProjectTechnologies[]
+   ProjectCategory     ProjectCategory       @relation(fields: [categoryId], references: [id])
+   categoryId          String                @db.ObjectId
+   ProjectTechnologies ProjectTechnologies[]
 }
 
 enum Status {
@@ -33,10 +35,16 @@ enum Status {
    onHold
 }
 
+model ProjectCategory {
+   id      String    @id @default(auto()) @map("_id") @db.ObjectId
+   name    String    @unique
+   Project Project[]
+}
+
 model Technology {
    id                  String                @id @default(auto()) @map("_id") @db.ObjectId
    name                String                @unique
-   projectTechnologies ProjectTechnologies[]
+   ProjectTechnologies ProjectTechnologies[]
 }
 
 model ProjectTechnologies {

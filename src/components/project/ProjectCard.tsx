@@ -11,9 +11,9 @@ interface Props {
 
 const ProjectCard = (props: Props): JSX.Element => {
 	const {
-		project: {id, title, description, status, image, projectTechnologies},
+		project: {id, title, description, status, image, ProjectTechnologies},
 	} = props;
-	const technologies = projectTechnologies.map(pt => pt.technology);
+	const technologies = ProjectTechnologies.map(pt => pt.technology);
 
 	const statusColor = getStatusColor(status);
 	const statusText = getStatusText(status);

@@ -22,7 +22,7 @@ const Project = async ({params}: {params: {id: string}}) => {
 	try {
 		project = await prisma.project.findUnique({
 			where: {id},
-			include: {projectTechnologies: {include: {technology: true}}},
+			include: {ProjectTechnologies: {include: {technology: true}}},
 		});
 	} catch (e) {
 		return notFound();
@@ -38,10 +38,10 @@ const Project = async ({params}: {params: {id: string}}) => {
 		liveUrl,
 		repoUrl,
 		overview,
-		projectTechnologies,
+		ProjectTechnologies,
 		image,
 	} = project;
-	const technologies = projectTechnologies.map(pt => pt.technology);
+	const technologies = ProjectTechnologies.map(pt => pt.technology);
 
 	const markdown = overview.replace(/\\n/g, '\n');
 

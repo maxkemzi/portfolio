@@ -5,6 +5,7 @@ import {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {Typography} from '@/components/ui';
 import {AnimatePresence, motion} from 'framer-motion';
 import {ProjectWithTechnologies} from '@/types';
+import {ProjectCategory} from '@prisma/client';
 import {HeroSection} from './(hero)';
 import {AboutSection} from './(about)';
 import ProjectsSection from './(projects)';
@@ -12,6 +13,7 @@ import ContactSection from './(contact)';
 
 interface Props {
 	projects: ProjectWithTechnologies[];
+	categories: ProjectCategory[];
 }
 
 const MOON_SPACING = 32;
@@ -21,7 +23,7 @@ const FIXED_HEADER_TRANSITION_DURATION = 0.5;
 const MotionHeader = motion(Header);
 
 const HomeContent = (props: Props): JSX.Element => {
-	const {projects} = props;
+	const {projects, categories} = props;
 
 	const [isClient, setIsClient] = useState(false);
 	const navbarRef = useRef<HTMLElement>(null);
@@ -132,7 +134,7 @@ const HomeContent = (props: Props): JSX.Element => {
 					moonTopPos={heroMoonTopPos}
 				/>
 				<AboutSection />
-				<ProjectsSection projects={projects} />
+				<ProjectsSection projects={projects} categories={categories} />
 				<ContactSection />
 			</main>
 			<Footer />
