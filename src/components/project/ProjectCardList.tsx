@@ -1,13 +1,13 @@
 'use client';
 
 import {ForwardedRef, forwardRef} from 'react';
-import {ProjectWithTechnologies} from '@/types';
+import {ProjectWithInclusions} from '@/types';
 import {LayoutGroup, motion, Transition} from 'framer-motion';
 import ProjectCard from './ProjectCard';
 import {calcItemHeight} from './helpers';
 
 interface Props {
-	projects: ProjectWithTechnologies[];
+	projects: ProjectWithInclusions[];
 }
 
 const COLS = 2;

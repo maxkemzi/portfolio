@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import {ProjectWithTechnologies} from '@/types';
+import {ProjectWithInclusions} from '@/types';
 import {Chip, Typography} from '../ui';
 import {TechnologyChipList} from '../technology';
 import {getStatusColor, getStatusText} from './helpers';
 
 interface Props {
-	project: ProjectWithTechnologies;
+	project: ProjectWithInclusions;
 }
 
 const ProjectCard = (props: Props): JSX.Element => {
@@ -20,7 +20,7 @@ const ProjectCard = (props: Props): JSX.Element => {
 
 	return (
 		<Link
-			className="group block relative h-full rounded-lg overflow-hidden before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:z-10 before:opacity-0 before:bg-[linear-gradient(rgba(0,0,0,0.1)_10%,_rgba(0,0,0,0.78)_80%)] before:transition-opacity before:duration-300 hover:before:opacity-100"
+			className="group block relative h-full rounded-lg overflow-hidden before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:z-10 before:opacity-0 before:bg-background-dark/70 before:transition-opacity before:duration-300 hover:before:opacity-100"
 			href={`/projects/${id}`}
 		>
 			<Image

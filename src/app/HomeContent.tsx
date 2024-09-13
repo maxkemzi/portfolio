@@ -4,7 +4,7 @@ import {Footer, Header} from '@/components';
 import {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {Typography} from '@/components/ui';
 import {AnimatePresence, motion} from 'framer-motion';
-import {ProjectWithTechnologies} from '@/types';
+import {ProjectWithInclusions} from '@/types';
 import {ProjectCategory} from '@prisma/client';
 import {HeroSection} from './(hero)';
 import {AboutSection} from './(about)';
@@ -12,7 +12,7 @@ import ProjectsSection from './(projects)';
 import ContactSection from './(contact)';
 
 interface Props {
-	projects: ProjectWithTechnologies[];
+	projects: ProjectWithInclusions[];
 	categories: ProjectCategory[];
 }
 

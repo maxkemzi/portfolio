@@ -3,13 +3,13 @@
 import {ProjectCardList, ProjectCategoryFilters} from '@/components';
 import {Container, Section, Typography} from '@/components/ui';
 import {Anchor} from '@/constants';
-import {ProjectWithTechnologies} from '@/types';
+import {ProjectWithInclusions} from '@/types';
 import {ProjectCategory} from '@prisma/client';
 import {motion, Transition} from 'framer-motion';
 import {useMemo, useState} from 'react';
 
 interface Props {
-	projects: ProjectWithTechnologies[];
+	projects: ProjectWithInclusions[];
 	categories: ProjectCategory[];
 }
 

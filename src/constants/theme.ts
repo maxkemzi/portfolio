@@ -6,7 +6,7 @@ const Palette = {
 	BERRY_RED: '#AC0D58',
 	TEAL: '#3EADAD',
 	LIGHTER_BLUE: '#e6eef1',
-	INKY_BLUE: '#000020',
+	INKY_BLUE: '#00001C',
 	MUTED_YELLOW: '#F4D35E',
 	LIGHT_BLUE: '#5CAFE2',
 } as const;

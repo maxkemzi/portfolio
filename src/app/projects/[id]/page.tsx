@@ -11,18 +11,21 @@ import {
 	Typography,
 } from '@/components/ui';
 import {prisma} from '@/db';
-import {ProjectWithTechnologies} from '@/types';
+import {ProjectWithInclusions} from '@/types';
 import Image from 'next/image';
 import {notFound} from 'next/navigation';
 
 const Project = async ({params}: {params: {id: string}}) => {
 	const {id} = params;
 
-	let project: ProjectWithTechnologies | null = null;
+	let project: ProjectWithInclusions | null = null;
 	try {
 		project = await prisma.project.findUnique({
 			where: {id},
-			include: {ProjectTechnologies: {include: {technology: true}}},
+			include: {
+				ProjectTechnologies: {include: {technology: true}},
+				ProjectCategory: true,
+			},
 		});
 	} catch (e) {
 		return notFound();
@@ -38,9 +41,11 @@ const Project = async ({params}: {params: {id: string}}) => {
 		liveUrl,
 		repoUrl,
 		overview,
+		ProjectCategory,
 		ProjectTechnologies,
 		image,
 	} = project;
+	const categoryName = ProjectCategory.name;
 	const technologies = ProjectTechnologies.map(pt => pt.technology);
 
 	const markdown = overview.replace(/\\n/g, '\n');
@@ -54,13 +59,35 @@ const Project = async ({params}: {params: {id: string}}) => {
 			<main className="flex-1">
 				<Section>
 					<Container size="sm">
-						<Typography className="mb-3" align="center" variant="h1">
+						<div className="flex items-center gap-4 mb-4">
+							<Chip size="lg" color="backgroundText">
+								<Typography
+									color="backgroundText"
+									variant="body2"
+									weight="medium"
+									textTransform="uppercase"
+								>
+									{categoryName}
+								</Typography>
+							</Chip>
+							<Chip size="lg" color={statusColor}>
+								<Typography
+									color={statusColor}
+									variant="body2"
+									weight="medium"
+									textTransform="uppercase"
+								>
+									{statusText}
+								</Typography>
+							</Chip>
+						</div>
+						<Typography className="mb-3" variant="h2">
 							{title}
 						</Typography>
-						<Typography className="mb-6" align="center" variant="h4">
+						<Typography className="mb-4" size="2xl" weight="normal">
 							{description}
 						</Typography>
-						<div className="flex justify-center gap-4 mb-8">
+						<div className="flex gap-4 mb-6">
 							<CustomLink variant="block" href={liveUrl} external>
 								Live app
 							</CustomLink>
@@ -68,35 +95,25 @@ const Project = async ({params}: {params: {id: string}}) => {
 								Repository
 							</CustomLink>
 						</div>
-						<Chip className="mb-4" size="lg" color={statusColor}>
-							<Typography
-								color={statusColor}
-								variant="body2"
-								weight="medium"
-								textTransform="uppercase"
-							>
-								{statusText}
-							</Typography>
-						</Chip>
-						<div className="mb-6">
-							<Typography className="mb-3" variant="h3">
-								Case study
-							</Typography>
-							<CustomMarkdown markdown={markdown} />
-						</div>
-						<div className="mb-6">
-							<Typography className="mb-3" variant="h3">
-								Technologies
-							</Typography>
-							<TechnologyChipList technologies={technologies} />
-						</div>
-						<div className="relative aspect-[16/10] overflow-hidden rounded-lg">
+						<div className="w-[70%] relative aspect-[16/10] overflow-hidden rounded-xl mb-6">
 							<Image
 								className="object-cover"
 								src={image}
 								fill
 								alt={`${title} image`}
 							/>
+						</div>
+						<div className="mb-6">
+							<Typography className="mb-3" variant="h3">
+								Case study
+							</Typography>
+							<CustomMarkdown markdown={markdown} />
+						</div>
+						<div>
+							<Typography className="mb-3" variant="h3">
+								Technologies
+							</Typography>
+							<TechnologyChipList technologies={technologies} />
 						</div>
 					</Container>
 				</Section>

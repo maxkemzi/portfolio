@@ -42,7 +42,7 @@ const TextField = forwardRef(
 		const {containerRef, multiline, label, error} = props;
 
 		const commonClassNames =
-			'block w-full px-4 py-3 bg-transparent border border-surface-main rounded-lg focus:bg-background-dark outline-none placeholder:text-[#948FA3]';
+			'block w-full px-4 py-3 bg-transparent border border-surface-main rounded-lg focus:bg-background-dark outline-none placeholder:text-background-contrastText/40';
 
 		const renderElement = () => {
 			const {name, value, placeholder} = props;

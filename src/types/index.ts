@@ -1,11 +1,14 @@
 import {Prisma} from '@prisma/client';
 
-const projectWithTechnologies = Prisma.validator<Prisma.ProjectDefaultArgs>()({
-	include: {ProjectTechnologies: {include: {technology: true}}},
+const projectWithInclusions = Prisma.validator<Prisma.ProjectDefaultArgs>()({
+	include: {
+		ProjectTechnologies: {include: {technology: true}},
+		ProjectCategory: true,
+	},
 });
 
-type ProjectWithTechnologies = Prisma.ProjectGetPayload<
-	typeof projectWithTechnologies
+type ProjectWithInclusions = Prisma.ProjectGetPayload<
+	typeof projectWithInclusions
 >;
 
-export type {ProjectWithTechnologies};
+export type {ProjectWithInclusions};
