@@ -13,7 +13,7 @@ const config: Config = {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 				'gradient-conic':
 					'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-				grid: 'linear-gradient(to right, rgba(113, 113, 113, 0.07) 1px, transparent 1px), linear-gradient(to bottom, rgba(113, 113, 113, 0.07) 1px, transparent 1px)',
+				grid: 'linear-gradient(to right, rgba(230, 238, 241, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(230, 238, 241, 0.05) 1px, transparent 1px)',
 			},
 		},
 		colors: {
