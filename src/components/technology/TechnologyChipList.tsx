@@ -10,9 +10,13 @@ interface Props {
 const TechnologyChipList = (props: Props): JSX.Element => {
 	const {technologies, className} = props;
 
+	const technologiesByPriority = technologies.toSorted(
+		(a, b) => a.priority - b.priority,
+	);
+
 	return (
 		<ul className={twMerge('flex flex-wrap gap-2', className)}>
-			{technologies.map(t => (
+			{technologiesByPriority.map(t => (
 				<li key={t.id}>
 					<TechnologyChip technology={t} />
 				</li>
