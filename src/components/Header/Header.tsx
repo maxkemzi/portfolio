@@ -48,7 +48,7 @@ const Header = forwardRef(
 			<header
 				ref={ref}
 				className={twJoin(
-					'py-5 z-30',
+					'z-30 py-5 max-md:py-4',
 					position === 'absolute' && 'absolute top-0 left-0 right-0',
 					position === 'fixed' && 'fixed top-0 left-0 right-0',
 					position === 'relative' && 'relative',

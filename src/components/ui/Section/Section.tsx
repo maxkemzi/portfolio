@@ -17,7 +17,8 @@ const Section = forwardRef(
 				id={id}
 				className={twMerge(
 					fullscreen && 'h-screen',
-					!fullscreen && 'py-20',
+					!fullscreen &&
+						'py-16 max-lg:py-14 max-md:py-12 max-xs:py-10 max-xxs:py-8',
 					className,
 				)}
 			>

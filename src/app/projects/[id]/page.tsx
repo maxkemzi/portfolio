@@ -59,7 +59,7 @@ const Project = async ({params}: {params: {id: string}}) => {
 			<main className="flex-1">
 				<Section>
 					<Container size="sm">
-						<div className="flex items-center gap-4 mb-4">
+						<div className="flex items-center gap-4 mb-4 max-md:mb-3 max-xxs:mb-2">
 							<Chip size="lg" color="backgroundText">
 								<Typography
 									color="backgroundText"
@@ -81,13 +81,20 @@ const Project = async ({params}: {params: {id: string}}) => {
 								</Typography>
 							</Chip>
 						</div>
-						<Typography className="mb-3" variant="h2">
+						<Typography
+							className="mb-2 max-md:mb-1 max-xxs:mb-0.5"
+							variant="h2"
+						>
 							{title}
 						</Typography>
-						<Typography className="mb-4" size="2xl" weight="normal">
+						<Typography
+							className="mb-4 max-md:mb-3 max-xxs:mb-2"
+							size="2xl"
+							weight="normal"
+						>
 							{description}
 						</Typography>
-						<div className="flex gap-4 mb-6">
+						<div className="flex gap-4 mb-6 max-md:mb-5 max-xxs:mb-4">
 							<CustomLink variant="block" href={liveUrl} external>
 								Live app
 							</CustomLink>
@@ -95,7 +102,7 @@ const Project = async ({params}: {params: {id: string}}) => {
 								Repository
 							</CustomLink>
 						</div>
-						<div className="w-[70%] relative aspect-[16/10] overflow-hidden rounded-xl mb-6">
+						<div className="w-[70%] relative aspect-[16/10] overflow-hidden rounded-xl mb-6 max-md:mb-5 max-xxs:mb-4">
 							<Image
 								className="object-cover"
 								src={image}
@@ -103,18 +110,16 @@ const Project = async ({params}: {params: {id: string}}) => {
 								alt={`${title} image`}
 							/>
 						</div>
-						<div className="mb-6">
-							<Typography className="mb-3" variant="h3">
+						<div className="mb-6 max-md:mb-5 max-xxs:mb-4">
+							<Typography
+								className="mb-2 max-md:mb-1 max-xxs:mb-0.5"
+								variant="h3"
+							>
 								Case study
 							</Typography>
 							<CustomMarkdown markdown={markdown} />
 						</div>
-						<div>
-							<Typography className="mb-3" variant="h3">
-								Technologies
-							</Typography>
-							<TechnologyChipList technologies={technologies} />
-						</div>
+						<TechnologyChipList technologies={technologies} />
 					</Container>
 				</Section>
 			</main>

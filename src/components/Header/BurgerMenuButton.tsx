@@ -2,6 +2,7 @@ import {ThemeColor} from '@/constants';
 import {IconProps} from '@phosphor-icons/react';
 import {List, X} from '@phosphor-icons/react/dist/ssr';
 import {MouseEventHandler} from 'react';
+import {twMerge} from 'tailwind-merge';
 
 interface Props {
 	className?: string;
@@ -21,7 +22,7 @@ const BurgerMenuButton = (props: Props): JSX.Element => {
 
 	return (
 		<button
-			className={className}
+			className={twMerge('flex', className)}
 			aria-label="burger menu button"
 			type="button"
 			onClick={onClick}
