@@ -78,12 +78,17 @@ const TextField = forwardRef(
 
 		return (
 			<div ref={containerRef}>
-				<label className="block">
-					<Typography className="mb-1" textTransform="capitalize">
+				<Typography as="label" className="block">
+					<Typography
+						className="block mb-1"
+						textTransform="capitalize"
+						as="span"
+						variant="inherit"
+					>
 						{label}
 					</Typography>
 					{renderElement()}
-				</label>
+				</Typography>
 				{error ? (
 					<Typography className="mt-1 text-sm" color="danger">
 						{error}

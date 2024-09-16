@@ -86,13 +86,16 @@ const VARIANT_TO_STYLES_MAPPING: Record<
 } as const;
 
 const SIZE_TO_CLASS_NAME_MAPPING: Record<SizeValue, string> = {
-	[Size['6XL']]: 'text-6xl',
-	[Size['5XL']]: 'text-5xl',
-	[Size['4XL']]: 'text-4xl',
-	[Size['2XL']]: 'text-2xl',
-	[Size.XL]: 'text-xl',
-	[Size.BASE]: 'text-base',
-	[Size.SM]: 'text-sm',
+	[Size['6XL']]:
+		'text-6xl max-lg:text-5xl max-md:text-4xl max-xs:text-3xl max-xxs:text-[1.600rem]',
+	[Size['5XL']]:
+		'text-5xl max-lg:text-4xl max-md:text-3xl max-xs:text-2xl max-xxs:text-xl',
+	[Size['4XL']]:
+		'text-4xl max-lg:text-3xl max-md:text-2xl max-xs:text-xl max-xxs:text-lg',
+	[Size['2XL']]:
+		'text-2xl max-lg:text-xl max-md:text-lg max-xs:text-base max-xxs:text-sm',
+	[Size.BASE]: 'text-base max-xs:text-sm max-xxs:text-xs',
+	[Size.SM]: 'text-sm max-xs:text-xs',
 	[Size.XS]: 'text-xs',
 	[Size.INHERIT]: '[font-size:inherit]',
 } as const;

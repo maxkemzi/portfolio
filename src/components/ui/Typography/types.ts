@@ -17,7 +17,6 @@ const Size = {
 	'5XL': '5xl',
 	'4XL': '4xl',
 	'2XL': '2xl',
-	XL: 'xl',
 	BASE: 'base',
 	SM: 'sm',
 	XS: 'xs',

@@ -1,4 +1,5 @@
 import type {Config} from 'tailwindcss';
+import defaultTheme from 'tailwindcss/defaultTheme';
 import {ThemeColor} from './src/constants';
 
 const config: Config = {
@@ -51,6 +52,11 @@ const config: Config = {
 				main: ThemeColor.WARNING.MAIN,
 				contrastText: ThemeColor.WARNING.CONTRAST_TEXT,
 			},
+		},
+		screens: {
+			xxs: '365px',
+			xs: '480px',
+			...defaultTheme.screens,
 		},
 	},
 	plugins: [],
