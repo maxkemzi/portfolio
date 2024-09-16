@@ -12,9 +12,9 @@ const AboutSection = () => {
 	return (
 		<Section id={Anchor.ABOUT}>
 			<Container size="sm">
-				<div className="flex justify-center items-center gap-12">
+				<div className="flex justify-center items-center gap-12 max-lg:gap-8 max-md:flex-col max-md:justify-normal max-md:gap-5 max-xxs:gap-4">
 					<motion.div
-						className="relative shrink-0 flex-1 aspect-square bg-secondary-main rounded-full overflow-hidden"
+						className="relative basis-1/2 aspect-square bg-secondary-main rounded-full overflow-hidden max-md:w-[50%] max-md:basis-auto"
 						initial={{x: -50, opacity: 0}}
 						whileInView={{x: 0, opacity: 1}}
 						viewport={VIEWPORT_CONFIG}
@@ -30,13 +30,16 @@ const AboutSection = () => {
 						/>
 					</motion.div>
 					<motion.div
-						className="flex-1"
+						className="basis-1/2 max-md:basis-auto"
 						initial={{x: 50, opacity: 0}}
 						whileInView={{x: 0, opacity: 1}}
 						viewport={VIEWPORT_CONFIG}
 						transition={{...TRANSITION_CONFIG, delay: 0.6}}
 					>
-						<Typography className="mb-3" variant="h2">
+						<Typography
+							className="mb-2 max-md:mb-1 max-md:text-center max-xxs:mb-0.5"
+							variant="h2"
+						>
 							About me
 						</Typography>
 						<Typography>
