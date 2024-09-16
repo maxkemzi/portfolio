@@ -26,7 +26,7 @@ const HomeContent = (props: Props): JSX.Element => {
 	const {projects, categories} = props;
 
 	const [isClient, setIsClient] = useState(false);
-	const navbarRef = useRef<HTMLElement>(null);
+	const headerRightBlockRef = useRef<HTMLDivElement>(null);
 	const heroRef = useRef<HTMLElement>(null);
 	const [heroWaveWidth, setHeroWaveWidth] = useState(0);
 	const [heroMoonTopPos, setHeroMoonTopPos] = useState(0);
@@ -54,11 +54,12 @@ const HomeContent = (props: Props): JSX.Element => {
 		}
 
 		const updateHeroWaveWidth = () => {
-			if (!navbarRef.current) {
+			if (!headerRightBlockRef.current) {
 				return;
 			}
 
-			const {top, left} = navbarRef.current.getBoundingClientRect();
+			const {top, left} =
+				headerRightBlockRef.current.getBoundingClientRect();
 			setHeroMoonTopPos(top + window.scrollY + MOON_SPACING);
 			setHeroWaveWidth(left - window.scrollX - WAVE_SPACING);
 		};
@@ -101,7 +102,7 @@ const HomeContent = (props: Props): JSX.Element => {
 
 	return (
 		<>
-			<Header navbarRef={navbarRef} />
+			<Header rightBlockRef={headerRightBlockRef} />
 			<AnimatePresence>
 				{fixedHeaderIsVisible ? (
 					<MotionHeader

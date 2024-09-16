@@ -1,28 +1,54 @@
+'use client';
+
 import {Anchor} from '@/constants';
-import {ForwardedRef, forwardRef, RefObject} from 'react';
+import {ForwardedRef, forwardRef, RefObject, useEffect, useState} from 'react';
 import Link from 'next/link';
-import {GithubLogo, TelegramLogo} from '@phosphor-icons/react/dist/ssr';
 import {twJoin} from 'tailwind-merge';
-import {Container, Logo, Navbar, NavbarItem, NavbarLink} from '../ui';
+import {AnimatePresence, motion, Transition} from 'framer-motion';
+import {Container, Logo} from '../ui';
+import BurgerMenu from './BurgerMenu';
+import BurgerMenuButton from './BurgerMenuButton';
+import HeaderNavbar from './HeaderNavbar';
+import SocialList from './SocialList';
 
 type Position = 'absolute' | 'fixed' | 'relative';
 
 interface Props {
-	navbarRef?: RefObject<HTMLElement>;
+	rightBlockRef?: RefObject<HTMLDivElement>;
 	position?: Position;
 	blurred?: boolean;
 	bordered?: boolean;
 }
 
+const MotionBurgerMenu = motion(BurgerMenu);
+const BURGER_MENU_TRANSITION_CONFIG: Transition = {
+	duration: 0.5,
+	ease: 'easeOut',
+};
+
 const Header = forwardRef(
 	(props: Props, ref: ForwardedRef<HTMLElement>): JSX.Element => {
-		const {navbarRef, position = 'absolute', blurred, bordered} = props;
+		const {rightBlockRef, position = 'absolute', blurred, bordered} = props;
+
+		const [menuIsOpen, setMenuIsOpen] = useState(false);
+
+		const toggleMenuIsOpen = () => setMenuIsOpen(prev => !prev);
+		const closeMenu = () => setMenuIsOpen(false);
+
+		useEffect(() => {
+			const disableScrollWhenMenuIsOpen = () => {
+				document.documentElement.style.overflowY = menuIsOpen
+					? 'hidden'
+					: 'unset';
+			};
+			disableScrollWhenMenuIsOpen();
+		}, [menuIsOpen]);
 
 		return (
 			<header
 				ref={ref}
 				className={twJoin(
-					'py-5 z-50',
+					'py-5 z-30',
 					position === 'absolute' && 'absolute top-0 left-0 right-0',
 					position === 'fixed' && 'fixed top-0 left-0 right-0',
 					position === 'relative' && 'relative',
@@ -32,63 +58,32 @@ const Header = forwardRef(
 			>
 				<Container size="lg">
 					<div className="flex items-center justify-between gap-7">
-						<Link href={`/#${Anchor.HERO}`}>
+						<Link className="z-50" href={`/#${Anchor.HERO}`}>
 							<Logo />
 						</Link>
-						<div className="flex items-center gap-3.5">
-							<Navbar ref={navbarRef}>
-								<NavbarItem>
-									<NavbarLink href={`/#${Anchor.HERO}`}>
-										Hero
-									</NavbarLink>
-								</NavbarItem>
-								<NavbarItem>
-									<NavbarLink href={`/#${Anchor.ABOUT}`}>
-										About
-									</NavbarLink>
-								</NavbarItem>
-								<NavbarItem>
-									<NavbarLink href={`/#${Anchor.PROJECTS}`}>
-										Projects
-									</NavbarLink>
-								</NavbarItem>
-								<NavbarItem>
-									<NavbarLink href={`/#${Anchor.CONTACT}`}>
-										Contact
-									</NavbarLink>
-								</NavbarItem>
-							</Navbar>
-							<ul className="flex items-center">
-								<li>
-									<Link
-										className="group inline-block px-3.5"
-										href="https://github.com/maxkemzi"
-										target="_blank"
-										rel="noreferrer noopenner"
-									>
-										<GithubLogo
-											className="fill-background-contrastText transition-colors duration-300 ease-out group-hover:fill-primary-main"
-											size={28}
-											weight="light"
-										/>
-									</Link>
-								</li>
-								<li>
-									<Link
-										className="group inline-block px-3.5"
-										href="https://t.me/maxkemzi"
-										target="_blank"
-										rel="noreferrer noopenner"
-									>
-										<TelegramLogo
-											className="fill-background-contrastText gtransition-colors duration-300 ease-out group-hover:fill-primary-main"
-											size={28}
-											weight="light"
-										/>
-									</Link>
-								</li>
-							</ul>
+						<div ref={rightBlockRef} className="max-md:z-50">
+							<div className="flex items-center gap-3.5 max-md:hidden">
+								<HeaderNavbar />
+								<SocialList />
+							</div>
+							<BurgerMenuButton
+								className="md:hidden"
+								onClick={toggleMenuIsOpen}
+								active={menuIsOpen}
+							/>
 						</div>
+						<AnimatePresence>
+							{menuIsOpen ? (
+								<MotionBurgerMenu
+									className="z-40"
+									initial={{opacity: 0}}
+									animate={{opacity: 1}}
+									exit={{opacity: 0}}
+									transition={BURGER_MENU_TRANSITION_CONFIG}
+									onNavbarLinkClick={closeMenu}
+								/>
+							) : null}
+						</AnimatePresence>
 					</div>
 				</Container>
 			</header>

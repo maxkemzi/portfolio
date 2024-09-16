@@ -16,7 +16,7 @@ const RootLayout = ({
 	children: React.ReactNode;
 }>) => {
 	return (
-		<html lang="en" className="scroll-smooth">
+		<html lang="en" className="scroll-smooth overflow-x-hidden">
 			<body
 				className={twJoin(
 					exo2Font.className,
