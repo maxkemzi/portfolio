@@ -34,11 +34,15 @@ const ProjectsSection = (props: Props): JSX.Element => {
 	return (
 		<Section id={Anchor.PROJECTS}>
 			<Container>
-				<Typography className="mb-8" variant="h2" align="center">
+				<Typography
+					className="mb-6 max-md:mb-5 max-xxs:mb-4"
+					variant="h2"
+					align="center"
+				>
 					Projects
 				</Typography>
 				<ProjectCategoryFilters
-					className="mb-7"
+					className="mb-6 max-md:mb-5 max-xxs:mb-4"
 					categories={categories}
 					activeCategoryId={activeCategoryId}
 					onCategoryClick={handleCategoryClick}

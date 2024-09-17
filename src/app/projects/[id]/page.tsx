@@ -1,4 +1,10 @@
-import {CustomMarkdown, Footer, Header, TechnologyChipList} from '@/components';
+import {
+	CustomMarkdown,
+	Footer,
+	Header,
+	sortTechnologiesByPriority,
+	TechnologyChipList,
+} from '@/components';
 import {
 	getProjectStatusColor,
 	getProjectStatusText,
@@ -45,8 +51,11 @@ const Project = async ({params}: {params: {id: string}}) => {
 		ProjectTechnologies,
 		image,
 	} = project;
+
 	const categoryName = ProjectCategory.name;
-	const technologies = ProjectTechnologies.map(pt => pt.technology);
+
+	let technologies = ProjectTechnologies.map(pt => pt.technology);
+	technologies = sortTechnologiesByPriority(technologies);
 
 	const markdown = overview.replace(/\\n/g, '\n');
 

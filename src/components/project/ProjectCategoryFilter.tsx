@@ -22,6 +22,7 @@ const ProjectCategoryFilter = (props: Props): JSX.Element => {
 				as="span"
 				weight={active ? 'semibold' : 'medium'}
 				textTransform="uppercase"
+				noWrap
 			>
 				{name}
 			</Typography>

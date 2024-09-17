@@ -1,3 +1,5 @@
+import {Technology} from '@prisma/client';
+
 const capitalizeName = (name: string): string => {
 	const trimmed = name.trim();
 	if (trimmed.length === 0) return '';
@@ -9,4 +11,7 @@ const capitalizeName = (name: string): string => {
 		.join(' ');
 };
 
-export {capitalizeName};
+const sortTechnologiesByPriority = (technologies: Technology[]) =>
+	technologies.toSorted((a, b) => a.priority - b.priority);
+
+export {capitalizeName, sortTechnologiesByPriority};

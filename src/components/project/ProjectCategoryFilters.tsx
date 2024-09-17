@@ -15,8 +15,8 @@ const ProjectCategoryFilters = (props: Props): JSX.Element => {
 	const commonClassNames = 'px-3';
 
 	return (
-		<ul className={twMerge('flex justify-center items-center', className)}>
-			<li>
+		<ul className={twMerge('flex items-center overflow-x-auto', className)}>
+			<li className="ml-auto">
 				<ProjectCategoryFilter
 					className={commonClassNames}
 					name="All"
@@ -24,16 +24,19 @@ const ProjectCategoryFilters = (props: Props): JSX.Element => {
 					onClick={() => onCategoryClick?.(undefined)}
 				/>
 			</li>
-			{categories.map(c => (
-				<li key={c.id}>
-					<ProjectCategoryFilter
-						className={commonClassNames}
-						name={c.name}
-						active={activeCategoryId === c.id}
-						onClick={() => onCategoryClick?.(c.id)}
-					/>
-				</li>
-			))}
+			{categories.map((c, i) => {
+				const last = i === categories.length - 1;
+				return (
+					<li key={c.id} className={last ? 'mr-auto' : undefined}>
+						<ProjectCategoryFilter
+							className={commonClassNames}
+							name={c.name}
+							active={activeCategoryId === c.id}
+							onClick={() => onCategoryClick?.(c.id)}
+						/>
+					</li>
+				);
+			})}
 		</ul>
 	);
 };

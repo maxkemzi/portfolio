@@ -15,7 +15,7 @@ const TechnologyChip = (props: Props): JSX.Element => {
 
 	return (
 		<Chip color="backgroundText">
-			<Typography weight="medium" variant="body2">
+			<Typography weight="medium" variant="body2" noWrap>
 				{capitalized}
 			</Typography>
 		</Chip>

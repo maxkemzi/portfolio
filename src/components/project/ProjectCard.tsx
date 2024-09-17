@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {ProjectWithInclusions} from '@/types';
 import {Chip, Typography} from '../ui';
-import {TechnologyChipList} from '../technology';
+import {sortTechnologiesByPriority, TechnologyChipList} from '../technology';
 import {getStatusColor, getStatusText} from './helpers';
 
 interface Props {
@@ -13,23 +13,29 @@ const ProjectCard = (props: Props): JSX.Element => {
 	const {
 		project: {id, title, description, status, image, ProjectTechnologies},
 	} = props;
-	const technologies = ProjectTechnologies.map(pt => pt.technology);
 
 	const statusColor = getStatusColor(status);
 	const statusText = getStatusText(status);
 
+	let technologies = ProjectTechnologies.map(pt => pt.technology);
+	technologies = sortTechnologiesByPriority(technologies);
+
+	const firstTechnologyRowLength = Math.ceil(technologies.length / 2);
+	const firstTechnologyRow = technologies.slice(0, firstTechnologyRowLength);
+	const secondTechnologyRow = technologies.slice(firstTechnologyRowLength);
+
 	return (
 		<Link
-			className="group block relative h-full rounded-lg overflow-hidden before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:z-10 before:opacity-0 before:bg-background-dark/70 before:transition-opacity before:duration-300 hover:before:opacity-100"
+			className="group block relative h-full rounded-lg overflow-hidden before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:z-10 before:bg-background-dark/60 md:before:opacity-0 md:before:transition-opacity md:before:duration-300 md:hover:before:opacity-100"
 			href={`/projects/${id}`}
 		>
 			<Image
-				className="absolute top-0 left-0 object-cover"
+				className="object-cover"
 				src={image}
 				fill
 				alt={`${title} screenshot`}
 			/>
-			<div className="absolute bottom-0 left-0 p-6 w-full h-full z-20 transition-all duration-300 translate-y-[50px] opacity-0 group-hover:opacity-100 group-hover:translate-y-0">
+			<div className="absolute bottom-0 left-0 p-6 w-full h-full z-20 md:transition-all md:duration-300 md:translate-y-[50px] md:opacity-0 md:group-hover:opacity-100 md:group-hover:translate-y-0 max-md:p-5 max-xxs:p-4">
 				<div className="flex flex-col justify-between h-full">
 					<Chip className="self-end" size="lg" color={statusColor}>
 						<Typography
@@ -42,11 +48,22 @@ const ProjectCard = (props: Props): JSX.Element => {
 						</Typography>
 					</Chip>
 					<div>
-						<Typography className="mb-1" variant="h3">
+						<Typography className="mb-1 max-md:mb-0.5" variant="h3">
 							{title}
 						</Typography>
-						<Typography className="mb-3">{description}</Typography>
-						<TechnologyChipList technologies={technologies} />
+						<Typography className="mb-3 max-xxs:mb-2">
+							{description}
+						</Typography>
+						<div className="overflow-x-auto">
+							<TechnologyChipList
+								className="flex-nowrap mb-2 max-xxs:mb-1"
+								technologies={firstTechnologyRow}
+							/>
+							<TechnologyChipList
+								className="flex-nowrap"
+								technologies={secondTechnologyRow}
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
