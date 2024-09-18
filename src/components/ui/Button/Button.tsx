@@ -71,7 +71,7 @@ const Button = forwardRef(
 		const {children, className, asLink, color = 'primary'} = props;
 
 		const commonClassNames = twMerge(
-			'inline-block px-6 py-3 text-primary-contrastText rounded-lg transition-all duration-300 ease-out',
+			'inline-block px-6 py-3 text-primary-contrastText rounded-lg transition-all duration-300 ease-out max-xs:px-5 max-xs:py-2.5 max-xxs:px-4 max-xxs:py-2',
 			COLOR_TO_CLASS_NAME_MAPPING[color],
 			className,
 		);
