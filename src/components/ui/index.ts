@@ -4,6 +4,7 @@ export {Logo} from './Logo';
 export {Container} from './Container';
 export {CustomLink} from './CustomLink';
 export {TextField} from './TextField';
+export type {ButtonProps} from './Button';
 export {Button} from './Button';
 export {AnimatedTypography, calcAnimatedCharDelay} from './AnimatedTypography';
 export {Section} from './Section';

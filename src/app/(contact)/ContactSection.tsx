@@ -13,9 +13,9 @@ const ContactSection = () => {
 	return (
 		<Section id={Anchor.CONTACT}>
 			<Container size="sm">
-				<div className="flex justify-center items-center gap-12">
+				<div className="sm:flex sm:justify-center sm:items-center lg:gap-10 md:gap-8 sm:gap-5">
 					<motion.div
-						className="flex-1"
+						className="sm:basis-1/2 max-sm:hidden"
 						initial={{x: -50, opacity: 0}}
 						whileInView={{x: 0, opacity: 1}}
 						viewport={VIEWPORT_CONFIG}
@@ -24,7 +24,7 @@ const ContactSection = () => {
 						<ContactCouple />
 					</motion.div>
 					<motion.div
-						className="flex-1"
+						className="sm:basis-1/2 max-sm:max-w-[350px] max-sm:w-full max-sm:mx-auto"
 						initial={{x: 50, opacity: 0}}
 						whileInView={{x: 0, opacity: 1}}
 						viewport={VIEWPORT_CONFIG}

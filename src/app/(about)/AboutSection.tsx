@@ -12,7 +12,7 @@ const AboutSection = () => {
 	return (
 		<Section id={Anchor.ABOUT}>
 			<Container size="sm">
-				<div className="flex justify-center items-center gap-12 max-lg:gap-8 max-md:flex-col max-md:justify-normal max-md:gap-5 max-xxs:gap-4">
+				<div className="flex justify-center items-center gap-10 max-lg:gap-8 max-md:flex-col max-md:justify-normal max-md:gap-3 max-xxs:gap-2">
 					<motion.div
 						className="relative basis-1/2 aspect-square bg-secondary-main rounded-full overflow-hidden max-md:w-[50%] max-md:basis-auto"
 						initial={{x: -50, opacity: 0}}

@@ -7,7 +7,7 @@ import {useAction} from 'next-safe-action/hooks';
 import {Button, CustomLink, TextField, Typography} from '../ui';
 import {schema} from './schema';
 import {sendContactMail} from './actions';
-import ContactFormStatus from './ContactFormStatus';
+import {useButtonColorByStatus} from './hooks';
 
 const ContactForm = () => {
 	const {execute, isExecuting, hasSucceeded, hasErrored} =
@@ -20,23 +20,29 @@ const ContactForm = () => {
 		resolver: zodResolver(schema),
 	});
 
+	const buttonColor = useButtonColorByStatus({hasSucceeded, hasErrored});
+
 	return (
 		<div>
-			<Typography className="mb-2" align="center" variant="h2">
+			<Typography
+				className="mb-2 max-md:mb-1 max-xxs:mb-0.5"
+				align="center"
+				variant="h2"
+			>
 				Contact
 			</Typography>
-			<Typography className="mb-3" align="center" noWrap>
+			<Typography
+				className="mb-5 max-md:mb-4 max-xxs:mb-3"
+				align="center"
+				noWrap
+			>
 				Or shoot an email directly on <br />
 				<CustomLink href="mailto:iam.maxkyrychenko@gmail.com" external>
 					iam.maxkyrychenko@gmail.com
 				</CustomLink>
 			</Typography>
 			<form onSubmit={handleSubmit(data => execute(data))}>
-				<ContactFormStatus
-					hasSucceeded={hasSucceeded}
-					hasErrored={hasErrored}
-				/>
-				<div className="flex flex-col gap-4 mb-5 w-full">
+				<div className="flex flex-col gap-4 mb-5 w-full max-md:gap-3 max-md:mb-4 max-xxs:gap-2 max-xxs:mb-3">
 					<TextField
 						label="Name"
 						placeholder="John Doe (HR)"
@@ -57,7 +63,12 @@ const ContactForm = () => {
 						{...register('message')}
 					/>
 				</div>
-				<Button className="w-full" submit disabled={isExecuting}>
+				<Button
+					className="w-full"
+					color={buttonColor}
+					submit
+					disabled={isExecuting}
+				>
 					Submit
 				</Button>
 			</form>

@@ -1,4 +1,4 @@
-import {render, screen} from '@testing-library/react';
+import {act, render, screen} from '@testing-library/react';
 import {ContactForm} from '@/components';
 import {useAction} from 'next-safe-action/hooks';
 import userEvent from '@testing-library/user-event';
@@ -79,7 +79,9 @@ test('disables the submit button when form is submitting', async () => {
 	expect(submitButton).toBeDisabled();
 });
 
-test('displays success message after form submission', async () => {
+test('changes button color for some time after form submission success', async () => {
+	vi.useFakeTimers({shouldAdvanceTime: true});
+
 	mockUseAction.mockReturnValue({
 		...USE_ACTION_RETURN_VALUE,
 		hasSucceeded: true,
@@ -92,12 +94,19 @@ test('displays success message after form submission', async () => {
 		screen.getByLabelText('Message'),
 		'We would love to work with you!',
 	);
-	await userEvent.click(screen.getByRole('button', {name: /submit/i}));
+	const submitButton = screen.getByRole('button', {name: /submit/i});
+	await userEvent.click(submitButton);
 
-	expect(screen.getByText('Form has been submitted.')).toBeInTheDocument();
+	expect(submitButton).toHaveClass('bg-success-main');
+	act(() => vi.advanceTimersByTime(2000));
+	expect(submitButton).not.toHaveClass('bg-success-main');
+
+	vi.useRealTimers();
 });
 
-test('displays error message after form submission failure', async () => {
+test('changes button color for some time after form submission failure', async () => {
+	vi.useFakeTimers({shouldAdvanceTime: true});
+
 	mockUseAction.mockReturnValue({
 		...USE_ACTION_RETURN_VALUE,
 		hasErrored: true,
@@ -110,7 +119,12 @@ test('displays error message after form submission failure', async () => {
 		screen.getByLabelText('Message'),
 		'We would love to work with you!',
 	);
-	await userEvent.click(screen.getByRole('button', {name: /submit/i}));
+	const submitButton = screen.getByRole('button', {name: /submit/i});
+	await userEvent.click(submitButton);
 
-	expect(screen.getByText('Something went wrong.')).toBeInTheDocument();
+	expect(submitButton).toHaveClass('bg-danger-main');
+	act(() => vi.advanceTimersByTime(2000));
+	expect(submitButton).not.toHaveClass('bg-danger-main');
+
+	vi.useRealTimers();
 });

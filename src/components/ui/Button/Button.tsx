@@ -1,10 +1,49 @@
 import {ForwardedRef, forwardRef, MouseEventHandler, ReactNode} from 'react';
 import {twMerge} from 'tailwind-merge';
-import {Typography} from '../Typography';
+import {Typography, TypographyColorValue} from '../Typography';
+import {Color, ColorValue} from '../types';
+
+const ButtonColor = {
+	PRIMARY: Color.PRIMARY,
+	SECONDARY: Color.SECONDARY,
+	BACKGROUND: Color.BACKGROUND,
+	SURFACE: Color.SURFACE,
+	DANGER: Color.DANGER,
+	SUCCESS: Color.SUCCESS,
+	INFORMATION: Color.INFORMATION,
+	WARNING: Color.WARNING,
+} satisfies Record<string, ColorValue>;
+type ButtonColorValue = (typeof ButtonColor)[keyof typeof ButtonColor];
+
+const COLOR_TO_CLASS_NAME_MAPPING: Record<ButtonColorValue, string> = {
+	[ButtonColor.PRIMARY]: 'bg-primary-main',
+	[ButtonColor.SECONDARY]: 'bg-secondary-main',
+	[ButtonColor.BACKGROUND]: 'bg-background-main',
+	[ButtonColor.SURFACE]: 'bg-surface-main',
+	[ButtonColor.DANGER]: 'bg-danger-main',
+	[ButtonColor.SUCCESS]: 'bg-success-main',
+	[ButtonColor.INFORMATION]: 'bg-information-main',
+	[ButtonColor.WARNING]: 'bg-warning-main',
+} as const;
+
+const COLOR_TO_TYPOGRAPHY_COLOR_MAPPING: Record<
+	ButtonColorValue,
+	TypographyColorValue
+> = {
+	[ButtonColor.PRIMARY]: 'primaryText',
+	[ButtonColor.SECONDARY]: 'secondaryText',
+	[ButtonColor.BACKGROUND]: 'backgroundText',
+	[ButtonColor.SURFACE]: 'surfaceText',
+	[ButtonColor.DANGER]: 'dangerText',
+	[ButtonColor.SUCCESS]: 'successText',
+	[ButtonColor.INFORMATION]: 'informationText',
+	[ButtonColor.WARNING]: 'warningText',
+} as const;
 
 type CommonProps = {
 	children?: ReactNode;
 	className?: string;
+	color?: ButtonColorValue;
 };
 
 type ButtonProps = CommonProps & {
@@ -29,15 +68,17 @@ const Button = forwardRef(
 		props: Props,
 		ref: ForwardedRef<HTMLButtonElement | HTMLAnchorElement>,
 	): JSX.Element => {
-		const {children, className, asLink} = props;
+		const {children, className, asLink, color = 'primary'} = props;
 
-		const commonClassNames =
-			'inline-block px-6 py-3 text-primary-contrastText rounded-lg transition-all duration-300 ease-out';
-		const backgroundClassNames =
-			'bg-gradient-to-br from-primary-main to-secondary-main bg-[length:250%_auto] ';
+		const commonClassNames = twMerge(
+			'inline-block px-6 py-3 text-primary-contrastText rounded-lg transition-all duration-300 ease-out',
+			COLOR_TO_CLASS_NAME_MAPPING[color],
+			className,
+		);
 
 		const commonChildren = (
 			<Typography
+				color={COLOR_TO_TYPOGRAPHY_COLOR_MAPPING[color]}
 				as="span"
 				weight="semibold"
 				letterSpacing="wider"
@@ -52,11 +93,7 @@ const Button = forwardRef(
 			return (
 				<a
 					ref={ref as ForwardedRef<HTMLAnchorElement>}
-					className={twMerge(
-						commonClassNames,
-						backgroundClassNames,
-						className,
-					)}
+					className={commonClassNames}
 					href={href}
 					download={download}
 					rel="noopener noreferrer"
@@ -70,12 +107,7 @@ const Button = forwardRef(
 		return (
 			<button
 				ref={ref as ForwardedRef<HTMLButtonElement>}
-				className={twMerge(
-					commonClassNames,
-					backgroundClassNames,
-					disabled && 'brightness-75',
-					className,
-				)}
+				className={twMerge(commonClassNames, disabled && 'bg-surface-main')}
 				type={submit ? 'submit' : 'button'}
 				disabled={disabled}
 				onClick={onClick}
@@ -86,4 +118,5 @@ const Button = forwardRef(
 	},
 );
 
+export type {Props as ButtonProps};
 export default Button;

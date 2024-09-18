@@ -22,7 +22,7 @@ test('renders as a disabled button when disabled prop is true', () => {
 
 	const buttonElement = screen.getByRole('button');
 	expect(buttonElement).toBeDisabled();
-	expect(buttonElement).toHaveClass('brightness-75');
+	expect(buttonElement).toHaveClass('bg-surface-main');
 });
 
 test('renders as a link when asLink is true', () => {
