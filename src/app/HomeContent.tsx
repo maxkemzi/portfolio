@@ -2,7 +2,7 @@
 
 import {Footer, Header} from '@/components';
 import {useLayoutEffect, useRef, useState} from 'react';
-import {Typography} from '@/components/ui';
+import {Spinner} from '@/components/ui';
 import {AnimatePresence, motion} from 'framer-motion';
 import {ProjectWithInclusions} from '@/types';
 import {ProjectCategory} from '@prisma/client';
@@ -61,7 +61,13 @@ const HomeContent = (props: Props): JSX.Element => {
 	}, [isClient]);
 
 	if (!isClient) {
-		return <Typography>Loading...</Typography>;
+		return (
+			<div className="relative min-h-screen">
+				<div className="absolute top-1/2 left-1/2 translate-y-[-50%] translate-x-[-50%]">
+					<Spinner />
+				</div>
+			</div>
+		);
 	}
 
 	return (
