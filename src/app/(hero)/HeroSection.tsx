@@ -9,19 +9,21 @@ import {
 	Typography,
 } from '@/components/ui';
 import {CrosshairSimple} from '@phosphor-icons/react/dist/ssr';
-import {motion, useAnimation} from 'framer-motion';
-import {ForwardedRef, forwardRef, useEffect, useState} from 'react';
-import {Anchor, ThemeColor} from '@/constants';
-import {twJoin} from 'tailwind-merge';
+import {motion} from 'framer-motion';
+import {
+	ForwardedRef,
+	forwardRef,
+	RefObject,
+	useLayoutEffect,
+	useState,
+} from 'react';
+import {Anchor} from '@/constants';
 import HeroWave from './HeroWave';
 import HeroMoon from './HeroMoon';
 import HeroScrollDownLink from './HeroScrollDownLink';
 
-const MotionButton = motion(Button);
-const MotionTypography = motion(Typography);
-
-const MOON_SIZE = 370;
-const CROSSHAIR_SIZE = 260;
+const MOON_SPACING = 48;
+const WAVE_SPACING = 16;
 
 const NB_SPACE = '\u00A0';
 const FIRST_TEXT = `Hi${NB_SPACE}there,${NB_SPACE}I’m${NB_SPACE}`;
@@ -44,50 +46,36 @@ animDuration = buttonAnimDelay;
 const BUTTON_ANIM_DURATION = 0.5;
 const crosshairAnimDuration = animDuration + BUTTON_ANIM_DURATION;
 
+const MotionButton = motion(Button);
+
 interface Props {
-	waveWidth: number;
-	moonTopPos: number;
+	headerRightBlockRef: RefObject<HTMLDivElement>;
 }
 
 const HeroSection = forwardRef(
 	(props: Props, ref: ForwardedRef<HTMLElement>): JSX.Element => {
-		const {waveWidth, moonTopPos} = props;
+		const {headerRightBlockRef} = props;
 
-		const controls = useAnimation();
-		const [hasAnimated, setHasAnimated] = useState(false);
+		const [waveWidth, setWaveWidth] = useState(0);
+		const [moonTopPos, setMoonTopPos] = useState(0);
 
-		useEffect(() => {
-			if (hasAnimated) {
-				controls.set({
-					top: moonTopPos + (MOON_SIZE / 2 - CROSSHAIR_SIZE / 2),
-				});
-				return;
-			}
+		useLayoutEffect(() => {
+			const updateWaveWidthAndMoonTopPos = () => {
+				if (!headerRightBlockRef.current) return;
 
-			const startAnimation = async () => {
-				const yTopPos = moonTopPos - CROSSHAIR_SIZE / 2;
-				const yCenterPos =
-					moonTopPos + (MOON_SIZE / 2 - CROSSHAIR_SIZE / 2);
-				const yBottomPos = moonTopPos + MOON_SIZE - CROSSHAIR_SIZE / 2;
-
-				const xCenterPos = MOON_SIZE / 2 - CROSSHAIR_SIZE / 2;
-				const xLeftPos = MOON_SIZE - CROSSHAIR_SIZE / 2;
-				const xRightPos = -CROSSHAIR_SIZE / 2;
-
-				await controls.start({
-					top: [yTopPos, yCenterPos, yBottomPos, yCenterPos, yCenterPos],
-					right: [xCenterPos, xLeftPos, xCenterPos, xRightPos, xCenterPos],
-					transition: {
-						duration: crosshairAnimDuration,
-						ease: 'easeInOut',
-					},
-				});
-
-				setHasAnimated(true);
+				const {top, left} =
+					headerRightBlockRef.current.getBoundingClientRect();
+				setMoonTopPos(top + window.scrollY + MOON_SPACING);
+				setWaveWidth(left - window.scrollX - WAVE_SPACING);
 			};
 
-			startAnimation();
-		}, [controls, hasAnimated, moonTopPos]);
+			updateWaveWidthAndMoonTopPos();
+
+			window.addEventListener('resize', updateWaveWidthAndMoonTopPos);
+			return () => {
+				window.removeEventListener('resize', updateWaveWidthAndMoonTopPos);
+			};
+		}, [headerRightBlockRef]);
 
 		return (
 			<Section ref={ref} id={Anchor.HERO} fullscreen>
@@ -125,46 +113,34 @@ const HeroSection = forwardRef(
 							Download CV
 						</MotionButton>
 					</div>
-					<HeroMoon
-						className="absolute right-0 z-[-2] brightness-75"
+					<div
+						className="absolute right-0 z-[-1] size-[360px] max-lg:size-80 max-md:size-72 max-xs:size-60 max-xxs:size-52"
 						style={{top: moonTopPos}}
-						size={MOON_SIZE}
-					/>
-					<motion.div
-						className={twJoin(
-							'absolute top-0 right-0 brightness-90',
-							hasAnimated && 'z-[-1]',
-						)}
-						animate={controls}
 					>
-						<CrosshairSimple
-							color={ThemeColor.PRIMARY.MAIN}
-							size={CROSSHAIR_SIZE}
-							weight="light"
-						/>
-						<MotionTypography
-							className="inline-block absolute top-4 left-[50%]"
-							weight="bold"
-							color="primary"
-							align="center"
-							noWrap
-							initial={{
-								opacity: 0,
-								rotate: '12deg',
-								scale: 0.5,
-								x: '-50%',
-								y: '-100%',
+						<HeroMoon className="brightness-[0.65] size-full" />
+						<motion.div
+							className="absolute top-0 left-0 size-3/4"
+							animate={{
+								top: [0, '50%', '100%', '50%', '50%'],
+								left: ['50%', 0, '50%', '100%', '50%'],
+								y: ['-50%', '-50%', '-50%', '-50%', '-50%'],
+								x: ['-50%', '-50%', '-50%', '-50%', '-50%'],
 							}}
-							animate={{opacity: 1, scale: 1}}
-							transition={{delay: crosshairAnimDuration}}
+							transition={{
+								duration: crosshairAnimDuration,
+								ease: 'easeInOut',
+							}}
 						>
-							Aimed for the moon!
-						</MotionTypography>
-					</motion.div>
+							<CrosshairSimple
+								className="text-primary-main/65 size-full"
+								weight="light"
+							/>
+						</motion.div>
+					</div>
 					<HeroScrollDownLink className="absolute bottom-6 left-[50%] translate-x-[-50%]" />
 				</Container>
 				<HeroWave
-					className="absolute top-0 left-0 z-[-3]"
+					className="absolute top-0 left-0 z-[-2]"
 					style={{width: waveWidth}}
 				/>
 			</Section>

@@ -1,98 +1,62 @@
 'use client';
 
 import {Footer, Header} from '@/components';
-import {useEffect, useLayoutEffect, useRef, useState} from 'react';
+import {useLayoutEffect, useRef, useState} from 'react';
 import {Typography} from '@/components/ui';
 import {AnimatePresence, motion} from 'framer-motion';
 import {ProjectWithInclusions} from '@/types';
 import {ProjectCategory} from '@prisma/client';
+import {useIsClient} from '@/hooks';
 import {HeroSection} from './(hero)';
 import {AboutSection} from './(about)';
 import ProjectsSection from './(projects)';
 import ContactSection from './(contact)';
+
+const FIXED_HEADER_TRANSITION_DURATION = 0.5;
+const MotionHeader = motion(Header);
 
 interface Props {
 	projects: ProjectWithInclusions[];
 	categories: ProjectCategory[];
 }
 
-const MOON_SPACING = 32;
-const WAVE_SPACING = 16;
-const FIXED_HEADER_TRANSITION_DURATION = 0.5;
-
-const MotionHeader = motion(Header);
-
 const HomeContent = (props: Props): JSX.Element => {
 	const {projects, categories} = props;
 
-	const [isClient, setIsClient] = useState(false);
+	const isClient = useIsClient();
 	const headerRightBlockRef = useRef<HTMLDivElement>(null);
 	const heroRef = useRef<HTMLElement>(null);
-	const [heroWaveWidth, setHeroWaveWidth] = useState(0);
-	const [heroMoonTopPos, setHeroMoonTopPos] = useState(0);
 	const [fixedHeaderIsVisible, setFixedHeaderIsVisible] = useState(false);
 
-	useEffect(() => {
-		setIsClient(true);
-	}, []);
-
+	// Instantly scroll to anchor when navigating from another page
 	useLayoutEffect(() => {
-		if (!isClient) {
-			return;
-		}
+		if (!isClient) return;
 
 		const {hash} = window.location;
-		if (hash) {
-			const section = document.querySelector(hash);
-			section?.scrollIntoView({behavior: 'instant'});
-		}
+		if (!hash) return;
+
+		const scrollToAnchor = () => {
+			const anchor = document.querySelector(hash);
+			anchor?.scrollIntoView({behavior: 'instant'});
+		};
+		scrollToAnchor();
 	}, [isClient]);
 
 	useLayoutEffect(() => {
-		if (!isClient) {
-			return;
-		}
+		if (!isClient) return;
 
-		const updateHeroWaveWidth = () => {
-			if (!headerRightBlockRef.current) {
-				return;
-			}
-
-			const {top, left} =
-				headerRightBlockRef.current.getBoundingClientRect();
-			setHeroMoonTopPos(top + window.scrollY + MOON_SPACING);
-			setHeroWaveWidth(left - window.scrollX - WAVE_SPACING);
-		};
-
-		updateHeroWaveWidth();
-
-		window.addEventListener('resize', updateHeroWaveWidth);
-
-		return () => {
-			window.removeEventListener('resize', updateHeroWaveWidth);
-		};
-	}, [isClient]);
-
-	useLayoutEffect(() => {
-		if (!isClient) {
-			return;
-		}
-
-		const updateFixedHeaderIsVisible = () => {
-			if (!heroRef.current) {
-				return;
-			}
+		const updateFixedHeaderVisibility = () => {
+			if (!heroRef.current) return;
 
 			const {height: heroHeight} = heroRef.current.getBoundingClientRect();
 			setFixedHeaderIsVisible(window.scrollY >= heroHeight);
 		};
 
-		updateFixedHeaderIsVisible();
+		updateFixedHeaderVisibility();
 
-		window.addEventListener('scroll', updateFixedHeaderIsVisible);
-
+		window.addEventListener('scroll', updateFixedHeaderVisibility);
 		return () => {
-			window.removeEventListener('scroll', updateFixedHeaderIsVisible);
+			window.removeEventListener('scroll', updateFixedHeaderVisibility);
 		};
 	}, [isClient]);
 
@@ -131,8 +95,7 @@ const HomeContent = (props: Props): JSX.Element => {
 			<main>
 				<HeroSection
 					ref={heroRef}
-					waveWidth={heroWaveWidth}
-					moonTopPos={heroMoonTopPos}
+					headerRightBlockRef={headerRightBlockRef}
 				/>
 				<AboutSection />
 				<ProjectsSection projects={projects} categories={categories} />

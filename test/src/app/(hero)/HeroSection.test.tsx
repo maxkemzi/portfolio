@@ -7,8 +7,7 @@ vi.mock('@/app/(hero)/HeroScrollDownLink', () => ({
 }));
 
 const defaultProps = {
-	waveWidth: 1000,
-	moonTopPos: 100,
+	headerRightBlockRef: {current: null},
 };
 
 describe('download CV button', () => {
