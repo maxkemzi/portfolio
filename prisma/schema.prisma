@@ -16,13 +16,14 @@ model RateLimit {
 
 model Project {
    id                  String                @id @default(auto()) @map("_id") @db.ObjectId
-   title               String                @unique
+   name                String                @unique
+   title               String
    description         String
    status              Status
-   overview            String                @unique
-   image               String                @unique
-   liveUrl             String                @unique
-   repoUrl             String                @unique
+   overview            String
+   image               String
+   liveUrl             String
+   repoUrl             String
    startedAt           DateTime
    ProjectCategory     ProjectCategory       @relation(fields: [categoryId], references: [id])
    categoryId          String                @db.ObjectId

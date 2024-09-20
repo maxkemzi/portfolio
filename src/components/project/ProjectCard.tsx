@@ -11,7 +11,7 @@ interface Props {
 
 const ProjectCard = (props: Props): JSX.Element => {
 	const {
-		project: {id, title, description, status, image, ProjectTechnologies},
+		project: {name, title, description, status, image, ProjectTechnologies},
 	} = props;
 
 	const statusColor = getStatusColor(status);
@@ -26,7 +26,7 @@ const ProjectCard = (props: Props): JSX.Element => {
 	return (
 		<Link
 			className="group block relative h-full rounded-lg overflow-hidden before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:z-10 before:bg-background-dark/60 md:before:opacity-0 md:before:transition-opacity md:before:duration-300 md:hover:before:opacity-100"
-			href={`/projects/${id}`}
+			href={`/projects/${name}`}
 		>
 			<Image
 				className="object-cover"

@@ -15,13 +15,13 @@ import {ProjectWithInclusions} from '@/types';
 import Image from 'next/image';
 import {notFound} from 'next/navigation';
 
-const Project = async ({params}: {params: {id: string}}) => {
-	const {id} = params;
+const Project = async ({params}: {params: {name: string}}) => {
+	const {name} = params;
 
 	let project: ProjectWithInclusions | null = null;
 	try {
 		project = await prisma.project.findUnique({
-			where: {id},
+			where: {name},
 			include: {
 				ProjectTechnologies: {
 					include: {technology: true},
@@ -31,6 +31,7 @@ const Project = async ({params}: {params: {id: string}}) => {
 			},
 		});
 	} catch (e) {
+		console.log(e);
 		return notFound();
 	}
 
