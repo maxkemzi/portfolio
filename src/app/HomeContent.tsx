@@ -72,7 +72,9 @@ const HomeContent = (props: Props): JSX.Element => {
 
 	return (
 		<>
-			<Header rightBlockRef={headerRightBlockRef} />
+			{fixedHeaderIsVisible ? null : (
+				<Header rightBlockRef={headerRightBlockRef} />
+			)}
 			<AnimatePresence>
 				{fixedHeaderIsVisible ? (
 					<MotionHeader
