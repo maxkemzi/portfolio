@@ -23,6 +23,7 @@ model Project {
    image               String                @unique
    liveUrl             String                @unique
    repoUrl             String                @unique
+   startedAt           DateTime
    ProjectCategory     ProjectCategory       @relation(fields: [categoryId], references: [id])
    categoryId          String                @db.ObjectId
    ProjectTechnologies ProjectTechnologies[]

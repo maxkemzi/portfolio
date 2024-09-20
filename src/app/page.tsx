@@ -4,8 +4,12 @@ import HomeContent from './HomeContent';
 const Home = async () => {
 	const [projects, categories] = await Promise.all([
 		prisma.project.findMany({
+			orderBy: {startedAt: 'desc'},
 			include: {
-				ProjectTechnologies: {include: {technology: true}},
+				ProjectTechnologies: {
+					include: {technology: true},
+					orderBy: {technology: {priority: 'asc'}},
+				},
 				ProjectCategory: true,
 			},
 		}),

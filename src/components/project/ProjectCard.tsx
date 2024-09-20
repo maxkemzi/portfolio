@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {ProjectWithInclusions} from '@/types';
 import {Chip, Typography} from '../ui';
-import {sortTechnologiesByPriority, TechnologyChipList} from '../technology';
+import {TechnologyChipList} from '../technology';
 import {getStatusColor, getStatusText} from './helpers';
 
 interface Props {
@@ -17,8 +17,7 @@ const ProjectCard = (props: Props): JSX.Element => {
 	const statusColor = getStatusColor(status);
 	const statusText = getStatusText(status);
 
-	let technologies = ProjectTechnologies.map(pt => pt.technology);
-	technologies = sortTechnologiesByPriority(technologies);
+	const technologies = ProjectTechnologies.map(pt => pt.technology);
 
 	const firstTechnologyRowLength = Math.ceil(technologies.length / 2);
 	const firstTechnologyRow = technologies.slice(0, firstTechnologyRowLength);

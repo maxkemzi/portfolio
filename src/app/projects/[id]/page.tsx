@@ -1,10 +1,4 @@
-import {
-	CustomMarkdown,
-	Footer,
-	Header,
-	sortTechnologiesByPriority,
-	TechnologyChipList,
-} from '@/components';
+import {CustomMarkdown, Footer, Header, TechnologyChipList} from '@/components';
 import {
 	getProjectStatusColor,
 	getProjectStatusText,
@@ -29,13 +23,17 @@ const Project = async ({params}: {params: {id: string}}) => {
 		project = await prisma.project.findUnique({
 			where: {id},
 			include: {
-				ProjectTechnologies: {include: {technology: true}},
+				ProjectTechnologies: {
+					include: {technology: true},
+					orderBy: {technology: {priority: 'asc'}},
+				},
 				ProjectCategory: true,
 			},
 		});
 	} catch (e) {
 		return notFound();
 	}
+
 	if (!project) {
 		return notFound();
 	}
@@ -53,9 +51,7 @@ const Project = async ({params}: {params: {id: string}}) => {
 	} = project;
 
 	const categoryName = ProjectCategory.name;
-
-	let technologies = ProjectTechnologies.map(pt => pt.technology);
-	technologies = sortTechnologiesByPriority(technologies);
+	const technologies = ProjectTechnologies.map(pt => pt.technology);
 
 	const markdown = overview.replace(/\\n/g, '\n');
 
