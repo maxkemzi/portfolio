@@ -8,7 +8,9 @@
 		"start": "next start",
 		"lint": "next lint && tsc --noEmit --incremental && prettier --check **/*.{js,jsx,ts,tsx,json,md,rc}",
 		"fmt": "prettier --write **/*.{js,jsx,ts,tsx,json,md,rc}",
-		"test": "vitest",
+		"test:unit": "vitest run",
+		"test:e2e": "playwright test",
+		"test": "npm run test:unit && npm run test:e2e",
 		"coverage": "vitest run --coverage",
 		"db:push": "dotenv -e .env.local -- npx prisma db push"
 	},
@@ -34,6 +36,7 @@
 		"zod-form-data": "^2.0.2"
 	},
 	"devDependencies": {
+		"@playwright/test": "^1.47.1",
 		"@testing-library/dom": "^10.4.0",
 		"@testing-library/jest-dom": "^6.5.0",
 		"@testing-library/react": "^16.0.1",

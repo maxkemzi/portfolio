@@ -19,7 +19,13 @@
 		],
 		"import/no-extraneous-dependencies": [
 			"error",
-			{"devDependencies": ["test/**/*.{ts,tsx}", "vitest.config.ts"]}
+			{
+				"devDependencies": [
+					"tests/**/*.{ts,tsx}",
+					"vitest.config.ts",
+					"playwright.config.ts"
+				]
+			}
 		],
 		"react/react-in-jsx-scope": "off",
 		"import/prefer-default-export": "off",

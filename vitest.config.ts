@@ -11,7 +11,8 @@ export default defineConfig({
 			reporter: ['html'],
 		},
 		environment: 'jsdom',
-		setupFiles: './test/setup.ts',
+		setupFiles: './tests/unit/setup.ts',
+		include: ['./tests/unit/**/*.test.{ts,tsx}'],
 	},
 	resolve: {
 		alias: {

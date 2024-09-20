@@ -21,7 +21,7 @@ jobs:
            run: npm run lint
 
          - name: Run tests
-           run: npm test -- --reporter=html --outputFile=./reports/tests/index.html
+           run: npm run test:unit -- --reporter=html --outputFile=./reports/tests/index.html
 
          - name: Upload lint and test results
            uses: actions/upload-artifact@v3
