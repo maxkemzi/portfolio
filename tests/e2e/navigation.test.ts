@@ -1,65 +1,69 @@
 /* eslint-disable no-await-in-loop */
 import {test, expect} from '@playwright/test';
 
-test('should navigate to the home page', async ({page}) => {
+test('logo link should navigate to the home page', async ({page}) => {
 	await page.goto('/#hero');
 
 	await page.getByRole('link', {name: /home page/i}).click();
 
-	await expect(page).toHaveURL('/');
+	await page.waitForURL('/');
 });
 
 test.describe('navbar section links', () => {
-	test('should navigate to the hero section', async ({page}) => {
+	test('hero link should navigate to the hero section', async ({page}) => {
 		await page.goto('/');
 
 		await page.getByRole('link', {name: /hero/i}).click();
 
-		await expect(page).toHaveURL('/#hero');
+		await page.waitForURL('/#hero');
 		await expect(page.locator('#hero')).toBeInViewport();
 	});
 
-	test('should navigate to the about section', async ({page}) => {
+	test('about link should navigate to the about section', async ({page}) => {
 		await page.goto('/');
 
 		await page.getByRole('link', {name: /about/i}).click();
 
-		await expect(page).toHaveURL('/#about');
+		await page.waitForURL('/#about');
 		await expect(page.locator('#about')).toBeInViewport();
 	});
 
-	test('should navigate to the projects section', async ({page}) => {
+	test('projects link should navigate to the projects section', async ({
+		page,
+	}) => {
 		await page.goto('/');
 
 		await page.getByRole('link', {name: /projects/i}).click();
 
-		await expect(page).toHaveURL('/#projects');
+		await page.waitForURL('/#projects');
 		await expect(page.locator('#projects')).toBeInViewport();
 	});
 
-	test('should navigate to the contact section', async ({page}) => {
+	test('contact link should navigate to the contact section', async ({
+		page,
+	}) => {
 		await page.goto('/');
 
 		await page.getByRole('link', {name: /contact/i}).click();
 
-		await expect(page).toHaveURL('/#contact');
+		await page.waitForURL('/#contact');
 		await expect(page.locator('#contact')).toBeInViewport();
 	});
 });
 
-test('should navigate to the section below the hero section', async ({
+test('continue journey link should navigate to the section below the hero section', async ({
 	page,
 }) => {
 	await page.goto('/');
 
 	await page.getByRole('link', {name: /continue journey/i}).click();
 
-	await expect(page).toHaveURL('/#about');
+	await page.waitForURL('/#about');
 	await expect(page.locator('#about')).toBeInViewport();
 });
 
 test.describe('social profile links', () => {
-	test('should open a new tab with github profile', async ({
+	test('github link should open a new tab with github profile', async ({
 		page,
 		context,
 	}) => {
@@ -69,10 +73,10 @@ test.describe('social profile links', () => {
 		await page.getByRole('link', {name: /github profile/i}).click();
 		const newPage = await pagePromise;
 
-		await expect(newPage).toHaveURL('https://github.com/maxkemzi');
+		expect(newPage.url()).toBe('https://github.com/maxkemzi');
 	});
 
-	test('should open a new tab with telegram profile', async ({
+	test('telegram link should open a new tab with telegram profile', async ({
 		page,
 		context,
 	}) => {
@@ -82,7 +86,7 @@ test.describe('social profile links', () => {
 		await page.getByRole('link', {name: /telegram profile/i}).click();
 		const newPage = await pagePromise;
 
-		await expect(newPage).toHaveURL('https://t.me/maxkemzi');
+		expect(newPage.url()).toBe('https://t.me/maxkemzi');
 	});
 });
 
@@ -102,7 +106,7 @@ test('each project link navigates to the correct project page', async ({
 		if (href) {
 			await projectLinks.nth(i).click();
 
-			await expect(page).toHaveURL(href);
+			await page.waitForURL(href);
 
 			await page.goBack();
 		}
