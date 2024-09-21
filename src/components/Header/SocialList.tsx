@@ -10,6 +10,7 @@ const SocialList = () => {
 					href="https://github.com/maxkemzi"
 					target="_blank"
 					rel="noreferrer noopenner"
+					aria-label="Github profile"
 				>
 					<GithubLogo
 						className="fill-background-contrastText transition-colors duration-300 ease-out group-hover:fill-primary-main"
@@ -24,6 +25,7 @@ const SocialList = () => {
 					href="https://t.me/maxkemzi"
 					target="_blank"
 					rel="noreferrer noopenner"
+					aria-label="Telegram profile"
 				>
 					<TelegramLogo
 						className="fill-background-contrastText gtransition-colors duration-300 ease-out group-hover:fill-primary-main"

@@ -1,6 +1,5 @@
 'use client';
 
-import {Anchor} from '@/constants';
 import {ForwardedRef, forwardRef, RefObject, useEffect, useState} from 'react';
 import Link from 'next/link';
 import {twJoin} from 'tailwind-merge';
@@ -58,7 +57,7 @@ const Header = forwardRef(
 			>
 				<Container size="lg">
 					<div className="flex items-center justify-between gap-7">
-						<Link className="z-50" href={`/#${Anchor.HERO}`}>
+						<Link className="z-50" href="/" aria-label="Home page">
 							<Logo />
 						</Link>
 						<div ref={rightBlockRef} className="max-md:z-50">
