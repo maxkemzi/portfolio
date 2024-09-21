@@ -11,13 +11,22 @@ interface Props {
 
 const ProjectCard = (props: Props): JSX.Element => {
 	const {
-		project: {name, title, description, status, image, ProjectTechnologies},
+		project: {
+			name,
+			title,
+			description,
+			status,
+			image,
+			ProjectTechnologies,
+			ProjectCategory,
+		},
 	} = props;
 
 	const statusColor = getStatusColor(status);
 	const statusText = getStatusText(status);
 
 	const technologies = ProjectTechnologies.map(pt => pt.technology);
+	const category = ProjectCategory.name;
 
 	const firstTechnologyRowLength = Math.ceil(technologies.length / 2);
 	const firstTechnologyRow = technologies.slice(0, firstTechnologyRowLength);
@@ -28,6 +37,7 @@ const ProjectCard = (props: Props): JSX.Element => {
 			className="group block relative h-full rounded-lg overflow-hidden before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:z-10 before:bg-background-dark/60 md:before:opacity-0 md:before:transition-opacity md:before:duration-300 md:hover:before:opacity-100"
 			href={`/projects/${name}`}
 			aria-label={`${title} project page`}
+			data-category={category}
 		>
 			<Image
 				className="object-cover"
