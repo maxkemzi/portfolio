@@ -1,4 +1,6 @@
+/* eslint-disable no-await-in-loop */
 import {test, expect} from '@playwright/test';
+import {mockCategories, mockProjects} from '../../prisma/mockData';
 
 test('download cv button should download .pdf file of CV on click', async ({
 	page,
@@ -14,30 +16,30 @@ test('download cv button should download .pdf file of CV on click', async ({
 });
 
 test('filters should filter projects by category', async ({page}) => {
-	const selector = 'a[href^="/projects/"]';
 	await page.goto('/');
 
-	await page.waitForSelector(selector);
+	const projectSelector = 'a[data-type="project"]';
+	const filterSelector = 'button[data-type="category-filter"]';
+	await Promise.all([
+		page.waitForSelector(projectSelector),
+		page.waitForSelector(filterSelector),
+	]);
 
-	let count = await page.locator(selector).count();
-	expect(count).toBe(5);
-
-	const buildCategorySelector = (category: string) =>
-		`${selector}[data-category="${category}" i]`;
-
-	await page.getByRole('button', {name: /full-stack/i}).click();
-	count = await page.locator(buildCategorySelector('full-stack')).count();
-	expect(count).toBe(3);
-
-	await page.getByRole('button', {name: /front-end/i}).click();
-	count = await page.locator(buildCategorySelector('front-end')).count();
-	expect(count).toBe(1);
-
-	await page.getByRole('button', {name: /back-end/i}).click();
-	count = await page.locator(buildCategorySelector('back-end')).count();
-	expect(count).toBe(1);
+	let count = await page.locator(projectSelector).count();
+	expect(count).toBe(mockProjects.length);
 
 	await page.getByRole('button', {name: /all/i}).click();
-	count = await page.locator(selector).count();
-	expect(count).toBe(5);
+	count = await page.locator(projectSelector).count();
+	expect(count).toBe(mockProjects.length);
+
+	const buildCategorySelector = (category: string) =>
+		`${projectSelector}[data-category="${category}" i]`;
+
+	// eslint-disable-next-line no-restricted-syntax
+	for (const {id, name} of mockCategories) {
+		await page.getByRole('button', {name: new RegExp(name, 'i')}).click();
+		count = await page.locator(buildCategorySelector(name)).count();
+
+		expect(count).toBe(mockProjects.filter(p => p.categoryId === id).length);
+	}
 });

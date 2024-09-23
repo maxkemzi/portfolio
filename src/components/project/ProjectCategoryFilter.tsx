@@ -13,7 +13,12 @@ const ProjectCategoryFilter = (props: Props): JSX.Element => {
 	const {className, name, onClick, active} = props;
 
 	return (
-		<button className={className} onClick={onClick} type="button">
+		<button
+			className={className}
+			onClick={onClick}
+			type="button"
+			data-type="category-filter"
+		>
 			<Typography
 				className={twMerge(
 					'inline-block py-1.5 px-1.5 rounded-lg transition-all duration-300',
