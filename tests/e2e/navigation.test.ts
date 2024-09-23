@@ -1,5 +1,6 @@
 /* eslint-disable no-await-in-loop */
 import {test, expect} from '@playwright/test';
+import {mockProjects} from '../../prisma/mockData';
 
 test('logo link should navigate to the home page', async ({page}) => {
 	await page.goto('/#hero');
@@ -9,46 +10,42 @@ test('logo link should navigate to the home page', async ({page}) => {
 	await page.waitForURL('/');
 });
 
-test.describe('navbar section links', () => {
-	test('hero link should navigate to the hero section', async ({page}) => {
-		await page.goto('/');
+test('hero link should navigate to the hero section', async ({page}) => {
+	await page.goto('/');
 
-		await page.getByRole('link', {name: /hero/i}).click();
+	await page.getByRole('link', {name: /hero/i}).click();
 
-		await page.waitForURL('/#hero');
-		await expect(page.locator('#hero')).toBeInViewport();
-	});
+	await page.waitForURL('/#hero');
+	await expect(page.locator('#hero')).toBeInViewport();
+});
 
-	test('about link should navigate to the about section', async ({page}) => {
-		await page.goto('/');
+test('about link should navigate to the about section', async ({page}) => {
+	await page.goto('/');
 
-		await page.getByRole('link', {name: /about/i}).click();
+	await page.getByRole('link', {name: /about/i}).click();
 
-		await page.waitForURL('/#about');
-		await expect(page.locator('#about')).toBeInViewport();
-	});
+	await page.waitForURL('/#about');
+	await expect(page.locator('#about')).toBeInViewport();
+});
 
-	test('projects link should navigate to the projects section', async ({
-		page,
-	}) => {
-		await page.goto('/');
+test('projects link should navigate to the projects section', async ({
+	page,
+}) => {
+	await page.goto('/');
 
-		await page.getByRole('link', {name: /projects/i}).click();
+	await page.getByRole('link', {name: /projects/i}).click();
 
-		await page.waitForURL('/#projects');
-		await expect(page.locator('#projects')).toBeInViewport();
-	});
+	await page.waitForURL('/#projects');
+	await expect(page.locator('#projects')).toBeInViewport();
+});
 
-	test('contact link should navigate to the contact section', async ({
-		page,
-	}) => {
-		await page.goto('/');
+test('contact link should navigate to the contact section', async ({page}) => {
+	await page.goto('/');
 
-		await page.getByRole('link', {name: /contact/i}).click();
+	await page.getByRole('link', {name: /contact/i}).click();
 
-		await page.waitForURL('/#contact');
-		await expect(page.locator('#contact')).toBeInViewport();
-	});
+	await page.waitForURL('/#contact');
+	await expect(page.locator('#contact')).toBeInViewport();
 });
 
 test('continue journey link should navigate to the section below the hero section', async ({
@@ -62,53 +59,80 @@ test('continue journey link should navigate to the section below the hero sectio
 	await expect(page.locator('#about')).toBeInViewport();
 });
 
-test.describe('social profile links', () => {
-	test('github link should open a new tab with github profile', async ({
-		page,
-		context,
-	}) => {
-		await page.goto('/');
+test('github link should open a new tab with github profile', async ({
+	page,
+	context,
+}) => {
+	await page.goto('/');
 
-		const pagePromise = context.waitForEvent('page');
-		await page.getByRole('link', {name: /github profile/i}).click();
-		const newPage = await pagePromise;
+	const pagePromise = context.waitForEvent('page');
+	await page.getByRole('link', {name: /github profile/i}).click();
+	const newPage = await pagePromise;
 
-		expect(newPage.url()).toBe('https://github.com/maxkemzi');
-	});
+	expect(newPage.url()).toBe('https://github.com/maxkemzi');
+});
 
-	test('telegram link should open a new tab with telegram profile', async ({
-		page,
-		context,
-	}) => {
-		await page.goto('/');
+test('telegram link should open a new tab with telegram profile', async ({
+	page,
+	context,
+}) => {
+	await page.goto('/');
 
-		const pagePromise = context.waitForEvent('page');
-		await page.getByRole('link', {name: /telegram profile/i}).click();
-		const newPage = await pagePromise;
+	const pagePromise = context.waitForEvent('page');
+	await page.getByRole('link', {name: /telegram profile/i}).click();
+	const newPage = await pagePromise;
 
-		expect(newPage.url()).toBe('https://t.me/maxkemzi');
-	});
+	expect(newPage.url()).toBe('https://t.me/maxkemzi');
 });
 
 test('each project link navigates to the correct project page', async ({
 	page,
 }) => {
-	const selector = 'a[href^="/projects/"]';
 	await page.goto('/');
 
+	const selector = 'a[data-type="project"]';
 	await page.waitForSelector(selector);
 
-	const projectLinks = page.locator(selector);
-	const count = await projectLinks.count();
-
-	for (let i = 0; i < count; i += 1) {
-		const href = await projectLinks.nth(i).getAttribute('href');
+	const projects = await page.locator(selector).all();
+	// eslint-disable-next-line no-restricted-syntax
+	for (const project of projects) {
+		const href = await project.getAttribute('href');
 		if (href) {
-			await projectLinks.nth(i).click();
+			await project.click();
 
 			await page.waitForURL(href);
 
 			await page.goBack();
 		}
 	}
+});
+
+test("project's live app link should navigate to the correct link", async ({
+	page,
+	context,
+}) => {
+	const mockProject = mockProjects[0];
+
+	await page.goto(`/projects/${mockProject.name}`);
+
+	const pagePromise = context.waitForEvent('page');
+	await page.getByRole('link', {name: /live app/i}).click();
+	const newPage = await pagePromise;
+
+	expect(newPage.url()).toBe(mockProject.liveUrl);
+});
+
+test("project's repository link should navigate to the correct link", async ({
+	page,
+	context,
+}) => {
+	const mockProject = mockProjects[0];
+
+	await page.goto(`/projects/${mockProject.name}`);
+
+	const pagePromise = context.waitForEvent('page');
+	await page.getByRole('link', {name: /repository/i}).click();
+	const newPage = await pagePromise;
+
+	expect(newPage.url()).toBe(mockProject.repoUrl);
 });
