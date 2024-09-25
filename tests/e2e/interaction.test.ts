@@ -25,12 +25,10 @@ test('filters should filter projects by category', async ({page}) => {
 		page.waitForSelector(filterSelector),
 	]);
 
-	let count = await page.locator(projectSelector).count();
-	expect(count).toBe(mockProjects.length);
+	await expect(page.locator(projectSelector)).toHaveCount(mockProjects.length);
 
 	await page.getByRole('button', {name: /all/i}).click();
-	count = await page.locator(projectSelector).count();
-	expect(count).toBe(mockProjects.length);
+	await expect(page.locator(projectSelector)).toHaveCount(mockProjects.length);
 
 	const buildCategorySelector = (category: string) =>
 		`${projectSelector}[data-category="${category}" i]`;
@@ -38,8 +36,8 @@ test('filters should filter projects by category', async ({page}) => {
 	// eslint-disable-next-line no-restricted-syntax
 	for (const {id, name} of mockCategories) {
 		await page.getByRole('button', {name: new RegExp(name, 'i')}).click();
-		count = await page.locator(buildCategorySelector(name)).count();
-
-		expect(count).toBe(mockProjects.filter(p => p.categoryId === id).length);
+		await expect(page.locator(buildCategorySelector(name))).toHaveCount(
+			mockProjects.filter(p => p.categoryId === id).length,
+		);
 	}
 });

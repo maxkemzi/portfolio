@@ -7,7 +7,7 @@ test('logo link should navigate to the home page', async ({page}) => {
 
 	await page.getByRole('link', {name: /home page/i}).click();
 
-	await page.waitForURL('/');
+	await expect(page).toHaveURL('/');
 });
 
 test('hero link should navigate to the hero section', async ({page}) => {
@@ -15,7 +15,7 @@ test('hero link should navigate to the hero section', async ({page}) => {
 
 	await page.getByRole('link', {name: /hero/i}).click();
 
-	await page.waitForURL('/#hero');
+	await expect(page).toHaveURL('/#hero');
 	await expect(page.locator('#hero')).toBeInViewport();
 });
 
@@ -24,7 +24,7 @@ test('about link should navigate to the about section', async ({page}) => {
 
 	await page.getByRole('link', {name: /about/i}).click();
 
-	await page.waitForURL('/#about');
+	await expect(page).toHaveURL('/#about');
 	await expect(page.locator('#about')).toBeInViewport();
 });
 
@@ -35,7 +35,7 @@ test('projects link should navigate to the projects section', async ({
 
 	await page.getByRole('link', {name: /projects/i}).click();
 
-	await page.waitForURL('/#projects');
+	await expect(page).toHaveURL('/#projects');
 	await expect(page.locator('#projects')).toBeInViewport();
 });
 
@@ -44,7 +44,7 @@ test('contact link should navigate to the contact section', async ({page}) => {
 
 	await page.getByRole('link', {name: /contact/i}).click();
 
-	await page.waitForURL('/#contact');
+	await expect(page).toHaveURL('/#contact');
 	await expect(page.locator('#contact')).toBeInViewport();
 });
 
@@ -55,7 +55,7 @@ test('continue journey link should navigate to the section below the hero sectio
 
 	await page.getByRole('link', {name: /continue journey/i}).click();
 
-	await page.waitForURL('/#about');
+	await expect(page).toHaveURL('/#about');
 	await expect(page.locator('#about')).toBeInViewport();
 });
 
@@ -100,7 +100,7 @@ test('each project link navigates to the correct project page', async ({
 		if (href) {
 			await project.click();
 
-			await page.waitForURL(href);
+			await expect(page).toHaveURL(href);
 
 			await page.goBack();
 		}
