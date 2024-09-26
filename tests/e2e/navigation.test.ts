@@ -2,6 +2,7 @@
 import {test, expect} from '@playwright/test';
 import {mockProjects} from '../../prisma/mockData';
 
+// Flaky
 test('logo link should navigate to the home page', async ({page}) => {
 	await page.goto('/#hero');
 
@@ -90,10 +91,7 @@ test('each project link navigates to the correct project page', async ({
 }) => {
 	await page.goto('/');
 
-	const selector = 'a[data-type="project"]';
-	await page.waitForSelector(selector);
-
-	const projects = await page.locator(selector).all();
+	const projects = await page.getByTestId('project').all();
 	// eslint-disable-next-line no-restricted-syntax
 	for (const project of projects) {
 		const href = await project.getAttribute('href');

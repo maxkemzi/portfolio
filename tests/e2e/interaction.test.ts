@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-await-in-loop */
 import {test, expect} from '@playwright/test';
 import {mockCategories, mockProjects} from '../../prisma/mockData';
@@ -18,26 +19,22 @@ test('download cv button should download .pdf file of CV on click', async ({
 test('filters should filter projects by category', async ({page}) => {
 	await page.goto('/');
 
-	const projectSelector = 'a[data-type="project"]';
-	const filterSelector = 'button[data-type="category-filter"]';
-	await Promise.all([
-		page.waitForSelector(projectSelector),
-		page.waitForSelector(filterSelector),
-	]);
-
-	await expect(page.locator(projectSelector)).toHaveCount(mockProjects.length);
+	await expect(page.getByTestId('project')).toHaveCount(mockProjects.length);
 
 	await page.getByRole('button', {name: /all/i}).click();
-	await expect(page.locator(projectSelector)).toHaveCount(mockProjects.length);
+	await expect(page.getByTestId('project')).toHaveCount(mockProjects.length);
 
-	const buildCategorySelector = (category: string) =>
-		`${projectSelector}[data-category="${category}" i]`;
-
-	// eslint-disable-next-line no-restricted-syntax
 	for (const {id, name} of mockCategories) {
 		await page.getByRole('button', {name: new RegExp(name, 'i')}).click();
-		await expect(page.locator(buildCategorySelector(name))).toHaveCount(
+
+		const projectLocator = page.getByTestId('project');
+		await expect(projectLocator).toHaveCount(
 			mockProjects.filter(p => p.categoryId === id).length,
 		);
+
+		const projects = await projectLocator.all();
+		for (const project of projects) {
+			await expect(project).toHaveAttribute('data-category', name);
+		}
 	}
 });

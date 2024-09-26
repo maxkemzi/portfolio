@@ -17,7 +17,7 @@ const ProjectCategoryFilter = (props: Props): JSX.Element => {
 			className={className}
 			onClick={onClick}
 			type="button"
-			data-type="category-filter"
+			data-testid="category-filter"
 		>
 			<Typography
 				className={twMerge(
