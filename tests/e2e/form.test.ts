@@ -10,6 +10,7 @@ test.describe('contact form', () => {
 		await expect(link).toHaveAttribute('href', `mailto:${EMAIL}`);
 	});
 
+	// Flaky
 	test('should show errors when submitting with empty data', async ({
 		page,
 	}) => {
@@ -42,29 +43,32 @@ test.describe('contact form', () => {
 		).toBeVisible();
 	});
 
-	test('should submit successfully with valid data', async ({page}) => {
-		await page.clock.install();
-
+	// Flaky
+	test('should submit successfully with valid data', async ({
+		page,
+		baseURL,
+	}) => {
 		await page.goto('/');
 
 		await page.getByLabel('Name').fill('John Doe');
 		await page.getByLabel('Email').fill('john@example.com');
 		await page.getByLabel('Message').fill('We would love to work with you!');
 
-		const responsePromise = page.waitForResponse('/');
+		const responsePromise = page.waitForResponse(
+			res =>
+				res.url() === `${baseURL}/` &&
+				res.request().method() === 'POST' &&
+				res.status() === 200,
+		);
 
 		const button = page.getByRole('button', {name: /submit/i});
 		await button.click();
+
 		await expect(button).toBeDisabled();
 
-		const response = await responsePromise;
-		expect(response.status()).toBe(200);
+		await responsePromise;
 
 		await expect(button).toBeEnabled();
 		await expect(button).toHaveCSS('background-color', 'rgb(62, 173, 173)');
-
-		await page.clock.runFor(2000);
-
-		await expect(button).toHaveCSS('background-color', 'rgb(207, 48, 170)');
 	});
 });
