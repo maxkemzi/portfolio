@@ -2,7 +2,6 @@
 import {test, expect} from '@playwright/test';
 import {mockProjects} from '../../prisma/mockData';
 
-// Flaky
 test('logo link should navigate to the home page', async ({page}) => {
 	await page.goto('/#hero');
 
