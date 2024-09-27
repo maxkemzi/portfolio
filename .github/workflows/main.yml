@@ -12,16 +12,28 @@ jobs:
       runs-on: ubuntu-latest
       steps:
          - name: Checkout code
-           uses: actions/checkout@v3
+           uses: actions/checkout@v4
 
          - name: Install dependencies
-           run: npm install
+           run: npm ci
+
+         - name: Install Playwright browsers
+           run: npx playwright install --with-deps
 
          - name: Check code style
            run: npm run lint
 
-         - name: Run tests
+         - name: Run unit tests
            run: npm run test:unit -- --reporter=html --outputFile=./reports/tests/index.html
+
+         - name: Build app
+           run: npm run test:build
+
+         - name: Start app
+           run: npm run test:start
+
+         - name: Run e2e tests
+           run: npx playwright test
 
          - name: Upload lint and test results
            uses: actions/upload-artifact@v3
