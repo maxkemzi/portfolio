@@ -34,7 +34,7 @@ jobs:
            run: npm run test:build
 
          - name: Start app
-           run: npm run test:start
+           run: npm run test:start & sleep 10
 
          - name: Install Playwright browsers
            run: npx playwright install --with-deps
