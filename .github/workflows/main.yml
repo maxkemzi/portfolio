@@ -10,15 +10,19 @@ on:
 jobs:
    ci:
       runs-on: ubuntu-latest
+      env:
+         DATABASE_URL: ${{ secrets.DATABASE_URL }}
+         SMTP_HOST: ${{ secrets.SMTP_HOST }}
+         SMTP_PORT: ${{ secrets.SMTP_PORT }}
+         SMTP_USER: ${{ secrets.SMTP_USER }}
+         SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+         EMAIL_TO: ${{ secrets.EMAIL_TO }}
       steps:
          - name: Checkout code
            uses: actions/checkout@v4
 
          - name: Install dependencies
            run: npm ci
-
-         - name: Install Playwright browsers
-           run: npx playwright install --with-deps
 
          - name: Check code style
            run: npm run lint
@@ -31,6 +35,9 @@ jobs:
 
          - name: Start app
            run: npm run test:start
+
+         - name: Install Playwright browsers
+           run: npx playwright install --with-deps
 
          - name: Run e2e tests
            run: npx playwright test
