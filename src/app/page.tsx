@@ -1,6 +1,8 @@
 import {prisma} from '@/db';
 import HomeContent from './HomeContent';
 
+export const revalidate = 3600;
+
 const Home = async () => {
 	const [projects, categories] = await Promise.all([
 		prisma.project.findMany({

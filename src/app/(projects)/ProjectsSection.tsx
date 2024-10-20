@@ -8,15 +8,15 @@ import {ProjectCategory} from '@prisma/client';
 import {motion, Transition} from 'framer-motion';
 import {useMemo, useState} from 'react';
 
-interface Props {
-	projects: ProjectWithInclusions[];
-	categories: ProjectCategory[];
-}
-
 const MotionProjectCardList = motion(ProjectCardList);
 
 const VIEWPORT_CONFIG = {once: true, amount: 0, margin: '0px 0px -100px 0px'};
 const TRANSITION_CONFIG: Transition = {duration: 1, ease: 'easeOut'};
+
+interface Props {
+	projects: ProjectWithInclusions[];
+	categories: ProjectCategory[];
+}
 
 const ProjectsSection = (props: Props): JSX.Element => {
 	const {projects, categories} = props;
