@@ -7,7 +7,7 @@ const exo2Font = Exo_2({subsets: ['latin']});
 
 export const metadata: Metadata = {
 	title: 'Max Kemzi Portfolio',
-	description: 'Portfolio of the software engineer by the name of Max Kemzi.',
+	description: 'The portfolio of the software engineer named Max Kemzi.',
 };
 
 const RootLayout = ({
