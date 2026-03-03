@@ -14,18 +14,17 @@ const AboutSection = () => {
 			<Container size="sm">
 				<div className="flex justify-center items-center gap-10 max-lg:gap-8 max-md:flex-col max-md:justify-normal max-md:gap-3 max-xxs:gap-2">
 					<motion.div
-						className="relative basis-1/2 aspect-square bg-secondary-main rounded-full overflow-hidden max-md:w-[50%] max-md:basis-auto"
+						className="relative basis-[40%] aspect-square bg-secondary-main rounded-full overflow-hidden max-md:w-[50%] max-md:basis-auto"
 						initial={{x: -50, opacity: 0}}
 						whileInView={{x: 0, opacity: 1}}
 						viewport={VIEWPORT_CONFIG}
 						transition={TRANSITION_CONFIG}
 					>
 						<Image
-							className="absolute top-0 left-[53%] translate-x-[-50%] scale-x-[-1] rotate-[5deg]"
-							width={705}
-							height={1099}
+							fill
+							objectFit="cover"
 							sizes="100vw"
-							src="/images/me.png"
+							src="/images/me.jpg"
 							alt="my image"
 						/>
 					</motion.div>
