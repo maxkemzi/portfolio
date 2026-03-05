@@ -58,7 +58,7 @@ const ContactForm = () => {
 				</CustomLink>
 			</Typography>
 			<form onSubmit={handleSubmit(values => execute(values))}>
-				<div className="flex flex-col gap-4 mb-5 w-full max-md:gap-3 max-md:mb-4 max-xxs:gap-2 max-xxs:mb-3">
+				<div className="flex flex-col gap-4 mb-6 w-full max-md:gap-3 max-md:mb-4 max-xxs:gap-2 max-xxs:mb-3">
 					<TextField
 						label="Name"
 						placeholder="John Doe (HR)"

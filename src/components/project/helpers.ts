@@ -15,10 +15,14 @@ const getStatusText = (status: Status): string | undefined => {
 	}
 };
 
-const getStatusColor = (status: Status): ColorValue | undefined => {
+const getStatusColor = (
+	status: Status,
+):
+	| Extract<ColorValue, 'success' | 'danger' | 'information' | 'warning'>
+	| undefined => {
 	switch (status) {
 		case 'inProgress':
-			return 'success';
+			return 'information';
 		case 'dropped':
 			return 'danger';
 		case 'completed':

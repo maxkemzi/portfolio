@@ -22,9 +22,10 @@ const ProjectCategoryFilter = (props: Props): JSX.Element => {
 			<Typography
 				className={twMerge(
 					'inline-block py-1.5 px-1.5 rounded-lg transition-all duration-300',
-					active && 'px-5 bg-background-contrastText/25',
+					active && 'px-5 bg-surface-main',
 				)}
 				as="span"
+				color={active ? 'primary' : 'backgroundText'}
 				weight={active ? 'semibold' : 'medium'}
 				textTransform="uppercase"
 				noWrap

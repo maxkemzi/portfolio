@@ -66,21 +66,24 @@ const Project = async ({params}: {params: {name: string}}) => {
 				<Section>
 					<Container size="sm">
 						<div className="flex items-center gap-4 mb-4 max-md:mb-3 max-xxs:mb-2">
-							<Chip size="lg" color="backgroundText">
+							<Chip size="lg" color="surfaceLight">
 								<Typography
-									color="backgroundText"
+									color="surfaceText"
 									variant="body2"
-									weight="medium"
+									weight="semibold"
 									textTransform="uppercase"
 								>
 									{categoryName}
 								</Typography>
 							</Chip>
-							<Chip size="lg" color={statusColor}>
+							<Chip
+								size="lg"
+								color={statusColor ? `${statusColor}Dark` : undefined}
+							>
 								<Typography
 									color={statusColor}
 									variant="body2"
-									weight="medium"
+									weight="semibold"
 									textTransform="uppercase"
 								>
 									{statusText}

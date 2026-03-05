@@ -14,7 +14,7 @@ const TechnologyChip = (props: Props): JSX.Element => {
 	const capitalized = capitalizeName(name);
 
 	return (
-		<Chip color="backgroundText">
+		<Chip color="surfaceLight">
 			<Typography weight="medium" variant="body2" noWrap>
 				{capitalized}
 			</Typography>

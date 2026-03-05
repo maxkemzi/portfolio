@@ -34,7 +34,7 @@ const ProjectCard = (props: Props): JSX.Element => {
 
 	return (
 		<Link
-			className="group block relative h-full rounded-lg overflow-hidden before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:z-10 before:bg-background-dark/60 md:before:opacity-0 md:before:transition-opacity md:before:duration-300 md:hover:before:opacity-100"
+			className="group block relative h-full rounded-lg overflow-hidden before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:z-10 before:bg-[#000]/60 md:before:opacity-0 md:before:transition-opacity md:before:duration-300 md:hover:before:opacity-100"
 			href={`/projects/${name}`}
 			aria-label={`${title} project page`}
 			data-testid="project"
@@ -48,12 +48,16 @@ const ProjectCard = (props: Props): JSX.Element => {
 			/>
 			<div className="absolute bottom-0 left-0 p-6 w-full h-full z-20 md:transition-all md:duration-300 md:translate-y-[50px] md:opacity-0 md:group-hover:opacity-100 md:group-hover:translate-y-0 max-md:p-5 max-xxs:p-4">
 				<div className="flex flex-col justify-between h-full">
-					<Chip className="self-end" size="lg" color={statusColor}>
+					<Chip
+						className="self-end"
+						size="lg"
+						color={statusColor ? `${statusColor}Dark` : undefined}
+					>
 						<Typography
 							color={statusColor}
 							variant="body3"
 							textTransform="uppercase"
-							weight="medium"
+							weight="semibold"
 						>
 							{statusText}
 						</Typography>

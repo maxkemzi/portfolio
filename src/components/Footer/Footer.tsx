@@ -1,9 +1,11 @@
 import {ThemeColor} from '@/constants';
+import {convertHexToRgba} from '@/helpers';
 
 const Footer = () => {
 	return (
 		<footer>
 			<svg
+				style={{transform: 'scaleX(-1)'}}
 				viewBox="0 0 1440 267"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
@@ -23,8 +25,12 @@ const Footer = () => {
 						y2="267"
 						gradientUnits="userSpaceOnUse"
 					>
-						<stop stopColor={ThemeColor.SECONDARY.MAIN} />
-						<stop offset="1" stopColor={ThemeColor.PRIMARY.MAIN} />
+						<stop stopColor={ThemeColor.PRIMARY.MAIN} stopOpacity={0.6} />
+						<stop
+							offset="1"
+							stopColor={ThemeColor.PRIMARY.MAIN}
+							stopOpacity={0.6}
+						/>
 					</linearGradient>
 				</defs>
 			</svg>

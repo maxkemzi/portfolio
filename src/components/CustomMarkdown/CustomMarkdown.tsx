@@ -21,7 +21,7 @@ const UnorderedList = ({children}: PropsWithChildren): JSX.Element => (
 );
 
 const ListItem = ({children}: PropsWithChildren): JSX.Element => (
-	<li className='relative before:content-[""] before:inline-block before:absolute before:left-0 before:top-[6px] before:w-[12px] before:h-[12px] before:rounded-sm before:bg-secondary-main'>
+	<li className='relative before:content-[""] before:inline-block before:absolute before:left-0 before:top-[6px] before:w-[12px] before:h-[12px] before:rounded-sm before:bg-primary-main'>
 		<Typography className="pl-[24px]">{children}</Typography>
 	</li>
 );

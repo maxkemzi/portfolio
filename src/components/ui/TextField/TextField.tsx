@@ -42,7 +42,7 @@ const TextField = forwardRef(
 		const {containerRef, multiline, label, error} = props;
 
 		const commonClassNames =
-			'block w-full px-4 py-3 bg-transparent border border-surface-main rounded-lg focus:bg-background-dark outline-none placeholder:text-background-contrastText/40';
+			'block w-full px-4 py-3 rounded-lg bg-surface-main focus:border-background-contrastText focus:placeholder:text-transparent outline-none placeholder:text-surface-contrastText/60';
 
 		const renderElement = () => {
 			const {name, value, placeholder} = props;
@@ -80,7 +80,7 @@ const TextField = forwardRef(
 			<div ref={containerRef}>
 				<Typography as="label" className="block">
 					<Typography
-						className="block mb-1"
+						className="block mb-2"
 						textTransform="capitalize"
 						as="span"
 						variant="inherit"
@@ -90,7 +90,7 @@ const TextField = forwardRef(
 					{renderElement()}
 				</Typography>
 				{error ? (
-					<Typography className="mt-1 text-sm" color="danger">
+					<Typography className="mt-2 text-sm" color="danger">
 						{error}
 					</Typography>
 				) : null}

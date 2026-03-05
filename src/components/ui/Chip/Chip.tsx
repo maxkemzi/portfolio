@@ -7,21 +7,17 @@ type ChipColorValue = (typeof ChipColor)[keyof typeof ChipColor];
 
 const COLOR_TO_CLASS_NAME_MAPPING: Partial<Record<ChipColorValue, string>> = {
 	[ChipColor.PRIMARY]: 'bg-primary-main',
-	[ChipColor.PRIMARY_TEXT]: 'bg-primary-contrastText',
-	[ChipColor.SECONDARY]: 'bg-secondary-main',
-	[ChipColor.SECONDARY_TEXT]: 'bg-secondary-contrastText',
 	[ChipColor.BACKGROUND]: 'bg-background-main',
-	[ChipColor.BACKGROUND_TEXT]: 'bg-background-contrastText',
 	[ChipColor.SURFACE]: 'bg-surface-main',
-	[ChipColor.SURFACE_TEXT]: 'bg-surface-contrastText',
+	[ChipColor.SURFACE_LIGHT]: 'bg-surface-light',
 	[ChipColor.DANGER]: 'bg-danger-main',
-	[ChipColor.DANGER_TEXT]: 'bg-danger-contrastText',
+	[ChipColor.DANGER_DARK]: 'bg-danger-dark',
 	[ChipColor.SUCCESS]: 'bg-success-main',
-	[ChipColor.SUCCESS_TEXT]: 'bg-success-contrastText',
+	[ChipColor.SUCCESS_DARK]: 'bg-success-dark',
 	[ChipColor.INFORMATION]: 'bg-information-main',
-	[ChipColor.INFORMATION_TEXT]: 'bg-information-contrastText',
+	[ChipColor.INFORMATION_DARK]: 'bg-information-dark',
 	[ChipColor.WARNING]: 'bg-warning-main',
-	[ChipColor.WARNING_TEXT]: 'bg-warning-contrastText',
+	[ChipColor.WARNING_DARK]: 'bg-warning-dark',
 } as const;
 
 const Size = {
@@ -48,7 +44,7 @@ const Chip = (props: Props): JSX.Element => {
 	return (
 		<div
 			className={twMerge(
-				'inline-block rounded-full bg-opacity-35 py-1 px-2.5',
+				'inline-block rounded-full py-1 px-2.5',
 				color && COLOR_TO_CLASS_NAME_MAPPING[color],
 				size && SIZE_TO_CLASS_NAMES_MAPPING[size],
 				className,
