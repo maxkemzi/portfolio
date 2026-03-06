@@ -21,6 +21,7 @@ const config: Config = {
 			transparent: 'transparent',
 			primary: {
 				main: ThemeColor.PRIMARY.MAIN,
+				dark: ThemeColor.PRIMARY.DARK,
 				contrastText: ThemeColor.PRIMARY.CONTRAST_TEXT,
 			},
 			background: {

@@ -1,36 +1,27 @@
 import {ThemeColor} from '@/constants';
-import {convertHexToRgba} from '@/helpers';
 
 const Footer = () => {
 	return (
 		<footer>
 			<svg
-				style={{transform: 'scaleX(-1)'}}
 				viewBox="0 0 1440 267"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
 			>
 				<path
-					fillRule="evenodd"
-					clipRule="evenodd"
-					d="M0 51.326L60 33.3532C120 15.3803 240 -20.5653 360 15.3803C480 51.326 600 159.163 720 171.145C840 183.127 960 99.2536 1080 99.2536C1200 99.2536 1320 183.127 1380 225.063L1440 267V267H1380C1320 267 1200 267 1080 267C960 267 840 267 720 267C600 267 480 267 360 267C240 267 120 267 60 267H0V51.326Z"
-					fill="url(#paint0_linear_44_74)"
+					d="M1440 51.326L1380 33.3532C1320 15.3803 1200 -20.5653 1080 15.3803C960 51.326 840 159.163 720 171.145C600 183.127 480 99.2536 360 99.2536C240 99.2536 120 183.127 60 225.063L0 267H60C120 267 240 267 360 267C480 267 600 267 720 267C840 267 960 267 1080 267C1200 267 1320 267 1380 267H1440V51.326Z"
+					fill="url(#paint0_linear_2044_3)"
 				/>
 				<defs>
 					<linearGradient
-						id="paint0_linear_44_74"
-						x1="586.5"
-						y1="2.44624e-05"
-						x2="853.5"
+						id="paint0_linear_2044_3"
+						x1="853.5"
+						y1="3.77305e-05"
+						x2="586.5"
 						y2="267"
 						gradientUnits="userSpaceOnUse"
 					>
-						<stop stopColor={ThemeColor.PRIMARY.MAIN} stopOpacity={0.6} />
-						<stop
-							offset="1"
-							stopColor={ThemeColor.PRIMARY.MAIN}
-							stopOpacity={0.6}
-						/>
+						<stop stopColor={ThemeColor.PRIMARY.DARK} />
 					</linearGradient>
 				</defs>
 			</svg>

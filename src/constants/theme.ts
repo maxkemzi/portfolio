@@ -1,5 +1,6 @@
 const Palette = {
 	ELECTRIC_SKY: '#2179dd',
+	STEEL_BLUE: '#1b467b',
 	DEEP_NIGHT: '#151419',
 	CHARCOAL: '#1C1B21',
 	SMOKY_CHARCOAL: '#26262E',
@@ -17,6 +18,7 @@ const Palette = {
 const ThemeColor = {
 	PRIMARY: {
 		MAIN: Palette.ELECTRIC_SKY,
+		DARK: Palette.STEEL_BLUE,
 		CONTRAST_TEXT: Palette.PALE_AZURE,
 	},
 	BACKGROUND: {
