@@ -34,7 +34,7 @@ const ProjectCard = (props: Props): JSX.Element => {
 
 	return (
 		<Link
-			className="group block relative h-full rounded-lg overflow-hidden before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:z-10 before:bg-[#000]/60 md:before:opacity-0 md:before:transition-opacity md:before:duration-300 md:hover:before:opacity-100"
+			className="group block relative h-full rounded-lg overflow-hidden before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:z-10 before:bg-background-dark/60 md:before:opacity-0 md:before:transition-opacity md:before:duration-300 md:hover:before:opacity-100"
 			href={`/projects/${name}`}
 			aria-label={`${title} project page`}
 			data-testid="project"

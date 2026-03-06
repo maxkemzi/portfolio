@@ -2,6 +2,7 @@ const Palette = {
 	ELECTRIC_SKY: '#2179dd',
 	STEEL_BLUE: '#1b467b',
 	DEEP_NIGHT: '#151419',
+	ONYX: '#100f13',
 	CHARCOAL: '#1C1B21',
 	SMOKY_CHARCOAL: '#26262E',
 	PALE_AZURE: '#f0f8ff',
@@ -23,6 +24,7 @@ const ThemeColor = {
 	},
 	BACKGROUND: {
 		MAIN: Palette.DEEP_NIGHT,
+		DARK: Palette.ONYX,
 		CONTRAST_TEXT: Palette.PALE_AZURE,
 	},
 	SURFACE: {

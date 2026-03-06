@@ -26,6 +26,7 @@ const config: Config = {
 			},
 			background: {
 				main: ThemeColor.BACKGROUND.MAIN,
+				dark: ThemeColor.BACKGROUND.DARK,
 				contrastText: ThemeColor.BACKGROUND.CONTRAST_TEXT,
 			},
 			surface: {
