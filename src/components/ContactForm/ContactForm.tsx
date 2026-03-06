@@ -61,19 +61,19 @@ const ContactForm = () => {
 				<div className="flex flex-col gap-4 mb-6 w-full max-md:gap-3 max-md:mb-4 max-xxs:gap-2 max-xxs:mb-3">
 					<TextField
 						label="Name"
-						placeholder="John Doe (HR)"
+						placeholder="Your name"
 						error={errors.name?.message}
 						{...register('name')}
 					/>
 					<TextField
 						label="Email"
-						placeholder="j.doe@bestcompany.com"
+						placeholder="Your email"
 						error={errors.email?.message}
 						{...register('email')}
 					/>
 					<TextField
 						label="Message"
-						placeholder="We'd like to see you in our team."
+						placeholder="Your message"
 						error={errors.message?.message}
 						multiline
 						{...register('message')}

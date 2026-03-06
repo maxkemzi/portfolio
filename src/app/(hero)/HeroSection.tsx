@@ -28,7 +28,7 @@ const WAVE_SPACING = 16;
 const NB_SPACE = '\u00A0';
 const FIRST_TEXT = `Hi${NB_SPACE}there,${NB_SPACE}I’m${NB_SPACE}`;
 const HIGHLIGHTED_TEXT = 'Max';
-const SECOND_TEXT = `I’m${NB_SPACE}a${NB_SPACE}software${NB_SPACE}engineer`;
+const SECOND_TEXT = `I’m${NB_SPACE}a${NB_SPACE}Software${NB_SPACE}Engineer`;
 
 let animDuration = 0;
 
@@ -132,7 +132,7 @@ const HeroSection = forwardRef(
 							}}
 						>
 							<CrosshairSimple
-								className="text-primary-main/65 size-full"
+								className="text-primary-dark size-full"
 								weight="light"
 							/>
 						</motion.div>
