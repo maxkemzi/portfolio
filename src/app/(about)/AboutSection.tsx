@@ -42,12 +42,13 @@ const AboutSection = () => {
 							About me
 						</Typography>
 						<Typography>
-							Hello! I’m Max, a software engineer specializing in backend
-							development. I’m passionate about creating software that
-							benefits society. Outside of work, I enjoy reading, working
-							out at the gym, and focusing on healthy living. A romantic
-							at heart, I value meaningful connections and thrive in team
-							environments. Let’s build something great together!
+							Hello! I’m Max, a software engineer specializing in full
+							stack development. I’m passionate about creating software
+							that benefits society. Outside of work, I enjoy reading,
+							working out at the gym, and focusing on healthy living. A
+							romantic at heart, I value meaningful connections and
+							thrive in team environments. Let’s build something great
+							together!
 						</Typography>
 					</motion.div>
 				</div>
