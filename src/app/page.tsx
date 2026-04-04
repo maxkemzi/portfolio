@@ -1,10 +1,9 @@
 import {prisma} from '@/db';
+import {unstable_cache} from 'next/cache';
 import HomeContent from './HomeContent';
 
-export const revalidate = 3600;
-
-const Home = async () => {
-	const [projects, categories] = await Promise.all([
+const getProjects = unstable_cache(
+	async () =>
 		prisma.project.findMany({
 			orderBy: {startedAt: 'desc'},
 			include: {
@@ -15,7 +14,22 @@ const Home = async () => {
 				ProjectCategory: true,
 			},
 		}),
-		prisma.projectCategory.findMany(),
+	['projects'],
+	{tags: ['projects']},
+);
+
+const getProjectCategories = unstable_cache(
+	async () => prisma.projectCategory.findMany(),
+	['projectCategories'],
+	{tags: ['projectCategories']},
+);
+
+export const revalidate = 3600;
+
+const Home = async () => {
+	const [projects, categories] = await Promise.all([
+		getProjects(),
+		getProjectCategories(),
 	]);
 
 	return <HomeContent projects={projects} categories={categories} />;

@@ -12,24 +12,33 @@ import {
 } from '@/components/ui';
 import {prisma} from '@/db';
 import {ProjectWithInclusions} from '@/types';
+import {unstable_cache} from 'next/cache';
 import Image from 'next/image';
 import {notFound} from 'next/navigation';
+
+const getProject = (name: string) =>
+	unstable_cache(
+		async () =>
+			prisma.project.findUnique({
+				where: {name},
+				include: {
+					ProjectTechnologies: {
+						include: {technology: true},
+						orderBy: {technology: {priority: 'asc'}},
+					},
+					ProjectCategory: true,
+				},
+			}),
+		['project', name],
+		{tags: ['projects']},
+	);
 
 const Project = async ({params}: {params: {name: string}}) => {
 	const {name} = params;
 
 	let project: ProjectWithInclusions | null = null;
 	try {
-		project = await prisma.project.findUnique({
-			where: {name},
-			include: {
-				ProjectTechnologies: {
-					include: {technology: true},
-					orderBy: {technology: {priority: 'asc'}},
-				},
-				ProjectCategory: true,
-			},
-		});
+		project = await getProject(name)();
 	} catch (e) {
 		console.log(e);
 		return notFound();
