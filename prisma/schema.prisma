@@ -24,7 +24,7 @@ model Project {
    overview            String
    image               String
    liveUrl             String
-   repoUrl             String
+   repoUrl             String?
    startedAt           DateTime
    ProjectCategory     ProjectCategory       @relation(fields: [categoryId], references: [id])
    categoryId          String                @db.ObjectId

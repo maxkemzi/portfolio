@@ -116,9 +116,11 @@ const Project = async ({params}: {params: {name: string}}) => {
 							<CustomLink variant="block" href={liveUrl} external>
 								Live app
 							</CustomLink>
-							<CustomLink variant="block" href={repoUrl} external>
-								Repository
-							</CustomLink>
+							{repoUrl ? (
+								<CustomLink variant="block" href={repoUrl} external>
+									Repository
+								</CustomLink>
+							) : null}
 						</div>
 						<div className="w-[70%] relative aspect-[16/10] overflow-hidden rounded-xl mb-6 max-md:mb-5 max-xxs:mb-4">
 							<Image
