@@ -1,27 +1,25 @@
 'use client';
 
 import {Footer, Header} from '@/components';
-import {useLayoutEffect, useRef, useState} from 'react';
 import {Spinner} from '@/components/ui';
-import {AnimatePresence, motion} from 'framer-motion';
-import {ProjectWithInclusions} from '@/types';
-import {ProjectCategory} from '@prisma/client';
 import {useIsClient} from '@/hooks';
-import {HeroSection} from './(hero)';
+import {ProjectWithInclusions} from '@/types';
+import {AnimatePresence, motion} from 'framer-motion';
+import {useLayoutEffect, useRef, useState} from 'react';
 import {AboutSection} from './(about)';
-import ProjectsSection from './(projects)';
 import ContactSection from './(contact)';
+import {HeroSection} from './(hero)';
+import ProjectsSection from './(projects)';
 
 const FIXED_HEADER_TRANSITION_DURATION = 0.5;
 const MotionHeader = motion(Header);
 
 interface Props {
 	projects: ProjectWithInclusions[];
-	categories: ProjectCategory[];
 }
 
 const HomeContent = (props: Props): JSX.Element => {
-	const {projects, categories} = props;
+	const {projects} = props;
 
 	const isClient = useIsClient();
 	const headerRightBlockRef = useRef<HTMLDivElement>(null);
@@ -106,7 +104,7 @@ const HomeContent = (props: Props): JSX.Element => {
 					headerRightBlockRef={headerRightBlockRef}
 				/>
 				<AboutSection />
-				<ProjectsSection projects={projects} categories={categories} />
+				<ProjectsSection projects={projects} />
 				<ContactSection />
 			</main>
 			<Footer />

@@ -18,21 +18,12 @@ const getProjects = unstable_cache(
 	{tags: ['projects']},
 );
 
-const getProjectCategories = unstable_cache(
-	async () => prisma.projectCategory.findMany(),
-	['projectCategories'],
-	{tags: ['projectCategories']},
-);
-
 export const revalidate = 3600;
 
 const Home = async () => {
-	const [projects, categories] = await Promise.all([
-		getProjects(),
-		getProjectCategories(),
-	]);
+	const projects = await getProjects();
 
-	return <HomeContent projects={projects} categories={categories} />;
+	return <HomeContent projects={projects} />;
 };
 
 export default Home;
