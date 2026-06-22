@@ -45,6 +45,7 @@ const ProjectCard = (props: Props): JSX.Element => {
 				src={image}
 				fill
 				alt={`${title} screenshot`}
+				sizes="(max-width: 768px) 100vw, 50vw"
 			/>
 			<div className="absolute bottom-0 left-0 p-6 w-full h-full z-20 md:transition-all md:duration-300 md:translate-y-[50px] md:opacity-0 md:group-hover:opacity-100 md:group-hover:translate-y-0 max-md:p-5 max-xxs:p-4">
 				<div className="flex flex-col justify-between h-full">

@@ -41,7 +41,7 @@ const ContactForm = () => {
 	return (
 		<div>
 			<Typography
-				className="mb-2 max-md:mb-1 max-xxs:mb-0.5"
+				className="mb-3 max-md:mb-2 max-xxs:mb-1"
 				align="center"
 				variant="h2"
 			>
