@@ -40,7 +40,7 @@ const Project = async ({params}: {params: {name: string}}) => {
 	try {
 		project = await getProject(name)();
 	} catch (e) {
-		console.log(e);
+		console.error(e);
 		return notFound();
 	}
 
