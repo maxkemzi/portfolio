@@ -74,7 +74,7 @@ test.describe('contact form', () => {
 
 			await Promise.all([
 				expect(button).toBeEnabled(),
-				expect(button).toHaveCSS('background-color', 'rgb(62, 173, 173)'),
+				expect(button).toHaveCSS('background-color', 'rgb(40, 167, 69)'),
 			]);
 		}).toPass();
 	});
