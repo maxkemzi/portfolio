@@ -1,7 +1,5 @@
 services:
    app:
+      image: maxkemzi/portfolio-app
       build: ./
-      container_name: portfolio-app
-      ports:
-         - '3000:3000'
       env_file: './.env.local'
