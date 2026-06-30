@@ -7,3 +7,12 @@ README.md
 .git
 test-results
 playwright-report
+.env
+.env.local
+.env*.local
+!.env.local.example
+coverage
+.vscode
+.idea
+*.log
+.DS_Store
