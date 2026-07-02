@@ -1,5 +1,5 @@
 services:
    app:
-      image: maxkemzi/portfolio-app
+      image: maxkemzi/portfolio
       build: ./
       env_file: './.env.local'
