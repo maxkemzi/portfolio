@@ -1,8 +1,9 @@
+import {VIDEO_EXTENSIONS} from '@/constants';
+import {ProjectWithInclusions} from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
-import {ProjectWithInclusions} from '@/types';
-import {Chip, Typography} from '../ui';
 import {TechnologyChipList} from '../technology';
+import {Chip, Typography} from '../ui';
 import {getStatusColor, getStatusText} from './helpers';
 
 interface Props {
@@ -15,8 +16,8 @@ const ProjectCard = (props: Props): JSX.Element => {
 			name,
 			title,
 			description,
-			status,
 			image,
+			status,
 			ProjectTechnologies,
 			ProjectCategory,
 		},
@@ -32,6 +33,10 @@ const ProjectCard = (props: Props): JSX.Element => {
 	const firstTechnologyRow = technologies.slice(0, firstTechnologyRowLength);
 	const secondTechnologyRow = technologies.slice(firstTechnologyRowLength);
 
+	const isVideo = VIDEO_EXTENSIONS.some(ext =>
+		image.toLowerCase().endsWith(ext),
+	);
+
 	return (
 		<Link
 			className="group block relative h-full rounded-lg overflow-hidden before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:z-10 before:bg-background-dark/60 md:before:opacity-0 md:before:transition-opacity md:before:duration-300 md:hover:before:opacity-100"
@@ -40,13 +45,25 @@ const ProjectCard = (props: Props): JSX.Element => {
 			data-testid="project"
 			data-category={category}
 		>
-			<Image
-				className="object-cover"
-				src={image}
-				fill
-				alt={`${title} screenshot`}
-				sizes="(max-width: 768px) 100vw, 50vw"
-			/>
+			{isVideo ? (
+				<video
+					className="absolute inset-0 w-full h-full object-cover"
+					src={image}
+					autoPlay
+					loop
+					muted
+					playsInline
+					aria-label={`${title} demo`}
+				/>
+			) : (
+				<Image
+					className="object-cover"
+					src={image}
+					fill
+					alt={`${title} screenshot`}
+					sizes="(max-width: 768px) 100vw, 50vw"
+				/>
+			)}
 			<div className="absolute bottom-0 left-0 p-6 w-full h-full z-20 md:transition-all md:duration-300 md:translate-y-[50px] md:opacity-0 md:group-hover:opacity-100 md:group-hover:translate-y-0 max-md:p-5 max-xxs:p-4">
 				<div className="flex flex-col justify-between h-full">
 					<Chip

@@ -10,6 +10,7 @@ import {
 	Section,
 	Typography,
 } from '@/components/ui';
+import {VIDEO_EXTENSIONS} from '@/constants';
 import {prisma} from '@/db';
 import {ProjectWithInclusions} from '@/types';
 import {unstable_cache} from 'next/cache';
@@ -52,12 +53,12 @@ const Project = async ({params}: {params: {name: string}}) => {
 		title,
 		description,
 		status,
+		image,
 		liveUrl,
 		repoUrl,
 		overview,
 		ProjectCategory,
 		ProjectTechnologies,
-		image,
 	} = project;
 
 	const categoryName = ProjectCategory.name;
@@ -67,6 +68,10 @@ const Project = async ({params}: {params: {name: string}}) => {
 
 	const statusColor = getProjectStatusColor(status);
 	const statusText = getProjectStatusText(status);
+
+	const isVideo = VIDEO_EXTENSIONS.some(ext =>
+		image.toLowerCase().endsWith(ext),
+	);
 
 	return (
 		<div className="flex flex-col min-h-screen">
@@ -123,12 +128,25 @@ const Project = async ({params}: {params: {name: string}}) => {
 							) : null}
 						</div>
 						<div className="w-[70%] relative aspect-[16/10] overflow-hidden rounded-xl mb-6 max-md:mb-5 max-xxs:mb-4">
-							<Image
-								className="object-cover"
-								src={image}
-								fill
-								alt={`${title} image`}
-							/>
+							{isVideo ? (
+								<video
+									className="absolute inset-0 w-full h-full object-cover"
+									src={image}
+									autoPlay
+									loop
+									muted
+									playsInline
+									aria-label={`${title} demo`}
+								/>
+							) : (
+								<Image
+									className="object-cover"
+									src={image}
+									fill
+									alt={`${title} image`}
+									sizes="70vw"
+								/>
+							)}
 						</div>
 						<div className="mb-6 max-md:mb-5 max-xxs:mb-4">
 							<Typography
