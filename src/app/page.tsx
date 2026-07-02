@@ -2,6 +2,8 @@ import {prisma} from '@/db';
 import {unstable_cache} from 'next/cache';
 import HomeContent from './HomeContent';
 
+export const dynamic = 'force-dynamic';
+
 const getProjects = unstable_cache(
 	async () =>
 		prisma.project.findMany({
@@ -15,10 +17,8 @@ const getProjects = unstable_cache(
 			},
 		}),
 	['projects'],
-	{tags: ['projects']},
+	{tags: ['projects'], revalidate: 3600},
 );
-
-export const revalidate = 3600;
 
 const Home = async () => {
 	const projects = await getProjects();
